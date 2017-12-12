@@ -6,5 +6,12 @@ body{
 .layout{
   div {
     border: 1px solid black;
+
+    .header-area {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      cursor: pointer;
+    }
   }
 }

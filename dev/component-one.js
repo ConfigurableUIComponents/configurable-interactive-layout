@@ -98,10 +98,21 @@ class CardsLayout extends React.Component {
             }}
         rowHeight={50}
         onLayoutChange={(layout, layouts2) => this.onLayoutChange(layout, layouts2)}
+        draggableCancel=".content-area"
+        draggableHandle=".header-area"
       >
-        <div key="ra">1</div>
-        <div key="rb">2</div>
-        <div key="rc">3</div>
+        <div key="ra">
+          <div>not draggable</div>
+          1
+        </div>
+        <div key="rb">
+          <div className="header-area">draggable</div>
+          2
+        </div>
+        <div key="rc">
+          <div className="header-area">draggable</div>
+          3
+        </div>
       </ResponsiveReactGridLayout>,
       <h1>ReactGridLayout</h1>,
       <ReactGridLayout
