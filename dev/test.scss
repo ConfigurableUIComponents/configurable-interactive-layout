@@ -7,5 +7,18 @@ body{
   .card {
     border: 1px solid black;
     height: 100%;
+
+    .card-header {
+      padding: 5px;
+      border-bottom: solid 1px black;
+    }
+
+    .card-content {
+      padding: 5px;
+    }
   }
+}
+
+.hidden {
+  display: none;
 }
