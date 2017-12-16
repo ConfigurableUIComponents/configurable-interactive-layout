@@ -10,7 +10,16 @@ import '../../node_modules/react-resizable/css/styles.css';
 function buildContent(contentList) {
   const data = [];
   for (let index = 0; index < contentList.length; index += 1) {
-    data.push(<div key={contentList[index].i}><Card>{contentList[index].content}</Card></div>);
+    data.push((
+      <div key={contentList[index].i}>
+        <Card
+          displayHeader={contentList[index].displayHeader}
+          title={contentList[index].title}
+        >
+          {contentList[index].content}
+        </Card>
+      </div>
+    ));
   }
   return data;
 }
