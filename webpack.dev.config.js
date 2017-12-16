@@ -18,9 +18,12 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: 'index_bundle.js',
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [{
-      test: /\.js$/,
+      test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       use: [{
         loader: 'babel-loader',
