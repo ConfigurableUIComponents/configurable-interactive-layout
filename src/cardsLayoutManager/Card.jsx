@@ -21,11 +21,13 @@ export default class Card extends Component {
 Card.propTypes = {
   displayHeader: PropTypes.bool,
   title: PropTypes.string,
-  children: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]).isRequired,
 };
 
 Card.defaultProps = {
   displayHeader: true,
   title: '',
-  children: 'Default Content',
 };
