@@ -14,6 +14,7 @@ function buildContent(contentList) {
       <div key={contentList[index].i}>
         <Card
           displayHeader={contentList[index].displayHeader}
+          actions={contentList[index].actions}
           title={contentList[index].title}
         >
           {contentList[index].content}
@@ -34,7 +35,7 @@ function extractLayout(contentList) {
 
 export default class CardsLayoutManager extends Component {
   render() {
-    return ([
+    return (
       <ReactGridLayout
         className="cards-layout-container"
         layout={extractLayout(this.props.content)}
@@ -45,8 +46,8 @@ export default class CardsLayoutManager extends Component {
         width={1200}
       >
         {buildContent(this.props.content)}
-      </ReactGridLayout>,
-    ]);
+      </ReactGridLayout>
+    );
   }
 }
 

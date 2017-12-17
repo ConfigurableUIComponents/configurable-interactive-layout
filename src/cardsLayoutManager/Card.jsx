@@ -1,31 +1,34 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CardHeader from './CardHeader';
 
 export default class Card extends Component {
   render() {
-    const headerClass = this.props.displayHeader ? 'card-header' : 'hidden';
-
-    return ([
+    return (
       <div className="card">
-        <div className={headerClass}>
-          { this.props.title }
-        </div>
+        {this.props.displayHeader ?
+          <CardHeader
+            title={this.props.title}
+            actions={this.props.actions}
+          /> : <div /> }
         <div className="card-content">
           { this.props.children }
         </div>
-      </div>,
-    ]);
+      </div>
+    );
   }
 }
 
 Card.propTypes = {
   displayHeader: PropTypes.bool,
+  actions: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
   children: PropTypes.string,
 };
 
 Card.defaultProps = {
   displayHeader: true,
+  actions: [],
   title: '',
   children: 'Default Content',
 };
