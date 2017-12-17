@@ -4,7 +4,7 @@ const cardLayoutProperties = [
     title: 'Box A Title',
     content: 'A',
     layout: {
-      i: 'a', x: 0, y: 0, w: 2, h: 2,
+      i: 'a', x: 0, y: 0, w: 2, h: 4,
     },
   },
   {
