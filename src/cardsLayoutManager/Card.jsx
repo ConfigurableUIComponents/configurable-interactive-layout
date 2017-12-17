@@ -23,12 +23,14 @@ Card.propTypes = {
   displayHeader: PropTypes.bool,
   actions: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
-  children: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]).isRequired,
 };
 
 Card.defaultProps = {
   displayHeader: true,
   actions: [],
   title: '',
-  children: 'Default Content',
 };
