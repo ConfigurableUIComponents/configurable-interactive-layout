@@ -10,16 +10,31 @@ import '../../node_modules/react-resizable/css/styles.css';
 function buildContent(contentList) {
   const data = [];
   for (let index = 0; index < contentList.length; index += 1) {
-    data.push((
-      <div key={contentList[index].i}>
-        <Card
-          displayHeader={contentList[index].displayHeader}
-          title={contentList[index].title}
-        >
-          {contentList[index].content}
-        </Card>
-      </div>
-    ));
+    const GeneratedContent = contentList[index].content;
+    if (React.isValidElement(<GeneratedContent />)) {
+      const generatedProps = contentList[index].data;
+      data.push((
+        <div key={contentList[index].i}>
+          <Card
+            displayHeader={contentList[index].displayHeader}
+            title={contentList[index].title}
+          >
+            <GeneratedContent {...generatedProps} />
+          </Card>
+        </div>
+      ));
+    } else {
+      data.push((
+        <div key={contentList[index].i}>
+          <Card
+            displayHeader={contentList[index].displayHeader}
+            title={contentList[index].title}
+          >
+            {GeneratedContent}
+          </Card>
+        </div>
+      ));
+    }
   }
   return data;
 }
@@ -34,7 +49,7 @@ function extractLayout(contentList) {
 
 export default class CardsLayoutManager extends Component {
   render() {
-    return ([
+    return (
       <ReactGridLayout
         className="cards-layout-container"
         layout={extractLayout(this.props.content)}
@@ -45,15 +60,18 @@ export default class CardsLayoutManager extends Component {
         width={1200}
       >
         {buildContent(this.props.content)}
-      </ReactGridLayout>,
-    ]);
+      </ReactGridLayout>
+    );
   }
 }
 
 CardsLayoutManager.propTypes = {
   content: PropTypes.arrayOf(PropTypes.shape({
     i: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    content: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element,
+    ]).isRequired,
     layout: PropTypes.arrayOf(PropTypes.shape({
       i: PropTypes.string.isRequired,
       x: PropTypes.number.isRequired,
