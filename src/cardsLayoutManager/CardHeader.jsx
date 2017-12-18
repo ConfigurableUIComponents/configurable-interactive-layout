@@ -19,8 +19,8 @@ export default class CardHeader extends Component {
 
     return (
       <div className="header">
-        <div className="title" title={this.props.title}>{this.props.title}</div>
         {actions.length > 0 ? <div className="actions">{ actions }</div> : <div />}
+        <div className="title" title={this.props.title}>{this.props.title}</div>
       </div>);
   }
 }
