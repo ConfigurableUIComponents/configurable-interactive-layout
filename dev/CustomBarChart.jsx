@@ -15,7 +15,7 @@ const COLOR_BLUE = '#009fdb';
 export default class CustomLineChart extends Component {
   render() {
     return (
-      <ResponsiveContainer width="100%" height={300} >
+      <ResponsiveContainer width="100%" height="90%" >
         <BarChart data={this.props.values} >
           <XAxis dataKey={this.props.xAxisAttrName} />
           <YAxis />

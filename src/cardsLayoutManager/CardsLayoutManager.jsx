@@ -39,6 +39,7 @@ function buildContent(contentList, EventManager) {
             displayHeader={contentList[index].displayHeader}
             title={contentList[index].title}
             actions={contentList[index].actions}
+            listeners={contentList[index].listeners}
             EventManager={EventManager}
             id={contentList[index].i}
           >
@@ -53,6 +54,8 @@ function buildContent(contentList, EventManager) {
           <Card
             displayHeader={contentList[index].displayHeader}
             title={contentList[index].title}
+            actions={contentList[index].actions}
+            listeners={contentList[index].listeners}
           >
             {CardContent}
           </Card>
