@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "cardsFramework.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config webpack.config.js",
     "lint": "eslint dev --ext .jsx,.js",
     "lint-fix": "npm run lint -- --fix",
     "dev": "webpack-dev-server --config webpack.dev.config.js --color --hot -d --progress"
