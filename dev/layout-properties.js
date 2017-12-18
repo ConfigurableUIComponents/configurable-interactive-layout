@@ -8,9 +8,11 @@ const cardLayoutProperties = [
     actions: [
       {
         id: 'DivBy2',
+        displayName: 'Divide by 2',
       },
       {
         id: 'MulBy2',
+        displayName: 'Multiply by 2',
       },
     ],
     Content: CustomBarChart,

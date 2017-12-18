@@ -10,8 +10,9 @@ export default class EventManager {
   }
 
   publish(eventId, initiatorID, data) {
-    // data.initiator = initiatorID;
-    this.eventEmitter.emit(eventId, data);
+    const eventData = data || {};
+    eventData.initiator = initiatorID;
+    this.eventEmitter.emit(eventId, eventData);
   }
 
   unsubscribe(eventId, cb) {

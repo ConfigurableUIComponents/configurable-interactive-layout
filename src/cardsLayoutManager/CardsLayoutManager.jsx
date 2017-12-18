@@ -10,14 +10,14 @@ import '../../node_modules/react-resizable/css/styles.css';
 function buildContent(contentList, EventManager) {
   const data = [];
   for (let index = 0; index < contentList.length; index += 1) {
-    const GeneratedCard = contentList[index].Type;
-    const GeneratedContent = contentList[index].Content;
+    const CustomCard = contentList[index].Type;
+    const CardContent = contentList[index].Content;
 
-    if (GeneratedCard) {
+    if (CustomCard) {
       // Custom card type scenario
       data.push((
         <div key={contentList[index].i}>
-          <GeneratedCard
+          <CustomCard
             displayHeader={contentList[index].displayHeader}
             title={contentList[index].title}
             actions={contentList[index].actions}
@@ -30,7 +30,7 @@ function buildContent(contentList, EventManager) {
           />
         </div>
       ));
-    } else if (React.isValidElement(<GeneratedContent />)) {
+    } else if (React.isValidElement(<CardContent />)) {
       // Custom React component scenario
       const generatedProps = contentList[index].data;
       data.push((
@@ -42,7 +42,7 @@ function buildContent(contentList, EventManager) {
             EventManager={EventManager}
             id={contentList[index].i}
           >
-            <GeneratedContent {...generatedProps} />
+            <CardContent {...generatedProps} />
           </Card>
         </div>
       ));
@@ -54,7 +54,7 @@ function buildContent(contentList, EventManager) {
             displayHeader={contentList[index].displayHeader}
             title={contentList[index].title}
           >
-            {GeneratedContent}
+            {CardContent}
           </Card>
         </div>
       ));
@@ -108,6 +108,7 @@ CardsLayoutManager.propTypes = {
     })),
     actions: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string,
+      displayName: PropTypes.string,
     })),
     listeners: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string,
