@@ -3,29 +3,16 @@ import PropTypes from 'prop-types';
 import CardHeader from './CardHeader';
 
 export default class Card extends Component {
-  buildActions() {
-    const actions = this.props.actions.map(action => (
-      <button onClick={() => this.props.EventManager.publish(action.id, this.props.id, {})}>
-        {action.id}
-      </button>
-    ));
-    return actions;
-  }
-
   render() {
-    const headerClass = this.props.displayHeader ? 'card-header' : 'hidden';
-    let actions = [];
-
-    if (this.props.EventManager) {
-      actions = this.buildActions();
-    }
-
-    return ([
+    return (
       <div className="card">
-        <div className={headerClass}>
-          { this.props.title }
-          {actions}
-        </div>
+        {this.props.displayHeader ?
+          <CardHeader
+            title={this.props.title}
+            actions={this.props.actions}
+            EventManager={this.props.EventManager}
+            id={this.props.id}
+          /> : <div /> }
         <div className="card-content">
           { this.props.children }
         </div>
@@ -37,7 +24,6 @@ export default class Card extends Component {
 Card.propTypes = {
   id: PropTypes.string.isRequired,
   displayHeader: PropTypes.bool,
-  actions: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
   EventManager: PropTypes.instanceOf(Object),
   actions: PropTypes.arrayOf(PropTypes.shape({
@@ -51,7 +37,6 @@ Card.propTypes = {
 
 Card.defaultProps = {
   displayHeader: true,
-  actions: [],
   title: '',
   actions: [],
   EventManager: undefined,
