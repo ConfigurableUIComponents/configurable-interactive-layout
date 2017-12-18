@@ -1,27 +1,54 @@
+import CustomBarChart from './CustomBarChart';
+import DICard from './DataIntegrityCard';
+
 const cardLayoutProperties = [
   {
     i: 'a',
-    title: 'Box A Title',
-    actions: [],
-    content: 'A',
+    title: 'Bar Chart #1',
+    actions: [
+      {
+        id: 'DivBy2',
+      },
+      {
+        id: 'MulBy2',
+      },
+    ],
+    Content: CustomBarChart,
+    data: {
+      values: [
+        { x: 'A', y: 5 },
+        { x: 'B', y: 9 },
+        { x: 'C', y: 2 },
+        { x: 'D', y: 4 },
+      ],
+      xAxisAttrName: 'x',
+      yAxisAttrName: 'y',
+      yAxisLabel: 'Count',
+    },
     layout: {
       i: 'a', x: 0, y: 0, w: 2, h: 2,
     },
   },
   {
     i: 'b',
-    content: 'B',
-    title: 'Test should not display',
-    displayHeader: false,
+    title: 'Card Data From Application',
+    Type: DICard,
+    Content: CustomBarChart,
     layout: {
       i: 'b', x: 2, y: 0, w: 8, h: 2, minW: 2, maxW: 8,
     },
   },
   {
     i: 'c',
-    title: 'Box C Title',
-    actions: ['test1', 'test2'],
-    content: 'C',
+    title: 'Card Data From Custom Card',
+    Type: DICard,
+    Content: CustomBarChart,
+    dataSource: 'DIChart1',
+    listeners: [
+      {
+        id: 'DivBy2',
+      },
+    ],
     layout: {
       i: 'c', x: 10, y: 0, w: 2, h: 2,
     },
