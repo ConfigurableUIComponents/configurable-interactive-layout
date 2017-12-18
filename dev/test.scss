@@ -8,13 +8,18 @@ body{
     border: 1px solid black;
     height: 100%;
 
-    .card-header {
+    .header {
       padding: 5px;
       border-bottom: solid 1px black;
+
+      .actions {
+        float: right;
+      }
     }
 
     .card-content {
       padding: 5px;
+      height: 100%;
     }
   }
 }
