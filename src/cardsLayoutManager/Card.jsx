@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CardHeader from './CardHeader';
 
 export default class Card extends Component {
   buildActions() {
@@ -28,14 +29,15 @@ export default class Card extends Component {
         <div className="card-content">
           { this.props.children }
         </div>
-      </div>,
-    ]);
+      </div>
+    );
   }
 }
 
 Card.propTypes = {
   id: PropTypes.string.isRequired,
   displayHeader: PropTypes.bool,
+  actions: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
   EventManager: PropTypes.instanceOf(Object),
   actions: PropTypes.arrayOf(PropTypes.shape({
@@ -49,6 +51,7 @@ Card.propTypes = {
 
 Card.defaultProps = {
   displayHeader: true,
+  actions: [],
   title: '',
   actions: [],
   EventManager: undefined,

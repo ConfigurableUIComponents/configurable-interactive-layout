@@ -26,7 +26,7 @@ const cardLayoutProperties = [
       yAxisLabel: 'Count',
     },
     layout: {
-      i: 'a', x: 0, y: 0, w: 6, h: 3,
+      i: 'a', x: 0, y: 0, w: 2, h: 2,
     },
   },
   {
@@ -35,7 +35,7 @@ const cardLayoutProperties = [
     Type: DICard,
     Content: CustomBarChart,
     layout: {
-      i: 'b', x: 6, y: 0, w: 6, h: 3, minW: 2, maxW: 8,
+      i: 'b', x: 2, y: 0, w: 8, h: 2, minW: 2, maxW: 8,
     },
   },
   {
@@ -50,7 +50,7 @@ const cardLayoutProperties = [
       },
     ],
     layout: {
-      i: 'c', x: 0, y: 1, w: 12, h: 3,
+      i: 'c', x: 10, y: 0, w: 2, h: 2,
     },
   },
 ];
