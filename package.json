@@ -1,9 +1,9 @@
 {
   "name": "cards-framework",
   "version": "1.0.0",
-  "main": "cardsFramework.js",
+  "main": "dist/cardsFramework.dist.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --bail -p",
     "lint": "eslint dev --ext .jsx,.js",
     "lint-fix": "npm run lint -- --fix",
     "dev": "webpack-dev-server --config webpack.dev.config.js --color --hot -d --progress"
@@ -35,6 +35,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.5.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",

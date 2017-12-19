@@ -1,16 +1,20 @@
 const path = require('path');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 
   entry: [
-    path.join(__dirname, './dev/main.js'),
+    path.join(__dirname, 'src', 'cardsLayoutManager', 'CardsLayoutManager.jsx'),
   ],
   output: {
-    path: path.join(__dirname, '/dist'),
-    filename: 'cardsFramework.js',
+    path: path.join(__dirname, 'dist'),
+    filename: 'CardsLayoutManager.dist.js',
+    publicPath: '/',
+    library: 'CardsLayoutManager',
+    libraryTarget: 'umd',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
@@ -45,6 +49,10 @@ module.exports = {
       },
     ],
   },
-  externals: ['react-dom', 'react'],
+  plugins: [
+    // new ExtractTextPlugin('cardsFramework.css'),
+  ],
+
+  // externals: ['react-dom', 'react'],
 
 };
