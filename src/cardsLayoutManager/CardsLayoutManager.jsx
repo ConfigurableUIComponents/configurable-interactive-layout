@@ -7,7 +7,8 @@ import Card from './Card';
 import '../../node_modules/react-grid-layout/css/styles.css';
 import '../../node_modules/react-resizable/css/styles.css';
 
-function buildContent(contentList, EventManager) {
+function buildContent(props) {
+  const contentList = props.content;
   const data = [];
   for (let index = 0; index < contentList.length; index += 1) {
     const GeneratedCard = contentList[index].Type;
@@ -18,32 +19,24 @@ function buildContent(contentList, EventManager) {
       data.push((
         <div key={contentList[index].i}>
           <GeneratedCard
-            displayHeader={contentList[index].displayHeader}
-            title={contentList[index].title}
-            actions={contentList[index].actions}
-            listeners={contentList[index].listeners}
-            EventManager={EventManager}
-            id={contentList[index].i}
-            Content={contentList[index].Content}
-            data={contentList[index].data}
-            dataSource={contentList[index].dataSource}
+            {...props}
+            {...contentList[index]}
+            Content={GeneratedContent}
           />
         </div>
       ));
     } else if (React.isValidElement(<GeneratedContent />)) {
       // Custom React component scenario
-      const generatedProps = contentList[index].data;
       data.push((
         <div key={contentList[index].i}>
           <Card
-            displayHeader={contentList[index].displayHeader}
-            title={contentList[index].title}
-            actions={contentList[index].actions}
-            listeners={contentList[index].listeners}
-            EventManager={EventManager}
-            id={contentList[index].i}
+            {...props}
+            {...contentList[index]}
           >
-            <GeneratedContent {...generatedProps} />
+            <GeneratedContent
+              {...contentList[index]}
+              store={props.store}
+            />
           </Card>
         </div>
       ));
@@ -52,10 +45,7 @@ function buildContent(contentList, EventManager) {
       data.push((
         <div key={contentList[index].i}>
           <Card
-            displayHeader={contentList[index].displayHeader}
-            title={contentList[index].title}
-            actions={contentList[index].actions}
-            listeners={contentList[index].listeners}
+            {...props}
           >
             {GeneratedContent}
           </Card>
@@ -86,14 +76,13 @@ export default class CardsLayoutManager extends Component {
         rowHeight={100}
         width={1200}
       >
-        {buildContent(this.props.content, this.props.EventManager)}
+        {buildContent(this.props)}
       </ReactGridLayout>
     );
   }
 }
 
 CardsLayoutManager.propTypes = {
-  EventManager: PropTypes.instanceOf(Object).isRequired,
   content: PropTypes.arrayOf(PropTypes.shape({
     i: PropTypes.string.isRequired,
     title: PropTypes.string,

@@ -8,10 +8,7 @@ export default class Card extends Component {
       <div className="card">
         {this.props.displayHeader ?
           <CardHeader
-            title={this.props.title}
-            actions={this.props.actions}
-            EventManager={this.props.EventManager}
-            id={this.props.id}
+            {...this.props}
           /> : <div /> }
         <div className="card-content">
           { this.props.children }

@@ -9,5 +9,5 @@
     	"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/prefer-stateless-function": 0,
         "linebreak-style": 0
-    }
+	}
 }
