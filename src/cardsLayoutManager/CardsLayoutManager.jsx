@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactGridLayout from 'react-grid-layout';
+import './CardLayoutStyle.scss';
 
 import Card from './Card';
 

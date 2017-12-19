@@ -28,6 +28,7 @@ Card.propTypes = {
   EventManager: PropTypes.instanceOf(Object),
   actions: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
+    displayName: PropTypes.string,
   })),
   children: PropTypes.oneOfType([
     PropTypes.string,

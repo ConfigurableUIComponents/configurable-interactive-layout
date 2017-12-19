@@ -14,6 +14,11 @@ const cardLayoutProperties = [
         id: 'MulBy2',
         displayName: 'Multiply by 2',
       },
+      {
+        id: 'FromConfig',
+        displayName: 'From Config',
+        onClick(actionId) { console.log(`Action Id: ${actionId} Card Id: ${this.props.id}`); },
+      },
     ],
     Content: CustomBarChart,
     data: {
