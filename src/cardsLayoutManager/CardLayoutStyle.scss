@@ -2,26 +2,32 @@
 	.header{
 		.actions{
 			float: right;
-			.actions-hit-area{
+			.actions-menu{
 				width: 12px;
 				margin-left: 7px;
 				cursor: pointer;
-				&.collapse{
-					float: right;
-					background-image: url('../../res/actions_collapsed.svg');
-					height: 17px;
-					width: 4px;	
+                float: right;
+                height: 17px;
+                outline: none;
+				&.collapsed{
+					background: url('../../res/actions_collapsed.svg') no-repeat right center;
 					&:hover{
-						background-image: url('../../res/actions_collapsed_hover.svg');
+                      background: url('../../res/actions_collapsed_hover.svg') no-repeat right center;
 					}
 				}
+                &.expanded{
+                    background: url('../../res/actions_collapsed.svg') no-repeat right center;
+                    &:hover{
+                      background: url('../../res/actions_collapsed_hover.svg') no-repeat right center;
+                    }
+                }
 			}
+            .action-items{
+                display: inline-block;
+                &.dispnone{
+                    display: none;
+                }
+            }
 		}
 	}
 }
-
-
-.dispnone {
-  display: none;
-}
-

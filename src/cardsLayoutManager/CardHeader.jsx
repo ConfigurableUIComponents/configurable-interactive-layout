@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class CardHeader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menuOpen: false,
+    };
+  }
   onActionMenuClick() {
-    console.log(`hi${this}`);
+    this.setState({ menuOpen: !this.state.menuOpen });
   }
 
   assignOnClickAction(action) {
@@ -36,19 +42,21 @@ export default class CardHeader extends Component {
   render() {
     let actions = [];
     actions = this.buildActions();
+    const actionItemsClassName = `action-items ${this.state.menuOpen ? '' : 'dispnone'}`;
+    const actionsMenuClassName = `actions-menu ${this.state.menuOpen ? 'expanded' : 'collapsed'}`;
 
     return (
       <div className="header">
         {actions.length > 0 ?
           <div className="actions">
             <div
-              className="actions-hit-area collapse"
-              onClick={() => this.onActionMenuClick}
-              onKeyUp={this.onActionMenuClick}
+              className={actionsMenuClassName}
+              onClick={() => this.onActionMenuClick()}
+              onKeyUp={() => this.onActionMenuClick()}
               role="button"
               tabIndex={0}
             />
-            { actions }
+            <div className={actionItemsClassName}>{ actions }</div>
           </div> : null}
         <div className="title" title={this.props.title}>{this.props.title}</div>
       </div>);
