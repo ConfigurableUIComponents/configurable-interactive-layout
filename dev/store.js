@@ -1,7 +1,7 @@
 import { observable, action, computed } from 'mobx';
 
 class Store {
-  @observable _card1Data = {
+  @observable card1DataObj = {
     values: [
       { x: 'A', y: 5 },
       { x: 'B', y: 9 },
@@ -13,7 +13,7 @@ class Store {
     yAxisLabel: 'Count',
   }
 
-  @observable _card2Data = {
+  @observable card2DataObj = {
     values: [
       { x: 'X', y: 30 },
       { x: 'Y', y: 20 },
@@ -26,22 +26,22 @@ class Store {
 
   @computed
   get card2Data() {
-    return this._card2Data;
+    return this.card2DataObj;
   }
 
   @action
   setCard2DataValues(values) {
-    this._card2Data.values = values;
+    this.card2DataObj.values = values;
   }
 
   @computed
   get card1Data() {
-    return this._card1Data;
+    return this.card1DataObj;
   }
 
   @action
   setcard1Data(value) {
-    this._card1Data = value;
+    this.card1DataObj = value;
   }
 }
 export default new Store();

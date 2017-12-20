@@ -19,7 +19,6 @@ export default class Card extends Component {
 }
 
 Card.propTypes = {
-  id: PropTypes.string.isRequired,
   displayHeader: PropTypes.bool,
   title: PropTypes.string,
   EventManager: PropTypes.instanceOf(Object),

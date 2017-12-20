@@ -11,9 +11,7 @@ function multiplyByTwoEvent() {
     obj.y = row.y * 2;
     return obj;
   });
-  Store.setCard2DataValues({
-    values: doubleValues,
-  });
+  Store.setCard2DataValues(doubleValues);
 }
 
 export default class TestApp extends Component {

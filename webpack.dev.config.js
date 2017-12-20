@@ -28,12 +28,12 @@ module.exports = {
       use: [{
         loader: 'babel-loader',
       },
-      // {
-      //   loader: 'eslint-loader',
-      //   options: {
-      //     failOnError: true,
-      //   },
-      // }
+      {
+        loader: 'eslint-loader',
+        options: {
+          failOnError: true,
+        },
+      },
       ],
     },
     {

@@ -8,34 +8,35 @@ import '../../node_modules/react-grid-layout/css/styles.css';
 import '../../node_modules/react-resizable/css/styles.css';
 
 function buildContent(props) {
-  const contentList = props.content;
   const data = [];
-  for (let index = 0; index < contentList.length; index += 1) {
-    const GeneratedCard = contentList[index].Type;
-    const GeneratedContent = contentList[index].Content;
+  const { content, ...strippedProps } = props;
+
+  for (let index = 0; index < content.length; index += 1) {
+    const GeneratedCard = content[index].Type;
+    const GeneratedContent = content[index].Content;
 
     if (GeneratedCard) {
       // Custom card type scenario
       data.push((
-        <div key={contentList[index].i}>
+        <div key={content[index].i}>
           <GeneratedCard
-            {...props}
-            {...contentList[index]}
+            {...strippedProps}
+            {...content[index]}
             Content={GeneratedContent}
           />
         </div>
       ));
     } else if (React.isValidElement(<GeneratedContent />)) {
       // Custom React component scenario
+      const componentProps = { ...props, ...content[index] };
       data.push((
-        <div key={contentList[index].i}>
+        <div key={content[index].i}>
           <Card
             {...props}
-            {...contentList[index]}
+            {...content[index]}
           >
             <GeneratedContent
-              {...contentList[index]}
-              store={props.store}
+              {...componentProps}
             />
           </Card>
         </div>
@@ -43,7 +44,7 @@ function buildContent(props) {
     } else {
       // Basic content scenario
       data.push((
-        <div key={contentList[index].i}>
+        <div key={content[index].i}>
           <Card
             {...props}
           >

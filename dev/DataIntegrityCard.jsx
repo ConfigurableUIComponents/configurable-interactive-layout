@@ -109,7 +109,6 @@ export default class DataIntegrityCard extends Component {
 }
 
 DataIntegrityCard.propTypes = {
-  id: PropTypes.string.isRequired,
   Content: PropTypes.element.isRequired,
   dataSource: PropTypes.string,
   data: PropTypes.instanceOf(Object),

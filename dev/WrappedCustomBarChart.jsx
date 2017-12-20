@@ -8,13 +8,13 @@ import Store from './store';
 @observer
 export default class WrapperCustomLineChart extends Component {
   render() {
-    const dataSource = this.props.dataSource;
     return (
-      <CustomBarChart {...this.props.store[dataSource]}/>
+      <CustomBarChart {...this.props.store[this.props.dataSource]} />
     );
   }
 }
 
 WrapperCustomLineChart.propTypes = {
   store: PropTypes.instanceOf(Store).isRequired,
+  dataSource: PropTypes.string.isRequired,
 };
