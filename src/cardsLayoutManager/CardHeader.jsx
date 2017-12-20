@@ -30,12 +30,14 @@ export default class CardHeader extends Component {
       let onClickAction = this.assignOnClickAction(action);
       onClickAction = onClickAction.bind(this, action);
 
-      const divStyle = action.iconURL ? {
-        background: `url('${action.iconURL}') no-repeat center center`,
-      } : '{}';
+      // const divStyle = action.iconURL ? {
+      //   background: `url('${action.iconURL}') no-repeat center center`,
+      // } : '{}';
       return (
-        <div key={action.id} title={action.displayName} onClick={onClickAction} onKeyUp={onClickAction} tabIndex="0" style={divStyle} role="button">
-          {action.id}
+        // style={divStyle}
+        <div className="action-item" title={action.displayName} key={action.id} onClick={onClickAction} onKeyUp={onClickAction} tabIndex="0" role="button">
+          {action.iconURL ? <img alt={action.displayName} src={action.iconURL} /> :
+          <div className="action-item-no-icon">{action.displayName}</div>}
         </div>
       );
     });

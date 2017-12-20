@@ -10,19 +10,18 @@ const cardLayoutProperties = [
       {
         id: 'DivBy2',
         displayName: 'Divide by 2',
-        iconURL: 'actions_collapsed.svg',
+        iconURL: 'SV_ANN.svg',
       },
       {
         id: 'MulBy2',
         displayName: 'Multiply by 2',
-        iconURL: 'actions_collapsed.svg',
+        // iconURL: 'SV_ANN.svg',
       },
       {
         id: 'FromConfig',
         displayName: 'From Config',
-        iconURL: 'https://imagejournal.org/wp-content/uploads/bb-plugin/cache/23466317216_b99485ba14_o-panorama.jpg',
-        // onClick(actionId) { console.log(`Action Id: ${actionId} Card Id: ${this.props.id}`); },
-        onClick(actionId) { console.log(`liron${{ actionId }}`); },
+        iconURL: 'SV_ANN.svg',
+        onClick(actionId) { console.log(`Action Id: ${actionId} Card Id: ${this.props.id}`); },
       },
     ],
     Content: WrappedCustomBarChart,

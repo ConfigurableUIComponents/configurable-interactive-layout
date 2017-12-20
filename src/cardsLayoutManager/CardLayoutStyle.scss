@@ -29,6 +29,19 @@
                 &.dispnone{
                     display: none;
                 }
+                .action-item{
+                    width: 20px;
+                    height: 20px;
+                    margin-left: 5px;
+                    display: inline-block;
+                    .action-item-no-icon{
+                        max-width: 20px;
+                        max-height: 20px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
             }
 		}
 	}
