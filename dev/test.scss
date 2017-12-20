@@ -1,4 +1,5 @@
 $header-height: 20px;
+$card-padding: 20px;
 
 body{
   background-color: #fefcfa;
@@ -21,7 +22,8 @@ body{
 
     .card-content {
       margin: 5px; // use margin so .card is exposed for drag & drop
-      height: calc(100% - #{$header-height});
+      height: calc(100% - #{$header-height} - #{$card-padding});
+      background-color: lightgray;
     }
   }
 }
