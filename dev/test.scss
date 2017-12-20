@@ -1,3 +1,4 @@
+$header-height: 20px;
 
 body{
   background-color: #fefcfa;
@@ -11,6 +12,7 @@ body{
     .header {
       padding: 5px;
       border-bottom: solid 1px black;
+      min-height: $header-height;
 
       .actions {
         float: right;
@@ -18,8 +20,8 @@ body{
     }
 
     .card-content {
-      padding: 5px;
-      height: 100%;
+      margin: 5px; // use margin so .card is exposed for drag & drop
+      height: calc(100% - #{$header-height});
     }
   }
 }

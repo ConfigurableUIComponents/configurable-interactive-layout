@@ -70,10 +70,11 @@ export default class CardsLayoutManager extends Component {
         className="cards-layout-container"
         layout={extractLayout(this.props.content)}
         cols={12}
-        isDraggable={false}
         isResizable={false}
         rowHeight={100}
         width={1200}
+        draggableHandle=".header, .card"
+        draggableCancel=".actions, .card-content"
       >
         {buildContent(this.props)}
       </ReactGridLayout>
