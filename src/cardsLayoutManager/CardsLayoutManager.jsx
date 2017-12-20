@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactGridLayout from 'react-grid-layout';
+import './CardLayoutStyle.scss';
 
 import Card from './Card';
 
@@ -12,21 +13,21 @@ function buildContent(props) {
   const { content, ...strippedProps } = props;
 
   for (let index = 0; index < content.length; index += 1) {
-    const GeneratedCard = content[index].Type;
-    const GeneratedContent = content[index].Content;
+    const CustomCard = content[index].Type;
+    const CardContent = content[index].Content;
 
-    if (GeneratedCard) {
+    if (CustomCard) {
       // Custom card type scenario
       data.push((
         <div key={content[index].i}>
-          <GeneratedCard
+          <CustomCard
             {...strippedProps}
             {...content[index]}
             Content={GeneratedContent}
           />
         </div>
       ));
-    } else if (React.isValidElement(<GeneratedContent />)) {
+    } else if (React.isValidElement(<CardContent />)) {
       // Custom React component scenario
       const componentProps = { ...props, ...content[index] };
       data.push((
@@ -35,9 +36,7 @@ function buildContent(props) {
             {...props}
             {...content[index]}
           >
-            <GeneratedContent
-              {...componentProps}
-            />
+            <CardContent {...componentProps} />
           </Card>
         </div>
       ));
@@ -48,7 +47,7 @@ function buildContent(props) {
           <Card
             {...props}
           >
-            {GeneratedContent}
+            {CardContent}
           </Card>
         </div>
       ));
@@ -101,6 +100,7 @@ CardsLayoutManager.propTypes = {
     })),
     actions: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string,
+      displayName: PropTypes.string,
     })),
     listeners: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string,

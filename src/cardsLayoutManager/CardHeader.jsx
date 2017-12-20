@@ -2,24 +2,62 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class CardHeader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menuOpen: false,
+    };
+  }
+  onActionMenuClick() {
+    this.setState({ menuOpen: !this.state.menuOpen });
+  }
+
+  assignOnClickAction(action) {
+    let onClickAction = action.onClick;
+    if (onClickAction === undefined) {
+      onClickAction = this.publishActionEvent;
+    }
+
+    return onClickAction.bind(this, action.id);
+  }
+
+  publishActionEvent(actionId) {
+    this.props.EventManager.publish(actionId, this.props.id, {});
+  }
+
   buildActions() {
-    const actions = this.props.actions.map(action => (
-      <button onClick={() => this.props.EventManager.publish(action.id, this.props.id, {})}>
-        {action.id}
-      </button>
-    ));
+    const actions = this.props.actions.map((action) => {
+      let onClickAction = this.assignOnClickAction(action);
+      onClickAction = onClickAction.bind(this, action);
+      return (
+        <button key={action.id} onClick={onClickAction}>
+          {action.id}
+        </button>
+      );
+    });
+
     return actions;
   }
 
   render() {
     let actions = [];
-    if (this.props.EventManager) {
-      actions = this.buildActions();
-    }
+    actions = this.buildActions();
+    const actionItemsClassName = `action-items ${this.state.menuOpen ? '' : 'dispnone'}`;
+    const actionsMenuClassName = `actions-menu ${this.state.menuOpen ? 'expanded' : 'collapsed'}`;
 
     return (
       <div className="header">
-        {actions.length > 0 ? <div className="actions">{ actions }</div> : <div />}
+        {actions.length > 0 ?
+          <div className="actions">
+            <div
+              className={actionsMenuClassName}
+              onClick={() => this.onActionMenuClick()}
+              onKeyUp={() => this.onActionMenuClick()}
+              role="button"
+              tabIndex={0}
+            />
+            <div className={actionItemsClassName}>{ actions }</div>
+          </div> : null}
         <div className="title" title={this.props.title}>{this.props.title}</div>
       </div>);
   }
@@ -28,7 +66,10 @@ export default class CardHeader extends Component {
 CardHeader.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  actions: PropTypes.arrayOf(PropTypes.string),
+  actions: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    displayName: PropTypes.string,
+  })),
   EventManager: PropTypes.instanceOf(Object),
 };
 

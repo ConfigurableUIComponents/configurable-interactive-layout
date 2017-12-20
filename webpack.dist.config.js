@@ -1,36 +1,39 @@
 const path = require('path');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-
+  devtool: 'source-map',
+  devServer: {
+    contentBase: path.join(__dirname, 'dev'),
+    open: true,
+    overlay: {
+      warnings: false,
+      errors: true,
+    },
+  },
   entry: [
-    path.join(__dirname, 'src', 'index.js'),
+    path.join(__dirname, './dev/main.dist.js'),
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'CardsLayoutManager.dist.js',
-    publicPath: '/',
-    library: 'CardsLayoutManager',
-    libraryTarget: 'umd',
+    path: path.resolve(__dirname, './dist'),
+    filename: 'dist_bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
   module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-        },
+    rules: [{
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: 'babel-loader',
+      },
         {
           loader: 'eslint-loader',
           options: {
             failOnError: true,
           },
         }],
-      },
+    },
       {
         test: /\.(css|scss)$/,
         use: [{
@@ -49,10 +52,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    // new ExtractTextPlugin('cardsFramework.css'),
-  ],
-
-  externals: ['react-dom', 'react'],
-
 };
