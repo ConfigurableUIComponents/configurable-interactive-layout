@@ -16,9 +16,11 @@
 					}
 				}
                 &.expanded{
-                    background: url('../../res/actions_collapsed.svg') no-repeat right center;
+                    height: 8px;
+                    width: 17px;
+                    background: url('../../res/actions_expanded.svg') no-repeat right center;
                     &:hover{
-                      background: url('../../res/actions_collapsed_hover.svg') no-repeat right center;
+                      background: url('../../res/actions_expanded_hover.svg') no-repeat right center;
                     }
                 }
 			}

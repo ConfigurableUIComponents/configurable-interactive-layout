@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   devtool: 'source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'dev'),
+    contentBase: [path.join(__dirname, "res")],
     open: true,
     overlay: {
       warnings: false,

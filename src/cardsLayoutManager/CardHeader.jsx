@@ -29,10 +29,14 @@ export default class CardHeader extends Component {
     const actions = this.props.actions.map((action) => {
       let onClickAction = this.assignOnClickAction(action);
       onClickAction = onClickAction.bind(this, action);
+
+      const divStyle = action.iconURL ? {
+        background: `url('${action.iconURL}') no-repeat center center`,
+      } : '{}';
       return (
-        <button key={action.id} onClick={onClickAction}>
+        <div key={action.id} title={action.displayName} onClick={onClickAction} onKeyUp={onClickAction} tabIndex="0" style={divStyle} role="button">
           {action.id}
-        </button>
+        </div>
       );
     });
 
@@ -44,7 +48,6 @@ export default class CardHeader extends Component {
     actions = this.buildActions();
     const actionItemsClassName = `action-items ${this.state.menuOpen ? '' : 'dispnone'}`;
     const actionsMenuClassName = `actions-menu ${this.state.menuOpen ? 'expanded' : 'collapsed'}`;
-
     return (
       <div className="header">
         {actions.length > 0 ?
