@@ -29,17 +29,12 @@ function buildContent(props) {
           />
         </div>
       ));
-    } else if (React.isValidElement(<CardContent />)) {
+    } else if (React.isValidElement(<CardContent {...props} {...strippedContent} />)) {
       // Custom React component scenario
-      const componentProps = { ...props, ...strippedContent };
       data.push((
         <div key={i}>
-          <Card
-            {...props}
-            {...strippedContent}
-            id={i}
-          >
-            <CardContent {...componentProps} />
+          <Card {...props} {...strippedContent} id={i} >
+            <CardContent {...props} {...strippedContent} />
           </Card>
         </div>
       ));
@@ -91,9 +86,9 @@ CardsLayoutManager.propTypes = {
     i: PropTypes.string.isRequired,
     title: PropTypes.string,
     displayHeader: PropTypes.bool,
-    Type: PropTypes.element,
-    Content: PropTypes.element.isRequired,
-    layout: PropTypes.arrayOf(PropTypes.shape({
+    Type: PropTypes.func,
+    Content: PropTypes.func.isRequired,
+    layout: PropTypes.shape({
       i: PropTypes.string.isRequired,
       x: PropTypes.number.isRequired,
       y: PropTypes.number.isRequired,
@@ -101,7 +96,7 @@ CardsLayoutManager.propTypes = {
       h: PropTypes.number.isRequired,
       minW: PropTypes.number,
       maxW: PropTypes.number,
-    })),
+    }),
     actions: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string,
       displayName: PropTypes.string,
