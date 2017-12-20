@@ -4,6 +4,8 @@
   "main": "dist/cardsFramework.dist.js",
   "scripts": {
     "build": "webpack --bail -p",
+    "predev-dist": "npm run build",
+    "dev-dist": "webpack --bail --config webpack.dist.config.js ",
     "lint": "eslint dev --ext .jsx,.js",
     "lint-fix": "npm run lint -- --fix",
     "dev": "webpack-dev-server --config webpack.dev.config.js --color --hot -d --progress"

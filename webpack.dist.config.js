@@ -1,4 +1,3 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -12,11 +11,11 @@ module.exports = {
     },
   },
   entry: [
-    path.join(__dirname, './dev/main.js'),
+    path.join(__dirname, './dev/main.dist.js'),
   ],
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'index_bundle.js',
+    filename: 'dist_bundle.js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -53,7 +52,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({
-    title: 'Dev Mode - Cards Framework',
-  })],
 };
