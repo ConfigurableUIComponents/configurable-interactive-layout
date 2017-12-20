@@ -13,28 +13,31 @@ function buildContent(props) {
   const { content, ...strippedProps } = props;
 
   for (let index = 0; index < content.length; index += 1) {
-    const CustomCard = content[index].Type;
-    const CardContent = content[index].Content;
+    const { i, ...strippedContent } = content[index];
+    const CustomCard = strippedContent.Type;
+    const CardContent = strippedContent.Content;
 
     if (CustomCard) {
       // Custom card type scenario
       data.push((
-        <div key={content[index].i}>
+        <div key={i}>
           <CustomCard
             {...strippedProps}
-            {...content[index]}
-            Content={GeneratedContent}
+            {...strippedContent}
+            id={i}
+            Content={CardContent}
           />
         </div>
       ));
     } else if (React.isValidElement(<CardContent />)) {
       // Custom React component scenario
-      const componentProps = { ...props, ...content[index] };
+      const componentProps = { ...props, ...strippedContent };
       data.push((
-        <div key={content[index].i}>
+        <div key={i}>
           <Card
             {...props}
-            {...content[index]}
+            {...strippedContent}
+            id={i}
           >
             <CardContent {...componentProps} />
           </Card>
@@ -43,9 +46,10 @@ function buildContent(props) {
     } else {
       // Basic content scenario
       data.push((
-        <div key={content[index].i}>
+        <div key={i}>
           <Card
             {...props}
+            id={i}
           >
             {CardContent}
           </Card>
