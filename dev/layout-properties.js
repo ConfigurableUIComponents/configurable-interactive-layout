@@ -1,10 +1,11 @@
 import CustomBarChart from './CustomBarChart';
+import WrappedCustomBarChart from './WrappedCustomBarChart';
 import DICard from './DataIntegrityCard';
 
 const cardLayoutProperties = [
   {
     i: 'a',
-    title: 'Bar Chart #1',
+    title: 'Application Data',
     actions: [
       {
         id: 'DivBy2',
@@ -20,34 +21,29 @@ const cardLayoutProperties = [
         onClick(actionId) { console.log(`Action Id: ${actionId} Card Id: ${this.props.id}`); },
       },
     ],
-    Content: CustomBarChart,
-    data: {
-      values: [
-        { x: 'A', y: 5 },
-        { x: 'B', y: 9 },
-        { x: 'C', y: 2 },
-        { x: 'D', y: 4 },
-      ],
-      xAxisAttrName: 'x',
-      yAxisAttrName: 'y',
-      yAxisLabel: 'Count',
-    },
+    Content: WrappedCustomBarChart,
+    dataSource: 'card1Data',
     layout: {
       i: 'a', x: 0, y: 0, w: 6, h: 2,
     },
   },
   {
     i: 'b',
-    title: 'Card Data From Application',
-    Type: DICard,
-    Content: CustomBarChart,
+    title: 'Application Data Listens for MulBy2 events',
+    Content: WrappedCustomBarChart,
+    dataSource: 'card2Data',
+    listeners: [
+      {
+        id: 'MulBy2',
+      },
+    ],
     layout: {
       i: 'b', x: 6, y: 0, w: 6, h: 2, minW: 2, maxW: 8,
     },
   },
   {
     i: 'c',
-    title: 'Card Data From Custom Card',
+    title: 'Custom Card Data Listens for DivBy2 events',
     Type: DICard,
     Content: CustomBarChart,
     dataSource: 'DIChart1',

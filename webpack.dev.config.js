@@ -33,7 +33,8 @@ module.exports = {
         options: {
           failOnError: true,
         },
-      }],
+      },
+      ],
     },
     {
       test: /\.(css|scss)$/,

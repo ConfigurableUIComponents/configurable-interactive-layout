@@ -8,10 +8,7 @@ export default class Card extends Component {
       <div className="card">
         {this.props.displayHeader ?
           <CardHeader
-            title={this.props.title}
-            actions={this.props.actions}
-            EventManager={this.props.EventManager}
-            id={this.props.id}
+            {...this.props}
           /> : <div /> }
         <div className="card-content">
           { this.props.children }
@@ -22,7 +19,6 @@ export default class Card extends Component {
 }
 
 Card.propTypes = {
-  id: PropTypes.string.isRequired,
   displayHeader: PropTypes.bool,
   title: PropTypes.string,
   EventManager: PropTypes.instanceOf(Object),
