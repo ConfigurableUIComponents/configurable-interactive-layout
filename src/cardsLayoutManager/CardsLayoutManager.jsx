@@ -74,7 +74,7 @@ export default class CardsLayoutManager extends Component {
         rowHeight={100}
         width={1200}
         draggableHandle=".header, .card"
-        draggableCancel=".actions, .card-content"
+        draggableCancel=".actions, .card-content, .card-content-no-header"
       >
         {buildContent(this.props)}
       </ReactGridLayout>
