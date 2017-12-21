@@ -73,6 +73,8 @@ export default class CardsLayoutManager extends Component {
         isResizable={false}
         rowHeight={100}
         width={1200}
+        margin={[20, 20]}
+        containerPadding={[20, 20]}
         draggableHandle=".header, .card"
         draggableCancel=".actions, .card-content, .card-content-no-header"
       >
