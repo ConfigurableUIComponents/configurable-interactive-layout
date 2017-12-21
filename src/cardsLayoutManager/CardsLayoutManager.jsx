@@ -86,7 +86,6 @@ CardsLayoutManager.propTypes = {
   content: PropTypes.arrayOf(PropTypes.shape({
     i: PropTypes.string.isRequired,
     title: PropTypes.string,
-    displayHeader: PropTypes.bool,
     Type: PropTypes.func,
     Content: PropTypes.func.isRequired,
     layout: PropTypes.shape({

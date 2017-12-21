@@ -32,7 +32,6 @@ const cardLayoutProperties = [
   },
   {
     i: 'b',
-    displayHeader: false,
     Content: WrappedCustomBarChart,
     dataSource: 'card2Data',
     listeners: [
@@ -61,7 +60,6 @@ const cardLayoutProperties = [
   },
   {
     i: 'd',
-    displayHeader: false,
     actions: [
       {
         id: 'DivBy2',

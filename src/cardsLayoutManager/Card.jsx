@@ -6,11 +6,11 @@ export default class Card extends Component {
   render() {
     return (
       <div className="card">
-        {this.props.displayHeader ?
+        {
           <CardHeader
             {...this.props}
-          /> : <div /> }
-        <div className={this.props.displayHeader ? 'card-content-no-header' : 'card-content'} >
+          /> }
+        <div className="card-content">
           { this.props.children }
         </div>
       </div>
@@ -19,7 +19,6 @@ export default class Card extends Component {
 }
 
 Card.propTypes = {
-  displayHeader: PropTypes.bool,
   title: PropTypes.string,
   EventManager: PropTypes.instanceOf(Object),
   actions: PropTypes.arrayOf(PropTypes.shape({
@@ -33,8 +32,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-  displayHeader: true,
-  title: '',
-  actions: [],
+  title: undefined,
+  actions: undefined,
   EventManager: undefined,
 };
