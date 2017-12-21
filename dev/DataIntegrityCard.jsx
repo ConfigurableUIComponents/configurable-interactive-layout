@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import EventManager from '../src/eventManager/EventManager';
 
 import Card from '../src/cardsLayoutManager/Card';
 
@@ -41,7 +42,7 @@ export default class DataIntegrityCard extends Component {
   constructor(props) {
     super(props);
 
-    this.setState({
+    this.state = ({
       values: [],
       xAxisAttrName: 'X Attribute',
       yAxisAttrName: 'Y Attribute',
@@ -109,14 +110,13 @@ export default class DataIntegrityCard extends Component {
 }
 
 DataIntegrityCard.propTypes = {
-  id: PropTypes.string.isRequired,
-  Content: PropTypes.element.isRequired,
+  Content: PropTypes.func.isRequired,
   dataSource: PropTypes.string,
   data: PropTypes.instanceOf(Object),
   listeners: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
   })),
-  EventManager: PropTypes.element,
+  EventManager: PropTypes.instanceOf(EventManager),
 };
 
 DataIntegrityCard.defaultProps = {

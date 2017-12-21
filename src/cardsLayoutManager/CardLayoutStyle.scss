@@ -16,9 +16,11 @@
 					}
 				}
                 &.expanded{
-                    background: url('../../res/actions_collapsed.svg') no-repeat right center;
+                    height: 8px;
+                    width: 17px;
+                    background: url('../../res/actions_expanded.svg') no-repeat right center;
                     &:hover{
-                      background: url('../../res/actions_collapsed_hover.svg') no-repeat right center;
+                      background: url('../../res/actions_expanded_hover.svg') no-repeat right center;
                     }
                 }
 			}
@@ -26,6 +28,19 @@
                 display: inline-block;
                 &.dispnone{
                     display: none;
+                }
+                .action-item{
+                    width: 20px;
+                    height: 20px;
+                    margin-left: 5px;
+                    display: inline-block;
+                    .action-item-no-icon{
+                        max-width: 20px;
+                        max-height: 20px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
                 }
             }
 		}

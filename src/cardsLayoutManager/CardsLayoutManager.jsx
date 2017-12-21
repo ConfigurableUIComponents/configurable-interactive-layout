@@ -8,55 +8,43 @@ import Card from './Card';
 import '../../node_modules/react-grid-layout/css/styles.css';
 import '../../node_modules/react-resizable/css/styles.css';
 
-function buildContent(contentList, EventManager) {
+function buildContent(props) {
   const data = [];
-  for (let index = 0; index < contentList.length; index += 1) {
-    const CustomCard = contentList[index].Type;
-    const CardContent = contentList[index].Content;
+  const { content, ...strippedProps } = props;
+
+  for (let index = 0; index < content.length; index += 1) {
+    const { i, ...strippedContent } = content[index];
+    const CustomCard = strippedContent.Type;
+    const CardContent = strippedContent.Content;
 
     if (CustomCard) {
       // Custom card type scenario
       data.push((
-        <div key={contentList[index].i}>
+        <div key={i}>
           <CustomCard
-            displayHeader={contentList[index].displayHeader}
-            title={contentList[index].title}
-            actions={contentList[index].actions}
-            listeners={contentList[index].listeners}
-            EventManager={EventManager}
-            id={contentList[index].i}
-            Content={contentList[index].Content}
-            data={contentList[index].data}
-            dataSource={contentList[index].dataSource}
+            {...strippedProps}
+            {...strippedContent}
+            id={i}
+            Content={CardContent}
           />
         </div>
       ));
-    } else if (React.isValidElement(<CardContent />)) {
+    } else if (React.isValidElement(<CardContent {...props} {...strippedContent} />)) {
       // Custom React component scenario
-      const generatedProps = contentList[index].data;
       data.push((
-        <div key={contentList[index].i}>
-          <Card
-            displayHeader={contentList[index].displayHeader}
-            title={contentList[index].title}
-            actions={contentList[index].actions}
-            listeners={contentList[index].listeners}
-            EventManager={EventManager}
-            id={contentList[index].i}
-          >
-            <CardContent {...generatedProps} />
+        <div key={i}>
+          <Card {...props} {...strippedContent} id={i} >
+            <CardContent {...props} {...strippedContent} />
           </Card>
         </div>
       ));
     } else {
       // Basic content scenario
       data.push((
-        <div key={contentList[index].i}>
+        <div key={i}>
           <Card
-            displayHeader={contentList[index].displayHeader}
-            title={contentList[index].title}
-            actions={contentList[index].actions}
-            listeners={contentList[index].listeners}
+            {...props}
+            id={i}
           >
             {CardContent}
           </Card>
@@ -82,26 +70,26 @@ export default class CardsLayoutManager extends Component {
         className="cards-layout-container"
         layout={extractLayout(this.props.content)}
         cols={12}
-        isDraggable={false}
         isResizable={false}
         rowHeight={100}
         width={1200}
+        draggableHandle=".header, .card"
+        draggableCancel=".actions, .card-content, .card-content-no-header"
       >
-        {buildContent(this.props.content, this.props.EventManager)}
+        {buildContent(this.props)}
       </ReactGridLayout>
     );
   }
 }
 
 CardsLayoutManager.propTypes = {
-  EventManager: PropTypes.instanceOf(Object).isRequired,
   content: PropTypes.arrayOf(PropTypes.shape({
     i: PropTypes.string.isRequired,
     title: PropTypes.string,
     displayHeader: PropTypes.bool,
-    Type: PropTypes.element,
-    Content: PropTypes.element.isRequired,
-    layout: PropTypes.arrayOf(PropTypes.shape({
+    Type: PropTypes.func,
+    Content: PropTypes.func.isRequired,
+    layout: PropTypes.shape({
       i: PropTypes.string.isRequired,
       x: PropTypes.number.isRequired,
       y: PropTypes.number.isRequired,
@@ -109,7 +97,7 @@ CardsLayoutManager.propTypes = {
       h: PropTypes.number.isRequired,
       minW: PropTypes.number,
       maxW: PropTypes.number,
-    })),
+    }),
     actions: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string,
       displayName: PropTypes.string,

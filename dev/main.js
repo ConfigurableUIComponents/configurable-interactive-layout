@@ -5,10 +5,10 @@ import TestApp from './TestApp';
 import './test.scss';
 
 const div = document.createElement('div');
-div.setAttribute('id', 'cards-freamwork-container');
+div.setAttribute('id', 'cards-framework-container');
 document.body.appendChild(div);
 
 ReactDOM.render(
   <TestApp />,
-  document.getElementById('cards-freamwork-container'),
+  document.getElementById('cards-framework-container'),
 );
