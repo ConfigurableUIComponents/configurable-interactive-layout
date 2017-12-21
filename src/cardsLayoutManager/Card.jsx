@@ -10,7 +10,7 @@ export default class Card extends Component {
           <CardHeader
             {...this.props}
           /> : <div /> }
-        <div className="card-content">
+        <div className={this.props.displayHeader ? 'card-content-no-header' : 'card-content'} >
           { this.props.children }
         </div>
       </div>

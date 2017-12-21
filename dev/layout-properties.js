@@ -32,7 +32,7 @@ const cardLayoutProperties = [
   },
   {
     i: 'b',
-    title: 'Application Data Listens for MulBy2 events',
+    displayHeader: false,
     Content: WrappedCustomBarChart,
     dataSource: 'card2Data',
     listeners: [
@@ -57,6 +57,37 @@ const cardLayoutProperties = [
     ],
     layout: {
       i: 'c', x: 0, y: 1, w: 12, h: 3,
+    },
+  },
+  {
+    i: 'd',
+    displayHeader: false,
+    actions: [
+      {
+        id: 'DivBy2',
+        displayName: 'Divide by 2',
+        iconURL: 'SV_ANN.svg',
+      },
+    ],
+    Content: WrappedCustomBarChart,
+    dataSource: 'card1Data',
+    layout: {
+      i: 'd', x: 0, y: 2, w: 8, h: 2,
+    },
+  },
+  {
+    i: 'e',
+    actions: [
+      {
+        id: 'DivBy2',
+        displayName: 'Divide by 2',
+        iconURL: 'SV_ANN.svg',
+      },
+    ],
+    Content: WrappedCustomBarChart,
+    dataSource: 'card1Data',
+    layout: {
+      i: 'e', x: 8, y: 2, w: 4, h: 2,
     },
   },
 ];
