@@ -56,7 +56,7 @@ const cardLayoutProperties = [
       },
     ],
     layout: {
-      i: 'c', x: 0, y: 1, w: 12, h: 3,
+      i: 'c', x: 0, y: 2, w: 6, h: 4,
     },
   },
   {
@@ -72,7 +72,7 @@ const cardLayoutProperties = [
     Content: WrappedCustomBarChart,
     dataSource: 'card1Data',
     layout: {
-      i: 'd', x: 0, y: 2, w: 8, h: 2,
+      i: 'd', x: 6, y: 2, w: 6, h: 2,
     },
   },
   {
@@ -87,7 +87,7 @@ const cardLayoutProperties = [
     Content: WrappedCustomBarChart,
     dataSource: 'card1Data',
     layout: {
-      i: 'e', x: 8, y: 2, w: 4, h: 2,
+      i: 'e', x: 6, y: 4, w: 6, h: 2,
     },
   },
 ];
