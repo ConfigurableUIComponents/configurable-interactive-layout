@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EventManager from '../src/eventManager/EventManager';
+import EventManager from './eventManager/EventManager';
 import { CardsLayoutManager, Card } from '../dist/CardsLayoutManager.dist';
 import cardLayoutProperties from './layout-properties';
 // import './../dist/cards-framework.css';
