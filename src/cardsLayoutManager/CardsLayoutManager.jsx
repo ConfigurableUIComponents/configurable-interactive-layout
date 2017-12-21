@@ -62,38 +62,47 @@ function extractLayout(contentList) {
   for (let index = 0; index < contentList.length; index += 1) {
     layoutList.push(contentList[index].layout);
   }
-  return { xlg: layoutList };
+  return { lg: layoutList };
 }
 
 function onBreakpointChange(newBreakpoint, newCols) {
   console.log(`Breakpoint: ${newBreakpoint}, Columns: ${newCols}`);
 }
 
-function onLayoutChange(curLayout, allLayouts) {
-  console.log(`Current Layout: ${JSON.stringify(curLayout)}, All Layouts: ${JSON.stringify(allLayouts)}`);
-}
-
-
 export default class CardsLayoutManager extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      layouts: extractLayout(props.content),
+    };
+  }
+
+  onLayoutChange(curLayout, allLayouts) {
+    this.setState({
+      layouts: allLayouts,
+    });
+    console.log(`Current Layout: ${JSON.stringify(curLayout)},
+  All Layouts: ${JSON.stringify(allLayouts)}`);
+  }
+
   render() {
     return (
       <ResponsiveLayout
         className="cards-layout-container"
-        layouts={extractLayout(this.props.content)}
+        layouts={this.state.layouts}
         breakpoints={{
-          xlg: 1920, lg: 1600, md: 1440, sm: 1280, xsm: 1024, xxsm: 960,
+          lg: 1500, md: 1440,
         }}
         cols={{
-          xlg: 12, lg: 12, md: 12, sm: 8, xsm: 8, xxsm: 6,
+          lg: 12, md: 8,
         }}
         isResizable={false}
         rowHeight={100}
         width={1200}
-        compactType="horizontal"
         draggableHandle=".header, .card"
         draggableCancel=".actions, .card-content, .card-content-no-header"
         onBreakpointChange={(newBreakpoint, newCols) => onBreakpointChange(newBreakpoint, newCols)}
-        onLayoutChange={(curLayout, allLayouts) => onLayoutChange(curLayout, allLayouts)}
+        onLayoutChange={(curLayout, allLayouts) => this.onLayoutChange(curLayout, allLayouts)}
       >
         {buildContent(this.props)}
       </ResponsiveLayout>
