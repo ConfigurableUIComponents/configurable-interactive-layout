@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import EventManager from '../src/eventManager/EventManager';
+import EventManager from './eventManager/EventManager';
 
 import Card from '../src/cardsLayoutManager/Card';
 
