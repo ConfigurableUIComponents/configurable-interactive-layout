@@ -1,5 +1,5 @@
 const path = require('path');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 
@@ -33,24 +33,31 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        use: [{
-          loader: 'style-loader',
-        }, {
-          loader: 'css-loader',
-          options: {
-            sourceMap: true,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader', query: { sourceMaps: true } },
+            //  { loader: 'postcss-loader' },
+            { loader: 'sass-loader', query: { sourceMaps: true } }
+          ],
+        }),
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: 40000 },
           },
-        }, {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true,
-          },
-        }],
+          'svg-fill-loader',
+          'image-webpack-loader',
+        ],
+        exclude: /node_modules/,
       },
     ],
   },
   plugins: [
-    // new ExtractTextPlugin('cardsFramework.css'),
+    new ExtractTextPlugin('cards-framework.css'),
   ],
 
   externals: ['react-dom', 'react'],

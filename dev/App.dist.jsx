@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import EventManager from '../src/eventManager/EventManager';
 import { CardsLayoutManager, Card } from '../dist/CardsLayoutManager.dist';
 import cardLayoutProperties from './layout-properties';
+// import './../dist/cards-framework.css';
+import './test.scss';
 
 function injectDataIntoConfig(properties, data2Merge) {
   const mergedConfig = [];
