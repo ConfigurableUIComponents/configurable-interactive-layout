@@ -14,7 +14,7 @@
         font-size: 20px;
         font-weight: 600;
         text-transform: uppercase;
-        height: 34px ;
+        line-height: 34px ;
         margin-left: 20px;
 		.actions{
 			float: right;
@@ -63,6 +63,7 @@
 	}
 
     .card-content {
+      height: auto;
       background-color: lightgray;
     }
 }
