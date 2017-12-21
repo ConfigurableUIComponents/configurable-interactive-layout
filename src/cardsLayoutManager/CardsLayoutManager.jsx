@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactGridLayout from 'react-grid-layout';
+import { Responsive, WidthProvider } from 'react-grid-layout';
 import './CardLayoutStyle.scss';
 
 import Card from './Card';
 
 import '../../node_modules/react-grid-layout/css/styles.css';
 import '../../node_modules/react-resizable/css/styles.css';
+
+const ResponsiveLayout = WidthProvider(Responsive);
 
 function buildContent(props) {
   const data = [];
@@ -60,24 +62,41 @@ function extractLayout(contentList) {
   for (let index = 0; index < contentList.length; index += 1) {
     layoutList.push(contentList[index].layout);
   }
-  return layoutList;
+  return { xlg: layoutList };
 }
+
+function onBreakpointChange(newBreakpoint, newCols) {
+  console.log(`Breakpoint: ${newBreakpoint}, Columns: ${newCols}`);
+}
+
+function onLayoutChange(curLayout, allLayouts) {
+  console.log(`Current Layout: ${JSON.stringify(curLayout)}, All Layouts: ${JSON.stringify(allLayouts)}`);
+}
+
 
 export default class CardsLayoutManager extends Component {
   render() {
     return (
-      <ReactGridLayout
+      <ResponsiveLayout
         className="cards-layout-container"
-        layout={extractLayout(this.props.content)}
-        cols={12}
+        layouts={extractLayout(this.props.content)}
+        breakpoints={{
+          xlg: 1920, lg: 1600, md: 1440, sm: 1280, xsm: 1024, xxsm: 960,
+        }}
+        cols={{
+          xlg: 12, lg: 12, md: 12, sm: 8, xsm: 8, xxsm: 6,
+        }}
         isResizable={false}
         rowHeight={100}
         width={1200}
+        compactType="horizontal"
         draggableHandle=".header, .card"
         draggableCancel=".actions, .card-content, .card-content-no-header"
+        onBreakpointChange={(newBreakpoint, newCols) => onBreakpointChange(newBreakpoint, newCols)}
+        onLayoutChange={(curLayout, allLayouts) => onLayoutChange(curLayout, allLayouts)}
       >
         {buildContent(this.props)}
-      </ReactGridLayout>
+      </ResponsiveLayout>
     );
   }
 }
