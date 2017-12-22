@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import './CardLayoutStyle.scss';
-
+import IframeCard from './iframeCard';
 import Card from './Card';
 
 import '../../node_modules/react-grid-layout/css/styles.css';
@@ -18,8 +18,12 @@ function buildContent(props) {
     const { i, ...strippedContent } = content[index];
     const CustomCard = strippedContent.Type;
     const CardContent = strippedContent.Content;
-
-    if (CustomCard) {
+    if (CustomCard === 'iframeCard') {
+      data.push((
+        <div key={i}>
+          <IframeCard {...props} {...strippedContent} id={i} />
+        </div>));
+    } else if (CustomCard) {
       // Custom card type scenario
       data.push((
         <div key={i}>
@@ -65,9 +69,9 @@ function extractLayout(contentList) {
   return { lg: layoutList };
 }
 
-function onBreakpointChange(newBreakpoint, newCols) {
-  console.log(`Breakpoint: ${newBreakpoint}, Columns: ${newCols}`);
-}
+// function onBreakpointChange(newBreakpoint, newCols) {
+// console.log(`Breakpoint: ${newBreakpoint}, Columns: ${newCols}`);
+// }
 
 export default class CardsLayoutManager extends Component {
   constructor(props) {
@@ -81,8 +85,8 @@ export default class CardsLayoutManager extends Component {
     this.setState({
       layouts: allLayouts,
     });
-    console.log(`Current Layout: ${JSON.stringify(curLayout)},
-  All Layouts: ${JSON.stringify(allLayouts)}`);
+    // console.log(`Current Layout: ${JSON.stringify(curLayout)},
+  // All Layouts: ${JSON.stringify(allLayouts)}`);
   }
 
   render() {
@@ -103,7 +107,6 @@ export default class CardsLayoutManager extends Component {
         containerPadding={[20, 20]}
         draggableHandle=".header, .card"
         draggableCancel=".actions, .card-content, .card-content-no-header"
-        onBreakpointChange={(newBreakpoint, newCols) => onBreakpointChange(newBreakpoint, newCols)}
         onLayoutChange={(curLayout, allLayouts) => this.onLayoutChange(curLayout, allLayouts)}
       >
         {buildContent(this.props)}
