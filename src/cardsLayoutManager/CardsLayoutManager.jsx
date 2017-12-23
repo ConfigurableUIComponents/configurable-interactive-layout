@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import './CardLayoutStyle.scss';
-
+import maintainCardSizeOnLayoutChange from './CardOrganizer';
 import Card from './Card';
 
 import '../../node_modules/react-grid-layout/css/styles.css';
 import '../../node_modules/react-resizable/css/styles.css';
 
 const ResponsiveLayout = WidthProvider(Responsive);
+const COL_MAP = {
+  lg: 12, md: 8,
+};
 
 function buildContent(props) {
   const data = [];
@@ -62,6 +65,7 @@ function extractLayout(contentList) {
   for (let index = 0; index < contentList.length; index += 1) {
     layoutList.push(contentList[index].layout);
   }
+  console.log(`Initial Layout: ${JSON.stringify(layoutList)}`);
   return { lg: layoutList };
 }
 
@@ -79,10 +83,8 @@ export default class CardsLayoutManager extends Component {
 
   onLayoutChange(curLayout, allLayouts) {
     this.setState({
-      layouts: allLayouts,
+      layouts: maintainCardSizeOnLayoutChange(curLayout, allLayouts, COL_MAP),
     });
-    console.log(`Current Layout: ${JSON.stringify(curLayout)},
-  All Layouts: ${JSON.stringify(allLayouts)}`);
   }
 
   render() {
@@ -93,9 +95,7 @@ export default class CardsLayoutManager extends Component {
         breakpoints={{
           lg: 1500, md: 1440,
         }}
-        cols={{
-          lg: 12, md: 8,
-        }}
+        cols={COL_MAP}
         isResizable={false}
         rowHeight={100}
         width={1200}

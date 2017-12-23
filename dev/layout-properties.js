@@ -27,7 +27,7 @@ const cardLayoutProperties = [
     Content: WrappedCustomBarChart,
     dataSource: 'card1Data',
     layout: {
-      i: 'a', x: 0, y: 0, w: 6, h: 2,
+      i: 'a', x: 0, y: 0, w: 8, h: 2,
     },
   },
   {
@@ -41,7 +41,16 @@ const cardLayoutProperties = [
       },
     ],
     layout: {
-      i: 'b', x: 6, y: 0, w: 6, h: 2, minW: 2, maxW: 8,
+      i: 'b', x: 8, y: 0, w: 2, h: 2,
+    },
+  },
+  {
+    i: 'f',
+    displayHeader: false,
+    Content: WrappedCustomBarChart,
+    dataSource: 'card2Data',
+    layout: {
+      i: 'f', x: 10, y: 0, w: 2, h: 2,
     },
   },
   {
@@ -56,7 +65,7 @@ const cardLayoutProperties = [
       },
     ],
     layout: {
-      i: 'c', x: 0, y: 2, w: 6, h: 4,
+      i: 'c', x: 0, y: 2, w: 6, h: 2,
     },
   },
   {
