@@ -10,7 +10,7 @@ import '../../node_modules/react-resizable/css/styles.css';
 
 const ResponsiveLayout = WidthProvider(Responsive);
 const COL_MAP = {
-  lg: 12, md: 8,
+  lg: 12, md: 10, sm: 8, xs: 6,
 };
 
 function buildContent(props) {
@@ -66,7 +66,14 @@ function extractLayout(contentList) {
     layoutList.push(contentList[index].layout);
   }
   console.log(`Initial Layout: ${JSON.stringify(layoutList)}`);
-  return { lg: layoutList };
+  // TODO - create a method for dynamically genreating layouts for each breakpoint
+  const allLayouts = maintainCardSizeOnLayoutChange(layoutList, {
+    lg: layoutList,
+    md: JSON.parse(JSON.stringify(layoutList)),
+    sm: JSON.parse(JSON.stringify(layoutList)),
+    xs: JSON.parse(JSON.stringify(layoutList)),
+  }, COL_MAP);
+  return allLayouts;
 }
 
 function onBreakpointChange(newBreakpoint, newCols) {
@@ -82,6 +89,7 @@ export default class CardsLayoutManager extends Component {
   }
 
   onLayoutChange(curLayout, allLayouts) {
+    console.log('onLayoutChange called ... updating all layouts!');
     this.setState({
       layouts: maintainCardSizeOnLayoutChange(curLayout, allLayouts, COL_MAP),
     });
@@ -93,12 +101,12 @@ export default class CardsLayoutManager extends Component {
         className="cards-layout-container"
         layouts={this.state.layouts}
         breakpoints={{
-          lg: 1500, md: 1440,
+          lg: 1400, md: 1200, sm: 1024, xs: 800,
         }}
         cols={COL_MAP}
         isResizable={false}
         rowHeight={100}
-        width={1200}
+        width={1500}
         draggableHandle=".header, .card"
         draggableCancel=".actions, .card-content, .card-content-no-header"
         onBreakpointChange={(newBreakpoint, newCols) => onBreakpointChange(newBreakpoint, newCols)}

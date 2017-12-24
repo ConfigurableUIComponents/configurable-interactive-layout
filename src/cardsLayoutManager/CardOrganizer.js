@@ -8,7 +8,6 @@ function compressLayout(sortedLayoutIds, layout, layoutMaxCol) {
   let yPos = 0;
   for (let i = 0; i < sortedLayoutIds.length; i += 1) {
     const match = getMatchingEntry(sortedLayoutIds[i], layout)[0];
-    console.log(`Found Match for ${sortedLayoutIds[i]}: ${JSON.stringify(match)}`);
 
     // ensure width of element never exceeds max col width
     if (match.w > layoutMaxCol) {
@@ -25,11 +24,12 @@ function compressLayout(sortedLayoutIds, layout, layoutMaxCol) {
     match.x = xPos;
     match.y = yPos;
     compressedLayout.push(match);
-    console.log(`Compressed match: ${JSON.stringify(match)}`);
 
     // update x according to width
     xPos += match.w;
   }
+
+  console.log(`Compressed Layout (Max Col: ${layoutMaxCol}): ${JSON.stringify(compressedLayout)}`);
   return compressedLayout;
 }
 
@@ -47,7 +47,7 @@ export default function maintainCardSizeOnLayoutChange(currentLayout, allLayouts
     return layout1.y > layout2.y;
   });
   const sortedIds = sortedLayout.map(layout => layout.i);
-  console.log(sortedIds);
+  console.log(`Card id order by placement (pre-compression): ${sortedIds}`);
 
   const updatedLayouts = {};
   const colTypes = Object.keys(colMap);
@@ -56,6 +56,7 @@ export default function maintainCardSizeOnLayoutChange(currentLayout, allLayouts
     updatedLayouts[colTypes[i]] =
       compressLayout(sortedIds, allLayouts[colTypes[i]], colMap[colTypes[i]]);
   }
+  console.log('All Compressed Layouts:');
   console.log(updatedLayouts);
   return updatedLayouts;
 }
