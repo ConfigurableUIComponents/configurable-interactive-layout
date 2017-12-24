@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/cardsFramework.dist.js",
   "scripts": {
-    "build": "webpack --bail -p",
+    "build": "webpack --bail -p --config webpack.config.prod.js ",
     "predev-dist": "npm run build",
     "dev-dist": "webpack --bail --config webpack.dist.config.js ",
     "lint": "eslint dev --ext .jsx,.js",
