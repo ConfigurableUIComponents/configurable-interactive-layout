@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/cardsFramework.dist.js",
   "scripts": {
-    "build": "webpack --bail -p",
+    "build": "webpack --bail -p --config webpack.config.prod.js ",
     "predev-dist": "npm run build",
     "dev-dist": "webpack --bail --config webpack.dist.config.js ",
     "lint": "eslint dev --ext .jsx,.js",
@@ -58,6 +58,7 @@
     "svg-fill-loader": "0.0.8",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.5"
+    "webpack-dev-server": "^2.9.5",
+    "webpack-merge": "^4.1.1"
   }
 }
