@@ -4,6 +4,7 @@ import CardHeader from './CardHeader';
 
 export default class IframeCard extends Component {
   componentDidMount() {
+    window.addEventListener('message', this.handleFrameTasks);
     const em = this.props.EventManager;
     const { eventIds } = this.props;
 
@@ -24,6 +25,14 @@ export default class IframeCard extends Component {
           /* eslint-disable no-console */
         }
       });
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('message', this.handleFrameTasks);
+  }
+  handleFrameTasks = (e) => {
+    if (e.origin === 'http://localhost:8080') { // e.data.metadata.eventName === 'a') {
+      console.log(`message from inner iframe: ${JSON.stringify(e.data)}`);
     }
   }
   render() {
@@ -53,7 +62,7 @@ IframeCard.propTypes = {
     id: PropTypes.string,
     displayName: PropTypes.string,
   })),
-  eventIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  eventIds: PropTypes.arrayOf(PropTypes.string),
   url: PropTypes.string.isRequired,
 };
 
@@ -61,4 +70,5 @@ IframeCard.defaultProps = {
   title: undefined,
   actions: undefined,
   EventManager: undefined,
+  eventIds: [],
 };

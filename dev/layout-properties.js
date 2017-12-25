@@ -6,7 +6,8 @@ const cardLayoutProperties = [
   {
     i: 'a',
     title: 'iframe card example',
-    url: 'www.ynet.com',
+    url: 'myIframe.html',
+    eventIds: ['a', 'b', 'c'],
     Type: 'iframeCard',
     layout: {
       i: 'a', x: 0, y: 0, w: 6, h: 2,

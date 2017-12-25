@@ -8,8 +8,11 @@
 <body>
         <p id="myP">"Hi I am an Iframe!"</p>
     <<script>
+
         window.addEventListener("DOMContentLoaded", function() {
 
+            // signal the parent that we're loaded.
+            window.parent.postMessage("loaded", window.parent.origin);
             // listen for messages from the parent.
             window.addEventListener("message", function(e) {
                 if(e.origin ==='http://localhost:8080') {
@@ -25,7 +28,6 @@
                                 document.getElementById("myP").innerHTML += "and also an " + "event c" + "\n";
                                 break;
                         }
-                        console.log(e);
                 }
             }, false)
         }, false)
