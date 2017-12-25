@@ -17,7 +17,7 @@ function buildContent(props) {
   for (let index = 0; index < content.length; index += 1) {
     const { i, ...strippedContent } = content[index];
     const CustomCard = strippedContent.Type;
-    const CardContent = strippedContent.Content;
+    const CardContent = strippedContent;
     if (CustomCard === 'iframeCard') {
       data.push((
         <div key={i}>
@@ -91,26 +91,38 @@ export default class CardsLayoutManager extends Component {
 
   render() {
     return (
-      <ResponsiveLayout
-        className="cards-layout-container"
-        layouts={this.state.layouts}
-        breakpoints={{
-          lg: 1500, md: 1440,
-        }}
-        cols={{
-          lg: 12, md: 8,
-        }}
-        isResizable={false}
-        rowHeight={100}
-        width={1200}
-        margin={[20, 20]}
-        containerPadding={[20, 20]}
-        draggableHandle=".header, .card"
-        draggableCancel=".actions, .card-content, .card-content-no-header"
-        onLayoutChange={(curLayout, allLayouts) => this.onLayoutChange(curLayout, allLayouts)}
-      >
-        {buildContent(this.props)}
-      </ResponsiveLayout>
+      [
+        <ResponsiveLayout
+          className="cards-layout-container"
+          layouts={this.state.layouts}
+          breakpoints={{
+            lg: 1500, md: 1440,
+          }}
+          cols={{
+            lg: 12, md: 8,
+          }}
+          isResizable={false}
+          rowHeight={100}
+          width={1200}
+          margin={[20, 20]}
+          containerPadding={[20, 20]}
+          draggableHandle=".header, .card"
+          draggableCancel=".actions, .card-content, .card-content-no-header"
+          onLayoutChange={(curLayout, allLayouts) => this.onLayoutChange(curLayout, allLayouts)}
+        >
+          {buildContent(this.props)}
+        </ResponsiveLayout>,
+        <div>
+          <button onClick={() => this.props.EventManager.publish('a', 'layoutManager', { aaa: 1 })}>
+            Send event a to iFrame
+          </button>
+          <button onClick={() => this.props.EventManager.publish('b', 'layoutManager', { aaa: 2 })}>
+            Send event b to iFrame
+          </button>
+          <button onClick={() => this.props.EventManager.publish('c', 'layoutManager', { aaa: 3 })}>
+            Send event c to iFrame
+          </button>
+        </div>]
     );
   }
 }
@@ -140,6 +152,7 @@ CardsLayoutManager.propTypes = {
     data: PropTypes.instanceOf(Object),
     dataSource: PropTypes.string,
   })),
+  EventManager: PropTypes.func.isRequired,
 };
 
 CardsLayoutManager.defaultProps = {
