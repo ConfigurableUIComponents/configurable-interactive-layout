@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card changes the class when hovered 1`] = `
+<div
+  className="card"
+>
+  <div
+    className="card-content"
+  >
+    Facebook
+  </div>
+</div>
+`;

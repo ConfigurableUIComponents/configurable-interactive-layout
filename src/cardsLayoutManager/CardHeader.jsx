@@ -36,8 +36,8 @@ export default class CardHeader extends Component {
       return (
         // style={divStyle}
         <div className="action-item" title={action.displayName} key={action.id} onClick={onClickAction} onKeyUp={onClickAction} tabIndex="0" role="button">
-          {action.iconURL ? <img alt={action.displayName} src={action.iconURL} /> :
-          <div className="action-item-no-icon">{action.displayName}</div>}
+          <img alt={action.displayName} src={action.iconURL} />
+
         </div>
       );
     });
