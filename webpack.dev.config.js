@@ -3,10 +3,10 @@ const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.config');
 
-module.exports = merge(common,{
+module.exports = merge(common, {
   devtool: 'source-map',
   devServer: {
-    contentBase: [path.join(__dirname, "res")],
+    contentBase: [path.join(__dirname, 'res')],
     open: true,
     overlay: {
       warnings: false,
@@ -37,7 +37,16 @@ module.exports = merge(common,{
         },
       }],
     },
-    ],
+    {
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: 'eslint-loader',
+        options: {
+          failOnError: true,
+        },
+      }],
+    }],
   },
   plugins: [new HtmlWebpackPlugin({
     title: 'Dev Mode - Cards Framework',
