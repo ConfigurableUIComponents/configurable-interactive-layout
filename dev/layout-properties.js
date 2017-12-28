@@ -15,7 +15,6 @@ const cardLayoutProperties = [
       {
         id: 'MulBy2',
         displayName: 'Multiply by 2',
-        // iconURL: 'SV_ANN.svg',
       },
       {
         id: 'FromConfig',

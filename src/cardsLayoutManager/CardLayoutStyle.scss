@@ -1,48 +1,97 @@
-.card{
-	.header{
-		.actions{
+@import '../UI_Elements.scss';
+
+#cards-framework-container {
+	background-color: $layout-bg;
+	font-family: $font-stack;
+}
+
+.react-grid-item {
+	background-color: $card-bg;
+	border: 1px solid $card-border;
+	padding: $card-padding; // use padding so .card is exposed for drag & drop
+	.card {
+		height: 100%
+	}
+
+	.header {
+		font-size: 20px;
+		font-weight: 600;
+		text-transform: uppercase;
+		line-height: $header-height;
+		margin-left: 20px;
+
+		.actions {
 			float: right;
-			.actions-menu{
-				width: 12px;
-				margin-left: 7px;
+
+			.actions-menu {
+				width: 20px; 
+				// margin-left: 7px;
+				margin-right: 10px;
 				cursor: pointer;
-                float: right;
-                height: 17px;
-                outline: none;
-				&.collapsed{
-					background: url('../../res/actions_collapsed.svg') no-repeat right center;
-					&:hover{
-                      background: url('../../res/actions_collapsed_hover.svg') no-repeat right center;
+				float: right;
+				height: 17px;
+				outline: none;
+
+				&.collapsed {
+					background: url('../../res/actions_collapsed.svg') no-repeat center center;
+
+					&:hover {
+						background: url('../../res/actions_collapsed_hover.svg') no-repeat center center;
 					}
 				}
-                &.expanded{
-                    height: 8px;
-                    width: 17px;
-                    background: url('../../res/actions_expanded.svg') no-repeat right center;
-                    &:hover{
-                      background: url('../../res/actions_expanded_hover.svg') no-repeat right center;
-                    }
-                }
+
+				&.expanded {
+					background: url('../../res/actions_expanded.svg') no-repeat center center;
+
+					&:hover {
+						background: url('../../res/actions_expanded_hover.svg') no-repeat center center;
+					}
+				}
 			}
-            .action-items{
-                display: inline-block;
-                &.dispnone{
-                    display: none;
-                }
-                .action-item{
-                    width: 20px;
-                    height: 20px;
-                    margin-left: 5px;
-                    display: inline-block;
-                    .action-item-no-icon{
-                        max-width: 20px;
-                        max-height: 20px;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                    }
-                }
-            }
+
+			.action-items {
+				display: inline-block;
+
+				&.dispnone {
+					display: none;
+				}
+
+				.action-item {
+					width: 20px;
+					height: 20px;
+					margin-left: 5px;
+					display: inline-block;
+
+					.action-item-no-icon {
+						max-width: 20px;
+						max-height: 20px;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+				}
+			}
 		}
+		&.with-title{
+			font-weight: 600;
+		}
+		&.without-title{
+			height: $header-height;
+			background-color: #FFFFFF;
+			opacity: 0.7;
+			font-weight: 600;
+			position: absolute;
+			right: 10px;
+			z-index: 1;
+		}
+	}
+
+	.card-content {
+		height: 100%;
+		background-color: lightgray;
+	}
+
+	.with-title + .card-content {
+		height: calc(100% - #{$header-height});
 	}
 }
