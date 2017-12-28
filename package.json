@@ -1,5 +1,5 @@
 {
-  "name": "cards-framework",
+  "name": "configurable-interactive-layout",
   "version": "1.0.0",
   "main": "dist/cardsFramework.dist.js",
   "scripts": {
