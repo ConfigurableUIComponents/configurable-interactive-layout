@@ -73,10 +73,6 @@ export default class CardHeader extends Component {
   }
 
   render() {
-    if (!this.props.title && !this.props.actions) {
-      return null;
-    }
-
     const headerClassName = `header ${this.props.title ? 'with-title' : 'without-title'}`;
 
     return (
