@@ -1,55 +1,35 @@
 const path = require('path');
+const merge = require('webpack-merge');
+const common = require('./webpack.config');
 
-module.exports = {
-  devtool: 'source-map',
-  devServer: {
-    contentBase: path.join(__dirname, 'dev'),
-    open: true,
-    overlay: {
-      warnings: false,
-      errors: true,
-    },
-  },
+module.exports = merge(common, {
   entry: [
-    path.join(__dirname, './dev/main.dist.js'),
+    path.join(__dirname, './dev/dev-dist/main.dist.js'),
   ],
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'dist_bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
+      test: /\.(css|scss)$/,
       use: [{
-        loader: 'babel-loader',
-      },
-        {
-          loader: 'eslint-loader',
-          options: {
-            failOnError: true,
-          },
-        }],
+        loader: 'style-loader',
+      }, {
+        loader: 'css-loader',
+        options: {
+          sourceMap: true,
+        },
+      }, {
+        loader: 'sass-loader',
+        options: {
+          sourceMap: true,
+        },
+      }],
     },
-      {
-        test: /\.(css|scss)$/,
-        use: [{
-          loader: 'style-loader',
-        }, {
-          loader: 'css-loader',
-          options: {
-            sourceMap: true,
-          },
-        }, {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true,
-          },
-        }],
-      },
     ],
   },
-};
+});

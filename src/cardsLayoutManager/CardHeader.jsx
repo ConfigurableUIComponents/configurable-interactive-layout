@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+const DEFAULT_ACTION_ICON = 'SV_ANN.svg';
+
 export default class CardHeader extends Component {
   constructor(props) {
     super(props);
@@ -29,16 +31,15 @@ export default class CardHeader extends Component {
     const actions = this.props.actions.map((action) => {
       let onClickAction = this.assignOnClickAction(action);
       onClickAction = onClickAction.bind(this, action);
+      if (!action.iconURL && !action.displayName) {
+        return null;
+      }
 
-      // const divStyle = action.iconURL ? {
-      //   background: `url('${action.iconURL}') no-repeat center center`,
-      // } : '{}';
+      const actionIcon = action.iconURL ? action.iconURL : DEFAULT_ACTION_ICON;
+
+      const divStyle = { background: `url('${actionIcon}') no-repeat center center` };
       return (
-        // style={divStyle}
-        <div className="action-item" title={action.displayName} key={action.id} onClick={onClickAction} onKeyUp={onClickAction} tabIndex="0" role="button">
-          {action.iconURL ? <img alt={action.displayName} src={action.iconURL} /> :
-          <div className="action-item-no-icon">{action.displayName}</div>}
-        </div>
+        <div className="action-item" style={divStyle} title={action.displayName} key={action.id} onClick={onClickAction} onKeyUp={onClickAction} tabIndex="0" role="button" />
       );
     });
 

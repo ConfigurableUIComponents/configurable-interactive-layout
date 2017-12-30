@@ -1,10 +1,12 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const merge = require('webpack-merge');
+const common = require('./webpack.config');
 
-module.exports = {
+module.exports = merge(common, {
   devtool: 'source-map',
   devServer: {
-    contentBase: [path.join(__dirname, "res")],
+    contentBase: [path.join(__dirname, 'res')],
     open: true,
     overlay: {
       warnings: false,
@@ -18,25 +20,8 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: 'index_bundle.js',
   },
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
   module: {
     rules: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      use: [{
-        loader: 'babel-loader',
-      },
-      {
-        loader: 'eslint-loader',
-        options: {
-          failOnError: true,
-        },
-      },
-      ],
-    },
-    {
       test: /\.(css|scss)$/,
       use: [{
         loader: 'style-loader',
@@ -53,20 +38,17 @@ module.exports = {
       }],
     },
     {
-      test: /\.(jpe?g|png|gif|svg)$/,
-      use: [
-        {
-          loader: 'url-loader',
-          options: { limit: 40000 },
-        },
-        'svg-fill-loader',
-        'image-webpack-loader',
-      ],
+      test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-    },
-    ],
+      use: [{
+        loader: 'eslint-loader',
+        options: {
+          failOnError: true,
+        },
+      }],
+    }],
   },
   plugins: [new HtmlWebpackPlugin({
     title: 'Dev Mode - Cards Framework',
   })],
-};
+});

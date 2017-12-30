@@ -3,12 +3,14 @@
     "env": {
     	"browser": true,
     	"node": true,
-    	"es6": true
+    	"es6": true,
+        "jest": true
   	},
     "parser": "babel-eslint",
     "rules": {
     	"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/prefer-stateless-function": 0,
-        "linebreak-style": 0
+        "linebreak-style": 0,
+        "react/require-default-props": 0
 	}
 }
