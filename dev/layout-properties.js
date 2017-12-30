@@ -4,6 +4,16 @@ import DICard from './DataIntegrityCard';
 
 const cardLayoutProperties = [
   {
+    i: 'aa',
+    title: 'iframe card example',
+    url: 'myIframe.html',
+    eventIds: ['a', 'b', 'c'],
+    Type: 'iframeCard',
+    layout: {
+      i: 'aa', x: 0, y: 1, w: 6, h: 2,
+    },
+  },
+  {
     i: 'a',
     title: 'Application Data',
     actions: [
