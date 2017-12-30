@@ -2,25 +2,16 @@ language: node_js
 node_js:
   - "7"
 
-stages:
-  - lint&test
-  - build
-  - deploy
-
 install: npm install
 
-lint&test:
-  - script:
-      - npm run lint
-      - npm run test
-
-build:
-  - script:
-      - npm run build
+script:
+    - npm run lint
+    - npm run test
+    - npm run build
 
 deploy:
   provider: npm
   email: $NPM_EMAIL
   api_key: $NPM_TOKEN
   on:
-    branch: travis/publish
+    branch: master
