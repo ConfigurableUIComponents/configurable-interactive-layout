@@ -10,53 +10,6 @@ import '../../node_modules/react-resizable/css/styles.css';
 
 const ResponsiveLayout = WidthProvider(Responsive);
 
-function buildContent(props) {
-  const data = [];
-  const { content, ...strippedProps } = props;
-
-  for (let index = 0; index < content.length; index += 1) {
-    const { i, ...strippedContent } = content[index];
-    const CustomCard = strippedContent.Type;
-    const CardContent = strippedContent.Content;
-
-    if (CustomCard) {
-      // Custom card type scenario
-      data.push((
-        <div key={i}>
-          <CustomCard
-            {...strippedProps}
-            {...strippedContent}
-            id={i}
-            Content={CardContent}
-          />
-        </div>
-      ));
-    } else if (React.isValidElement(<CardContent {...props} {...strippedContent} />)) {
-      // Custom React component scenario
-      data.push((
-        <div key={i}>
-          <Card {...props} {...strippedContent} id={i} >
-            <CardContent {...props} {...strippedContent} />
-          </Card>
-        </div>
-      ));
-    } else {
-      // Basic content scenario
-      data.push((
-        <div key={i}>
-          <Card
-            {...props}
-            id={i}
-          >
-            {CardContent}
-          </Card>
-        </div>
-      ));
-    }
-  }
-  return data;
-}
-
 function extractLayout(contentList) {
   const layoutList = [];
   for (let index = 0; index < contentList.length; index += 1) {
@@ -73,7 +26,7 @@ export default class CardsLayoutManager extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      layouts: extractLayout(props.content),
+      layouts: extractLayout(props.layoutProps),
     };
   }
 
@@ -81,8 +34,93 @@ export default class CardsLayoutManager extends Component {
     this.setState({
       layouts: allLayouts,
     });
-    console.log(`Current Layout: ${JSON.stringify(curLayout)},
-  All Layouts: ${JSON.stringify(allLayouts)}`);
+  }
+
+  buildContent() {
+    const data = [];
+    const { layoutProps } = this.props;
+
+    for (let index = 0; index < layoutProps.length; index += 1) {
+      const cardProps = layoutProps[index];
+      const cardType = cardProps.type;
+      let card;
+
+      switch (cardType) {
+        case 'CustomCard':
+          card = this.buildCustomCard(cardProps);
+          if (card) {
+            data.push(card);
+          }
+          break;
+          // case 'IFrame':
+          //   card = this.buildIFrameCard(cardContent);
+          //   if (card) {
+          //     data.push(card);
+          //   }
+          //   break;
+          // case 'StaticResource':
+          //   card = this.buildStaticResourceCard(cardContent);
+          //   if (card) {
+          //     data.push(card);
+          //   }
+          //   break;
+        case 'ReactComponent':
+          card = this.buildReactComponentCard(cardProps);
+          if (card) {
+            data.push(card);
+          }
+          break;
+        default:
+          // TODO: Error handling
+          break;
+      }
+    }
+
+    return data;
+  }
+
+  buildReactComponentCard(cardProps) {
+    const cardId = cardProps.i;
+    const ReactComponentRef = cardProps.Content;
+    if (!this.props) {
+      return null;
+    }
+    return (
+      <div key={cardId}>
+        <Card
+          {...cardProps}
+          eventManager={this.props.eventManager}
+          store={this.props.store}
+          id={cardId}
+        >
+          <ReactComponentRef
+            {...cardProps}
+            {...this.props.layoutProps}
+            eventManager={this.props.eventManager}
+            store={this.props.store}
+          />
+        </Card>
+      </div>);
+  }
+
+  buildCustomCard(cardProps) {
+    const CustomCardType = cardProps.Content;
+    const cardId = cardProps.i;
+    if (!React.isValidElement(<CustomCardType />)) {
+      return null;
+    }
+
+    // TODO: Validation on customCardType ...
+
+    return (
+      <div key={cardId}>
+        <CustomCardType
+          {...cardProps}
+          store={this.props.store}
+          eventManager={this.props.eventManager}
+          id={cardId}
+        />
+      </div>);
   }
 
   render() {
@@ -91,11 +129,11 @@ export default class CardsLayoutManager extends Component {
         className="cards-layout-container"
         layouts={this.state.layouts}
         breakpoints={{
-          lg: 1500, md: 1440,
-        }}
+                    lg: 1500, md: 1440,
+                }}
         cols={{
-          lg: 12, md: 8,
-        }}
+                    lg: 12, md: 8,
+                }}
         isResizable={false}
         rowHeight={100}
         width={1200}
@@ -106,17 +144,19 @@ export default class CardsLayoutManager extends Component {
         onBreakpointChange={(newBreakpoint, newCols) => onBreakpointChange(newBreakpoint, newCols)}
         onLayoutChange={(curLayout, allLayouts) => this.onLayoutChange(curLayout, allLayouts)}
       >
-        {buildContent(this.props)}
+        {this.buildContent()}
       </ResponsiveLayout>
     );
   }
 }
 
 CardsLayoutManager.propTypes = {
-  content: PropTypes.arrayOf(PropTypes.shape({
+  eventManager: PropTypes.instanceOf(Object),
+  store: PropTypes.instanceOf(Object),
+  layoutProps: PropTypes.arrayOf(PropTypes.shape({
     i: PropTypes.string.isRequired,
     title: PropTypes.string,
-    Type: PropTypes.func,
+    type: PropTypes.string,
     Content: PropTypes.func.isRequired,
     layout: PropTypes.shape({
       i: PropTypes.string.isRequired,
@@ -140,6 +180,7 @@ CardsLayoutManager.propTypes = {
 };
 
 CardsLayoutManager.defaultProps = {
-  content: [],
+  layoutProps: [],
+  store: undefined,
+  eventManager: undefined,
 };
-

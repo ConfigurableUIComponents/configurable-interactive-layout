@@ -24,7 +24,7 @@ export default class CardHeader extends Component {
   }
 
   publishActionEvent(actionId) {
-    this.props.EventManager.publish(actionId, this.props.id, {});
+    this.props.eventManager.publish(actionId, this.props.id, {});
   }
 
   buildActions() {
@@ -95,11 +95,11 @@ CardHeader.propTypes = {
     displayName: PropTypes.string,
     iconURL: PropTypes.string,
   })),
-  EventManager: PropTypes.instanceOf(Object),
+  eventManager: PropTypes.instanceOf(Object),
 };
 
 CardHeader.defaultProps = {
   title: undefined,
   actions: undefined,
-  EventManager: undefined,
+  eventManager: undefined,
 };

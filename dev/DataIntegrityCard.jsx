@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import EventManager from './eventManager/EventManager';
+import CustomBarChart from './CustomBarChart';
 
 import Card from '../src/cardsLayoutManager/Card';
 
@@ -56,7 +57,7 @@ export default class DataIntegrityCard extends Component {
     // subscribe to listener events
     if (this.props.listeners) {
       for (let index = 0; index < this.props.listeners.length; index += 1) {
-        this.props.EventManager.subscribe(this.props.listeners[index].id, this.divideByTwoEvent);
+        this.props.eventManager.subscribe(this.props.listeners[index].id, this.divideByTwoEvent);
       }
     }
 
@@ -100,28 +101,28 @@ export default class DataIntegrityCard extends Component {
   }
 
   render() {
-    const GeneratedContent = this.props.Content;
+    // const GeneratedContent = this.props.Content;
     return (
       <Card {...this.props}>
-        <GeneratedContent {...this.state} />
+        <CustomBarChart {...this.state} />
       </Card>
     );
   }
 }
 
 DataIntegrityCard.propTypes = {
-  Content: PropTypes.func.isRequired,
+  // Content: PropTypes.func.isRequired,
   dataSource: PropTypes.string,
   data: PropTypes.instanceOf(Object),
   listeners: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
   })),
-  EventManager: PropTypes.instanceOf(EventManager),
+  eventManager: PropTypes.instanceOf(EventManager),
 };
 
 DataIntegrityCard.defaultProps = {
   listeners: [],
   dataSource: undefined,
   data: {},
-  EventManager: undefined,
+  eventManager: undefined,
 };

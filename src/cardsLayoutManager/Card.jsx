@@ -20,7 +20,8 @@ export default class Card extends Component {
 
 Card.propTypes = {
   title: PropTypes.string,
-  EventManager: PropTypes.instanceOf(Object),
+  store: PropTypes.instanceOf(Object),
+  eventManager: PropTypes.instanceOf(Object),
   actions: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     displayName: PropTypes.string,
@@ -34,5 +35,6 @@ Card.propTypes = {
 Card.defaultProps = {
   title: undefined,
   actions: undefined,
-  EventManager: undefined,
+  eventManager: undefined,
+  store: undefined,
 };
