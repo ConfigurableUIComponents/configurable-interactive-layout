@@ -7,10 +7,15 @@
 
 .card {
 	background-color: $card-bg;
-	border: 1px solid $card-border;
-	padding: $card-padding; /*use padding so .card is exposed for drag & drop*/
-	height: 100%;
+	border: $card-border-width solid $card-border;
+	padding: $card-padding;
+	height: calc(100% - 2*#{$card-padding} - 2*#{$card-border-width});
  	cursor: pointer;
+
+	&.with-title{
+		padding: 0 $card-padding $card-padding;
+		height: calc(100% - #{$card-padding} - 2*#{$card-border-width});
+	}
 
 	.header {
 		font-size: 20px;
@@ -97,9 +102,5 @@
 
 	.with-title + .card-content {
 		height: calc(100% - #{$header-height});
-	}
-
-	&.with-title{
-		padding: 0 $card-padding $card-padding;
 	}
 }
