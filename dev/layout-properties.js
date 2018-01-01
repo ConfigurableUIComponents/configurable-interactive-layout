@@ -1,4 +1,4 @@
-import CustomBarChart from './CustomBarChart';
+// import CustomBarChart from './CustomBarChart';
 import WrappedCustomBarChart from './WrappedCustomBarChart';
 import DICard from './DataIntegrityCard';
 
@@ -6,6 +6,7 @@ const cardLayoutProperties = [
   {
     i: 'a',
     title: 'Application Data',
+    type: 'ReactComponent',
     actions: [
       {
         id: 'DivBy2',
@@ -31,6 +32,7 @@ const cardLayoutProperties = [
   },
   {
     i: 'b',
+    type: 'ReactComponent',
     Content: WrappedCustomBarChart,
     dataSource: 'card2Data',
     listeners: [
@@ -45,8 +47,8 @@ const cardLayoutProperties = [
   {
     i: 'c',
     title: 'Custom Card Data Listens for DivBy2 events',
-    Type: DICard,
-    Content: CustomBarChart,
+    type: 'CustomCard',
+    Content: DICard,
     dataSource: 'DIChart1',
     listeners: [
       {
@@ -59,6 +61,7 @@ const cardLayoutProperties = [
   },
   {
     i: 'd',
+    type: 'ReactComponent',
     actions: [
       {
         id: 'DivBy2',
@@ -74,6 +77,7 @@ const cardLayoutProperties = [
   },
   {
     i: 'e',
+    type: 'ReactComponent',
     actions: [
       {
         id: 'DivBy2',

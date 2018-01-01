@@ -30,9 +30,9 @@ export default class TestApp extends Component {
         <div className="app-header">
           <h1>Layout Manager Test Application</h1>
           <LayoutManager
-            content={cardLayoutProperties}
+            layoutProps={cardLayoutProperties}
             store={Store}
-            EventManager={this.eventManager}
+            eventManager={this.eventManager}
           />
         </div>
       </div>
