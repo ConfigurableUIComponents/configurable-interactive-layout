@@ -46,6 +46,14 @@ export default class CardHeader extends Component {
     return actions;
   }
 
+  createHeaderClassName() {
+    let headerClassName = `card-header ${this.props.title ? '' : 'without-title'}`;
+    if (this.state.menuOpen) {
+      headerClassName += ' menu-open';
+    }
+    return headerClassName;
+  }
+
   renderActions() {
     let actions = [];
     if (this.props.actions) {
@@ -73,10 +81,8 @@ export default class CardHeader extends Component {
   }
 
   render() {
-    const headerClassName = `header ${this.props.title ? 'with-title' : 'without-title'}`;
-
     return (
-      <div className={headerClassName}>
+      <div className={this.createHeaderClassName()}>
         {this.renderActions()}
         {this.props.title ? <div className="title" title={this.props.title}>{this.props.title}</div> : null }
       </div>);
