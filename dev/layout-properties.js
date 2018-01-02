@@ -11,16 +11,17 @@ const cardLayoutProperties = [
       {
         id: 'DivBy2',
         displayName: 'Divide by 2',
-        iconURL: 'SV_ANN.svg',
+        iconURL: 'trashbin.svg',
       },
       {
         id: 'MulBy2',
         displayName: 'Multiply by 2',
+        iconURL: 'refresh.svg',
       },
       {
         id: 'FromConfig',
         displayName: 'From Config',
-        iconURL: 'SV_ANN.svg',
+        iconURL: 'see_all.svg',
         onClick(actionId) { console.log(`Action Id: ${actionId} Card Id: ${this.props.id}`); },
       },
     ],
