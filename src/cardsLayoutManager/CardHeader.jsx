@@ -24,7 +24,7 @@ export default class CardHeader extends Component {
   }
 
   publishActionEvent(actionId) {
-    this.props.EventManager.publish(actionId, this.props.id, {});
+    this.props.eventManager.publish(actionId, this.props.id, {});
   }
 
   buildActions() {
@@ -44,6 +44,14 @@ export default class CardHeader extends Component {
     });
 
     return actions;
+  }
+
+  createHeaderClassName() {
+    let headerClassName = `card-header ${this.props.title ? '' : 'without-title'}`;
+    if (this.state.menuOpen) {
+      headerClassName += ' menu-open';
+    }
+    return headerClassName;
   }
 
   renderActions() {
@@ -73,14 +81,8 @@ export default class CardHeader extends Component {
   }
 
   render() {
-    if (!this.props.title && !this.props.actions) {
-      return null;
-    }
-
-    const headerClassName = `header ${this.props.title ? 'with-title' : 'without-title'}`;
-
     return (
-      <div className={headerClassName}>
+      <div className={this.createHeaderClassName()}>
         {this.renderActions()}
         {this.props.title ? <div className="title" title={this.props.title}>{this.props.title}</div> : null }
       </div>);
@@ -95,11 +97,11 @@ CardHeader.propTypes = {
     displayName: PropTypes.string,
     iconURL: PropTypes.string,
   })),
-  EventManager: PropTypes.instanceOf(Object),
+  eventManager: PropTypes.instanceOf(Object),
 };
 
 CardHeader.defaultProps = {
   title: undefined,
   actions: undefined,
-  EventManager: undefined,
+  eventManager: undefined,
 };

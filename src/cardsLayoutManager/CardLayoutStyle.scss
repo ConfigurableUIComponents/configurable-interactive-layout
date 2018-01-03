@@ -5,36 +5,59 @@
 	font-family: $font-stack;
 }
 
-.react-grid-item {
+.card {
 	background-color: $card-bg;
-	border: 1px solid $card-border;
-	padding: $card-padding; // use padding so .card is exposed for drag & drop
-	.card {
-		height: 100%
+	border: $card-border-width solid $card-border;
+	cursor: pointer;
+	padding: $card-padding;
+	height: calc(100% - 2*#{$card-padding} - 2*#{$card-border-width});
+
+	&.with-title{
+		padding: 0 $card-padding $card-padding;
+		height: calc(100% - #{$card-padding} - 2*#{$card-border-width});
 	}
 
-	.header {
+	.card-header {
 		font-size: 20px;
 		font-weight: 600;
 		text-transform: uppercase;
 		line-height: $header-height;
+		height: $header-height;	
 		margin-left: 20px;
+		z-index: 1;
+		display: flex;
+		align-items: center;
 
+        &.without-title{
+          right: $card-padding;
+          position: absolute;
+          background-color: $card-bg;
+
+          opacity: 0;
+          &:hover{
+            opacity: 0.7;
+          }
+        }
+		&.without-title.menu-open{
+			opacity: 0.7;
+		}
 		.actions {
-			float: right;
+			order: 2;
+			margin-left: auto;
+			height: 100%;
+			display: flex;
+			align-items: center;
 
 			.actions-menu {
-				width: 20px; 
-				// margin-left: 7px;
-				margin-right: 10px;
+				order: 2;
+				width: $actions-menu-width;
 				cursor: pointer;
 				float: right;
-				height: 17px;
+				height: inherit;
 				outline: none;
 
 				&.collapsed {
 					background: url('../../res/actions_collapsed.svg') no-repeat center center;
-
 					&:hover {
 						background: url('../../res/actions_collapsed_hover.svg') no-repeat center center;
 					}
@@ -42,7 +65,6 @@
 
 				&.expanded {
 					background: url('../../res/actions_expanded.svg') no-repeat center center;
-
 					&:hover {
 						background: url('../../res/actions_expanded_hover.svg') no-repeat center center;
 					}
@@ -50,6 +72,7 @@
 			}
 
 			.action-items {
+				order: 1;
 				display: inline-block;
 
 				&.dispnone {
@@ -59,8 +82,9 @@
 				.action-item {
 					width: 20px;
 					height: 20px;
-					margin-left: 5px;
+					margin-left: 8px;
 					display: inline-block;
+					outline: none;
 
 					.action-item-no-icon {
 						max-width: 20px;
@@ -72,26 +96,19 @@
 				}
 			}
 		}
-		&.with-title{
-			font-weight: 600;
-		}
-		&.without-title{
-			height: $header-height;
-			background-color: #FFFFFF;
-			opacity: 0.7;
-			font-weight: 600;
-			position: absolute;
-			right: 10px;
-			z-index: 1;
+		.title{
+			order: 1;	
 		}
 	}
 
 	.card-content {
-		height: 100%;
 		background-color: lightgray;
+		height: 100%;
 	}
 
-	.with-title + .card-content {
+	&.with-title .card-content{
 		height: calc(100% - #{$header-height});
 	}
 }
+
+
