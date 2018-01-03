@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
+import './iframeCardStyles.scss';
+
 
 const IFRAME_NOT_SUPPORTED_STR = 'This browser does not support iframes.';
 
@@ -50,6 +52,7 @@ export default class IframeCard extends Component {
       <div className="card">
         <Card {...this.props}>
           <iframe
+            className="iframeCard"
             title={this.props.url}
             src={this.props.url}
             ref={(iframe) => { this.frameReference = iframe; }}

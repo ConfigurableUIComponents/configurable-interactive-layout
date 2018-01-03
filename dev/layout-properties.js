@@ -10,7 +10,7 @@ const cardLayoutProperties = [
     eventIds: ['a', 'b', 'c'],
     Type: 'iframeCard',
     layout: {
-      i: 'aa', x: 0, y: 1, w: 6, h: 2,
+      i: 'aa', x: 0, y: 1, w: 6, h: 4,
     },
   },
   {
