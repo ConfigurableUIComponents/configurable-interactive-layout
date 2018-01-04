@@ -111,6 +111,7 @@ export default class CardsLayoutManager extends Component {
         draggableCancel=".actions, .card-content, .card-content-no-header"
         onBreakpointChange={(newBreakpoint, newCols) => onBreakpointChange(newBreakpoint, newCols)}
         onLayoutChange={(curLayout, allLayouts) => this.onLayoutChange(curLayout, allLayouts)}
+        verticalCompact={false}
       >
         {buildContent(this.props)}
       </ResponsiveLayout>

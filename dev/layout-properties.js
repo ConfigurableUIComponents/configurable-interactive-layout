@@ -5,7 +5,7 @@ import DICard from './DataIntegrityCard';
 const cardLayoutProperties = [
   {
     i: 'a',
-    title: 'Application Data',
+    title: 'Component A (default: 8x6)',
     actions: [
       {
         id: 'DivBy2',
@@ -27,12 +27,12 @@ const cardLayoutProperties = [
     Content: WrappedCustomBarChart,
     dataSource: 'card1Data',
     layout: {
-      i: 'a', x: 0, y: 0, w: 8, h: 2,
+      i: 'a', x: 0, y: 0, w: 8, h: 6,
     },
   },
   {
     i: 'b',
-    displayHeader: false,
+    title: 'Component B (default: 2x2)',
     Content: WrappedCustomBarChart,
     dataSource: 'card2Data',
     listeners: [
@@ -45,17 +45,17 @@ const cardLayoutProperties = [
     },
   },
   {
-    i: 'f',
-    displayHeader: false,
+    i: 'c',
+    title: 'Component C (default: 2x4)',
     Content: WrappedCustomBarChart,
     dataSource: 'card2Data',
     layout: {
-      i: 'f', x: 10, y: 0, w: 2, h: 2,
+      i: 'c', x: 10, y: 0, w: 2, h: 4,
     },
   },
   {
-    i: 'c',
-    title: 'Custom Card Data Listens for DivBy2 events',
+    i: 'd',
+    title: 'Component D (default: 2x2)',
     Type: DICard,
     Content: CustomBarChart,
     dataSource: 'DIChart1',
@@ -65,27 +65,12 @@ const cardLayoutProperties = [
       },
     ],
     layout: {
-      i: 'c', x: 0, y: 2, w: 6, h: 2,
-    },
-  },
-  {
-    i: 'd',
-    displayHeader: false,
-    actions: [
-      {
-        id: 'DivBy2',
-        displayName: 'Divide by 2',
-        iconURL: 'SV_ANN.svg',
-      },
-    ],
-    Content: WrappedCustomBarChart,
-    dataSource: 'card1Data',
-    layout: {
-      i: 'd', x: 6, y: 2, w: 6, h: 2,
+      i: 'd', x: 8, y: 2, w: 2, h: 2,
     },
   },
   {
     i: 'e',
+    title: 'Component E (default: 4x2)',
     actions: [
       {
         id: 'DivBy2',
@@ -96,7 +81,39 @@ const cardLayoutProperties = [
     Content: WrappedCustomBarChart,
     dataSource: 'card1Data',
     layout: {
-      i: 'e', x: 6, y: 4, w: 6, h: 2,
+      i: 'e', x: 8, y: 4, w: 4, h: 2,
+    },
+  },
+  {
+    i: 'f',
+    title: 'Component F (default: 10x2)',
+    actions: [
+      {
+        id: 'DivBy2',
+        displayName: 'Divide by 2',
+        iconURL: 'SV_ANN.svg',
+      },
+    ],
+    Content: WrappedCustomBarChart,
+    dataSource: 'card1Data',
+    layout: {
+      i: 'f', x: 0, y: 6, w: 10, h: 2,
+    },
+  },
+  {
+    i: 'g',
+    title: 'Component G (default: 2x2)',
+    actions: [
+      {
+        id: 'DivBy2',
+        displayName: 'Divide by 2',
+        iconURL: 'SV_ANN.svg',
+      },
+    ],
+    Content: WrappedCustomBarChart,
+    dataSource: 'card1Data',
+    layout: {
+      i: 'g', x: 10, y: 6, w: 2, h: 2,
     },
   },
 ];

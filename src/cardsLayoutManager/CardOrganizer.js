@@ -2,10 +2,29 @@ function getMatchingEntry(id, layout) {
   return layout.filter(element => element.i === id);
 }
 
-function compressLayout(sortedLayoutIds, layout, layoutMaxCol) {
+function spaceAvailable(width, xPos, yPos, existingLayout) {
+  let available = true;
+  for (let i = 0; i < width; i += 1) {
+    const xOffset = xPos + i;
+    const existingOffsetYValue = existingLayout[xOffset];
+
+    if (existingOffsetYValue && existingOffsetYValue > yPos) {
+      // there is already something in this location
+      available = false;
+      break;
+    }
+
+    console.log(`Space available in column ${xPos} since maxValue value is ${existingOffsetYValue} (which is smaller than ${yPos})`);
+  }
+  return available;
+}
+
+function layoutComponents(sortedLayoutIds, layout, layoutMaxCol) {
   const compressedLayout = [];
+  const bottomComponents = [];
   let xPos = 0;
   let yPos = 0;
+
   for (let i = 0; i < sortedLayoutIds.length; i += 1) {
     const match = getMatchingEntry(sortedLayoutIds[i], layout)[0];
 
@@ -14,24 +33,96 @@ function compressLayout(sortedLayoutIds, layout, layoutMaxCol) {
       match.w = layoutMaxCol;
     }
 
-    // ensure there is space in current row
-    if (xPos + match.w > layoutMaxCol) {
-      yPos += match.h;
-      xPos = 0;
+    // find next available space for component
+    let spaceFound = false;
+    while (!spaceFound) {
+      if (xPos + match.w <= layoutMaxCol) {
+        // there is space for this component in the current row
+        for (let col = xPos; col < layoutMaxCol; col += 1) {
+          if (spaceAvailable(match.w, col, yPos, bottomComponents)) {
+            // there's space available, set the xPos, update
+            // 'spaceFound' so can add the component in the current
+            // location
+            xPos = col;
+            spaceFound = true;
+            console.log(`Space found at (${col}, ${yPos}) for ${JSON.stringify(match)}`);
+            break;
+          } else if (col + 1 + match.w > layoutMaxCol) {
+            // no more room in this row for this component, break
+            // so can move to the next row
+            console.log(`No space found in current row (${yPos}), moving to next row`);
+            break;
+          }
+          console.log(`No space found at (${col}, ${yPos}) for ${JSON.stringify(match)}`);
+        }
+      }
+
+      if (!spaceFound) {
+        // prepare to check next row
+        yPos += 1;
+        xPos = 0;
+      }
     }
 
-    // reset position values
+    // update the list of bottom components
+    for (let j = 0; j < match.w; j += 1) {
+      console.log(`Blocking out column ${xPos + j} down to ${match.h + yPos}`);
+      bottomComponents[xPos + j] = match.h + yPos;
+    }
+
+    // set position values and add the component to the layout
     match.x = xPos;
     match.y = yPos;
     compressedLayout.push(match);
 
-    // update x according to width
-    xPos += match.w;
+    // update xPos to be at the end of the newly added component so
+    // next component can be added right next to this one
+    if (xPos + match.w >= layoutMaxCol) {
+      // no more room in this row, set current location to be start of next row.
+      // TODO - do we need this case, or will the for loop (inside while loop)
+      // take care of moving to next row?
+      xPos = 0;
+      yPos += 1;
+    } else {
+      xPos += match.w;
+    }
   }
 
   console.log(`Compressed Layout (Max Col: ${layoutMaxCol}): ${JSON.stringify(compressedLayout)}`);
   return compressedLayout;
 }
+//
+// function compressLayout(sortedLayoutIds, layout, layoutMaxCol) {
+//   const compressedLayout = [];
+//   let xPos = 0;
+//   let yPos = 0;
+//   for (let i = 0; i < sortedLayoutIds.length; i += 1) {
+//     const match = getMatchingEntry(sortedLayoutIds[i], layout)[0];
+//
+//     // ensure width of element never exceeds max col width
+//     if (match.w > layoutMaxCol) {
+//       match.w = layoutMaxCol;
+//     }
+//
+//     // ensure there is space in current row
+//     if (xPos + match.w > layoutMaxCol) {
+//       yPos += match.h;
+//       xPos = 0;
+//     }
+//
+//     // reset position values
+//     match.x = xPos;
+//     match.y = yPos;
+//     compressedLayout.push(match);
+//
+//     // update x according to width
+//     xPos += match.w;
+//   }
+//
+//   console.log(`Compressed Layout (Max Col: ${layoutMaxCol}):
+// ${JSON.stringify(compressedLayout)}`);
+//   return compressedLayout;
+// }
 
 export default function maintainCardSizeOnLayoutChange(currentLayout, allLayouts, colMap) {
   console.log('Calculating New Layouts');
@@ -54,7 +145,7 @@ export default function maintainCardSizeOnLayoutChange(currentLayout, allLayouts
   for (let i = 0; i < colTypes.length; i += 1) {
     console.log(`Compressing for: ${colTypes[i]}`);
     updatedLayouts[colTypes[i]] =
-      compressLayout(sortedIds, allLayouts[colTypes[i]], colMap[colTypes[i]]);
+      layoutComponents(sortedIds, allLayouts[colTypes[i]], colMap[colTypes[i]]);
   }
   console.log('All Compressed Layouts:');
   console.log(updatedLayouts);
