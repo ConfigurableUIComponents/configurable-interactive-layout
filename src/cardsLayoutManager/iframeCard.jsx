@@ -26,7 +26,7 @@ export default class IframeCard extends Component {
   }
 
   subscribeToApplicationEvents = () => {
-    const em = this.props.EventManager;
+    const em = this.props.eventManager;
     const { eventIds } = this.props;
 
     for (let index = 0; index < eventIds.length; index += 1) {
@@ -49,24 +49,24 @@ export default class IframeCard extends Component {
 
   render() {
     return (
-      <div className="card">
-        <Card {...this.props}>
-          <iframe
-            className="iframeCard"
-            title={this.props.url}
-            src={this.props.url}
-            ref={(iframe) => { this.frameReference = iframe; }}
-          >
-            {IFRAME_NOT_SUPPORTED_STR}
-          </iframe>
-        </Card>
-      </div>);
+
+      <Card {...this.props}>
+        <iframe
+          className="iframeCard"
+          title={this.props.url}
+          src={this.props.url}
+          ref={(iframe) => { this.frameReference = iframe; }}
+        >
+          {IFRAME_NOT_SUPPORTED_STR}
+        </iframe>
+      </Card>
+    );
   }
 }
 
 IframeCard.propTypes = {
   title: PropTypes.string,
-  EventManager: PropTypes.instanceOf(Object),
+  eventManager: PropTypes.instanceOf(Object),
   actions: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     displayName: PropTypes.string,
@@ -78,6 +78,6 @@ IframeCard.propTypes = {
 IframeCard.defaultProps = {
   title: undefined,
   actions: undefined,
-  EventManager: undefined,
+  eventManager: undefined,
   eventIds: [],
 };

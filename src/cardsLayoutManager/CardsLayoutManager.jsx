@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import './CardLayoutStyle.scss';
-
+import IframeCard from './iframeCard';
 import Card from './Card';
 
 import '../../node_modules/react-grid-layout/css/styles.css';
@@ -52,18 +52,12 @@ export default class CardsLayoutManager extends Component {
             data.push(card);
           }
           break;
-          // case 'IFrame':
-          //   card = this.buildIFrameCard(cardContent);
-          //   if (card) {
-          //     data.push(card);
-          //   }
-          //   break;
-          // case 'StaticResource':
-          //   card = this.buildStaticResourceCard(cardContent);
-          //   if (card) {
-          //     data.push(card);
-          //   }
-          //   break;
+        case 'iframeCard':
+          card = this.buildIframeCard(cardProps);
+          if (card) {
+            data.push(card);
+          }
+          break;
         case 'ReactComponent':
           card = this.buildReactComponentCard(cardProps);
           if (card) {
@@ -100,6 +94,16 @@ export default class CardsLayoutManager extends Component {
             store={this.props.store}
           />
         </Card>
+      </div>);
+  }
+
+
+  buildIframeCard(cardProps) {
+    const cardId = cardProps.i;
+    console.log(this.props);
+    return (
+      <div key={cardId}>
+        <IframeCard {...cardProps} eventManager={this.props.eventManager} id={cardId} />
       </div>);
   }
 

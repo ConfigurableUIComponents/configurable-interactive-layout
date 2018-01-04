@@ -8,9 +8,9 @@ const cardLayoutProperties = [
     title: 'iframe card example',
     url: 'myIframe.html',
     eventIds: ['a', 'b', 'c'],
-    Type: 'iframeCard',
+    type: 'iframeCard',
     layout: {
-      i: 'aa', x: 0, y: 1, w: 6, h: 4,
+      i: 'aa', x: 0, y: 2, w: 6, h: 3,
     },
   },
   {
