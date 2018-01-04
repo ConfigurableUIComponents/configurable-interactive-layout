@@ -28,19 +28,20 @@
 		display: flex;
 		align-items: center;
 
-        &.without-title{
+        &.without-title {
           right: $card-padding;
           position: absolute;
-          background-color: $card-bg;
-
-          opacity: 0;
-          &:hover{
-            opacity: 0.7;
-          }
+			.actions{
+				background-color: $card-bg;
+				opacity: 0;
+				&:hover{
+					opacity: 0.7;
+				}
+				&.menu-open{
+					opacity: 0.7;
+				}
+			}
         }
-		&.without-title.menu-open{
-			opacity: 0.7;
-		}
 		.actions {
 			order: 2;
 			margin-left: auto;
