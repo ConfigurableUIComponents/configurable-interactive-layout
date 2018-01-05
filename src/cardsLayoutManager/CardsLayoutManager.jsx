@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import './CardLayoutStyle.scss';
-import IframeCard from './iframeCard';
+import IframeCard from '../InteractiveIframe/iframeCard';
 import Card from './Card';
 
 import '../../node_modules/react-grid-layout/css/styles.css';

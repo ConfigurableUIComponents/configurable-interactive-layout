@@ -9,7 +9,7 @@
     "lint": "eslint src/ --ext .jsx,.js",
     "lint-fix": "npm run lint -- --fix",
     "dev": "webpack-dev-server --config webpack.dev.config.js --color --hot -d --progress",
-    "test": "jest"
+    "component-tests": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -39,6 +39,8 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "css-loader": "^0.28.7",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.12.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-loader": "^1.9.0",
@@ -50,6 +52,7 @@
     "html-webpack-plugin": "^2.30.1",
     "image-webpack-loader": "^3.4.2",
     "jest": "^22.0.4",
+    "jest-enzyme": "^4.0.2",
     "node-sass": "^4.7.2",
     "regenerator-runtime": "^0.11.1",
     "sass-loader": "^6.0.6",
@@ -59,5 +62,13 @@
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.5",
     "webpack-merge": "^4.1.1"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./test-configurations/setupTests.js",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+      "<rootDir>/test-configurations/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/test-configurations/styleMock.js"
+    }
   }
 }

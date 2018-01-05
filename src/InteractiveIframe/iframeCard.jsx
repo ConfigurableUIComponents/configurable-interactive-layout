@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Card from './Card';
+import Card from '../cardsLayoutManager/Card';
 import './iframeCardStyles.scss';
 
 
