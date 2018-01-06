@@ -177,8 +177,6 @@ CardsLayoutManager.propTypes = {
       breakpoint: PropTypes.string.isRequired,
       layout: PropTypes.arrayOf(PropTypes.shape({
         i: PropTypes.string.isRequired,
-        x: PropTypes.number.isRequired,
-        y: PropTypes.number.isRequired,
         w: PropTypes.number.isRequired,
         h: PropTypes.number.isRequired,
         minW: PropTypes.number,

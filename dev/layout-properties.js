@@ -102,25 +102,25 @@ const cardLayoutProperties = {
       breakpoint: 'lg',
       layout: [
         {
-          i: 'a', x: 0, y: 0, w: 8, h: 6,
+          i: 'a', w: 8, h: 6,
         },
         {
-          i: 'b', x: 8, y: 0, w: 2, h: 2,
+          i: 'b', w: 2, h: 2,
         },
         {
-          i: 'c', x: 10, y: 0, w: 2, h: 4,
+          i: 'c', w: 2, h: 4,
         },
         {
-          i: 'd', x: 8, y: 2, w: 2, h: 2,
+          i: 'd', w: 2, h: 2,
         },
         {
-          i: 'e', x: 8, y: 4, w: 4, h: 2,
+          i: 'e', w: 4, h: 2,
         },
         {
-          i: 'f', x: 0, y: 6, w: 10, h: 2,
+          i: 'f', w: 10, h: 2,
         },
         {
-          i: 'g', x: 10, y: 6, w: 2, h: 2,
+          i: 'g', w: 2, h: 2,
         },
       ],
     },
@@ -128,25 +128,25 @@ const cardLayoutProperties = {
       breakpoint: 'sm',
       layout: [
         {
-          i: 'a', x: 0, y: 0, w: 8, h: 6,
+          i: 'a', w: 8, h: 6,
         },
         {
-          i: 'b', x: 0, y: 6, w: 8, h: 2,
+          i: 'b', w: 8, h: 2,
         },
         {
-          i: 'c', x: 0, y: 8, w: 8, h: 4,
+          i: 'c', w: 8, h: 4,
         },
         {
-          i: 'd', x: 0, y: 12, w: 8, h: 2,
+          i: 'd', w: 8, h: 2,
         },
         {
-          i: 'e', x: 0, y: 14, w: 8, h: 2,
+          i: 'e', w: 8, h: 2,
         },
         {
-          i: 'f', x: 0, y: 16, w: 8, h: 2,
+          i: 'f', w: 8, h: 2,
         },
         {
-          i: 'g', x: 0, y: 18, w: 8, h: 2,
+          i: 'g', w: 8, h: 2,
         },
       ],
     },
