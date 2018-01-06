@@ -9,7 +9,7 @@
     "lint": "eslint src/ --ext .jsx,.js",
     "lint-fix": "npm run lint -- --fix",
     "dev": "webpack-dev-server --config webpack.dev.config.js --color --hot -d --progress",
-    "component-tests": "jest"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
