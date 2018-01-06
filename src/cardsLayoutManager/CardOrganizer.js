@@ -20,7 +20,7 @@ function spaceAvailable(width, xPos, yPos, existingLayout) {
 }
 
 function layoutComponents(sortedLayoutIds, layout, layoutMaxCol) {
-  const compressedLayout = [];
+  const orderedLayout = [];
   const bottomComponents = [];
   let xPos = 0;
   let yPos = 0;
@@ -73,7 +73,7 @@ function layoutComponents(sortedLayoutIds, layout, layoutMaxCol) {
     // set position values and add the component to the layout
     match.x = xPos;
     match.y = yPos;
-    compressedLayout.push(match);
+    orderedLayout.push(match);
 
     // update xPos to be at the end of the newly added component so
     // next component can be added right next to this one
@@ -88,43 +88,11 @@ function layoutComponents(sortedLayoutIds, layout, layoutMaxCol) {
     }
   }
 
-  console.log(`Compressed Layout (Max Col: ${layoutMaxCol}): ${JSON.stringify(compressedLayout)}`);
-  return compressedLayout;
+  console.log(`Compressed Layout (Max Col: ${layoutMaxCol}): ${JSON.stringify(orderedLayout)}`);
+  return orderedLayout;
 }
-//
-// function compressLayout(sortedLayoutIds, layout, layoutMaxCol) {
-//   const compressedLayout = [];
-//   let xPos = 0;
-//   let yPos = 0;
-//   for (let i = 0; i < sortedLayoutIds.length; i += 1) {
-//     const match = getMatchingEntry(sortedLayoutIds[i], layout)[0];
-//
-//     // ensure width of element never exceeds max col width
-//     if (match.w > layoutMaxCol) {
-//       match.w = layoutMaxCol;
-//     }
-//
-//     // ensure there is space in current row
-//     if (xPos + match.w > layoutMaxCol) {
-//       yPos += match.h;
-//       xPos = 0;
-//     }
-//
-//     // reset position values
-//     match.x = xPos;
-//     match.y = yPos;
-//     compressedLayout.push(match);
-//
-//     // update x according to width
-//     xPos += match.w;
-//   }
-//
-//   console.log(`Compressed Layout (Max Col: ${layoutMaxCol}):
-// ${JSON.stringify(compressedLayout)}`);
-//   return compressedLayout;
-// }
 
-export default function maintainCardSizeOnLayoutChange(currentLayout, allLayouts, colMap) {
+export default function maintainCardOrderAcrossBreakpoints(currentLayout, allLayouts, colMap) {
   console.log('Calculating New Layouts');
   console.log(`Current Layout: ${JSON.stringify(currentLayout)}`);
   console.log(`Columns Per Breakpoint: ${JSON.stringify(colMap)}`);
@@ -138,16 +106,16 @@ export default function maintainCardSizeOnLayoutChange(currentLayout, allLayouts
     return layout1.y > layout2.y;
   });
   const sortedIds = sortedLayout.map(layout => layout.i);
-  console.log(`Card id order by placement (pre-compression): ${sortedIds}`);
+  console.log(`Card id order by placement (pre-reordering): ${sortedIds}`);
 
   const updatedLayouts = {};
   const colTypes = Object.keys(colMap);
   for (let i = 0; i < colTypes.length; i += 1) {
-    console.log(`Compressing for: ${colTypes[i]}`);
+    console.log(`Ordering for: ${colTypes[i]}`);
     updatedLayouts[colTypes[i]] =
       layoutComponents(sortedIds, allLayouts[colTypes[i]], colMap[colTypes[i]]);
   }
-  console.log('All Compressed Layouts:');
+  console.log('All Ordered Layouts:');
   console.log(updatedLayouts);
   return updatedLayouts;
 }
