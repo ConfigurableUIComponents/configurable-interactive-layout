@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import EventManager from './eventManager/EventManager';
 import LayoutManager from '../src/cardsLayoutManager/CardsLayoutManager';
 import cardLayoutProperties from './layout-properties';
 import Store from './store';
+import ConfigUi from './configurableUI/configurable-ui';
 
 function multiplyByTwoEvent() {
   const doubleValues = Store.card2Data.values.map((row) => {

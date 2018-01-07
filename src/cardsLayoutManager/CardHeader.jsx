@@ -24,7 +24,7 @@ export default class CardHeader extends Component {
   }
 
   publishActionEvent(actionId) {
-    this.props.eventManager.publish(actionId, this.props.id, {});
+    this.props.eventManager.publish(actionId, this.props.cardId, {});
   }
 
   buildActions() {
@@ -88,7 +88,7 @@ export default class CardHeader extends Component {
 }
 
 CardHeader.propTypes = {
-  id: PropTypes.string.isRequired,
+  cardId: PropTypes.string.isRequired,
   title: PropTypes.string,
   actions: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,

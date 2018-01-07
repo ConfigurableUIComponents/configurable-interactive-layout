@@ -33,11 +33,20 @@ const cardLayoutProperties = [
   {
     i: 'b',
     type: 'ReactComponent',
+    actions: [{
+      id: 'Remove',
+      displayName: 'Remove Card',
+      iconURL: 'SV_ANN.svg',
+      onClick() { this.props.removeCard(this.props.id); },
+    }],
     Content: WrappedCustomBarChart,
     dataSource: 'card2Data',
     listeners: [
       {
         id: 'MulBy2',
+      },
+      {
+        id: 'DivBy2',
       },
     ],
     layout: {

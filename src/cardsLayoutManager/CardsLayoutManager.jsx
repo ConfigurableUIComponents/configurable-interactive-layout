@@ -36,6 +36,16 @@ export default class CardsLayoutManager extends Component {
     });
   }
 
+  removeCard(cardId) {
+    const lg = this.state.layouts.lg.filter(card => card.i !== cardId);
+    const md = this.state.layouts.md.filter(card => card.i !== cardId);
+    const layouts = {
+      lg,
+      md,
+    };
+    this.setState({ layouts });
+  }
+
   buildContent() {
     const data = [];
     const { layoutProps } = this.props;
@@ -65,6 +75,9 @@ export default class CardsLayoutManager extends Component {
           //   }
           //   break;
         case 'ReactComponent':
+          if (this.state.layouts.lg.filter(cardObj => cardObj.i === cardProps.i).length === 0) {
+            break;
+          }
           card = this.buildReactComponentCard(cardProps);
           if (card) {
             data.push(card);
@@ -80,6 +93,8 @@ export default class CardsLayoutManager extends Component {
   }
 
   buildReactComponentCard(cardProps) {
+    let func1 = this.removeCard;
+    func1 = func1.bind(this);
     const cardId = cardProps.i;
     const ReactComponentRef = cardProps.Content;
     if (!this.props) {
@@ -88,6 +103,7 @@ export default class CardsLayoutManager extends Component {
     return (
       <div key={cardId}>
         <Card
+          removeCard={func1}
           {...cardProps}
           eventManager={this.props.eventManager}
           store={this.props.store}

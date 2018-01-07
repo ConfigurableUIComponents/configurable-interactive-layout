@@ -6,7 +6,8 @@ export default class EventManager {
   }
 
   subscribe(eventId, cb) {
-    this.eventEmitter.addListener(eventId, cb);
+    const l = this.eventEmitter.addListener(eventId, cb);
+    console.log(l);
   }
 
   publish(eventId, initiatorID, data) {
@@ -16,6 +17,7 @@ export default class EventManager {
   }
 
   unsubscribe(eventId, cb) {
-    this.eventEmitter.addListener(eventId, cb);
+    const l = this.eventEmitter.removeListener(eventId, cb);
+    console.log(l);
   }
 }
