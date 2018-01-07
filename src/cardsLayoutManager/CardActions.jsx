@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CardActionItem from './CardActionItem';
 
 const DEFAULT_ACTION_ICON = 'SV_ANN.svg';
 
@@ -8,95 +9,39 @@ export default class CardActions extends Component {
     super(props);
     this.state = {
       menuOpen: false,
-      actionItemsHover: this.createActionItemsHover(),
     };
+    if (this.props.actions) {
+      this.items = this.buildActionItems();
+    }
   }
 
   onActionMenuClick() {
     this.setState({ menuOpen: !this.state.menuOpen });
   }
 
-  onMouseOverItem(actionId) {
-    const { actionItemsHover } = this.state;
-    actionItemsHover[actionId] = true;
-    this.setState({ actionItemsHover });
-  }
-
-  onMouseOutItem(actionId) {
-    const { actionItemsHover } = this.state;
-    actionItemsHover[actionId] = false;
-    this.setState({ actionItemsHover });
-  }
-  getActionIconURL(action) {
-    const itemHover = this.state.actionItemsHover[action.id];
-    if (!itemHover && action.iconURL) {
-      return action.iconURL;
-    }
-    if (itemHover && action.iconURLHover) {
-      return action.iconURLHover;
-    }
-    return DEFAULT_ACTION_ICON;
-  }
-
-  assignOnClickAction(action) {
-    let onClickAction = action.onClick;
-    if (onClickAction === undefined) {
-      onClickAction = this.publishActionEvent;
-    }
-    return onClickAction.bind(this, action.id);
-  }
-  createActionItemsHover() {
-    const result = {};
-    const { actions } = this.props;
-    for (let i = 0; i < actions.length; i += 1) {
-      result[actions[i].id] = false;
-    }
-    return result;
-  }
-
-  publishActionEvent(actionId) {
-    this.props.eventManager.publish(actionId, this.props.id, {});
-  }
-
   buildActionItems() {
     const actions = this.props.actions.map((action) => {
-      let onClickAction = this.assignOnClickAction(action);
-      onClickAction = onClickAction.bind(this, action);
       if (!action.iconURL && !action.displayName) {
         return null;
       }
-      const actionIcon = this.getActionIconURL(action);
-      const divStyle = { background: `url('${actionIcon}') no-repeat center center` };
-
-      return (<div
-        className="action-item"
-        style={divStyle}
-        title={action.displayName}
-        key={action.id}
-        onClick={onClickAction}
-        onKeyUp={onClickAction}
-        tabIndex="0"
-        role="button"
-        onMouseOver={() => this.onMouseOverItem(action.id)}
-        onFocus={() => this.onMouseOverItem(action.id)}
-        onMouseOut={() => this.onMouseOutItem(action.id)}
-        onBlur={() => this.onMouseOutItem(action.id)}
-      />);
+      return (
+        <CardActionItem
+          key={action.id}
+          action={action}
+          defaultIcon={DEFAULT_ACTION_ICON}
+          cardId={this.props.id}
+          eventManager={this.props.eventManager}
+        />);
     });
     return actions;
   }
 
   render() {
-    let actions = [];
-    if (this.props.actions) {
-      actions = this.buildActionItems();
-    }
-
     const actionItemsClassName = `action-items ${this.state.menuOpen ? '' : 'dispnone'}`;
     const actionsMenuClassName = `actions-menu ${this.state.menuOpen ? 'expanded' : 'collapsed'}`;
     const actionsClassName = `actions ${this.state.menuOpen ? 'menu-open' : ''}`;
 
-    if (actions.length > 0) {
+    if (this.items.length > 0) {
       return (
         <div className={actionsClassName} >
           <div
@@ -106,12 +51,13 @@ export default class CardActions extends Component {
             role="button"
             tabIndex={0}
           />
-          <div className={actionItemsClassName} > { actions } </div>
+          <div className={actionItemsClassName} > { this.items } </div>
         </div>);
     }
     return null;
   }
 }
+
 
 CardActions.propTypes = {
   id: PropTypes.string.isRequired,

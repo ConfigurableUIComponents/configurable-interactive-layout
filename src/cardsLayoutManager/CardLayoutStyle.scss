@@ -98,13 +98,18 @@
 			}
 		}
 		.title{
-			order: 1;	
+			order: 1;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
 		}
 	}
 
 	.card-content {
 		background-color: lightgray;
 		height: 100%;
+		overflow-y: auto;
+		cursor: initial;
 	}
 
 	&.with-title .card-content{
