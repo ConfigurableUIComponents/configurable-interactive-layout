@@ -12,7 +12,7 @@ export default class Card extends Component {
       <div className="card">
         {
           <CardHeader
-            cardId={this.props.key}
+            cardId={this.props.configId}
             {...this.props}
           /> }
         <div className="card-content">
@@ -24,7 +24,7 @@ export default class Card extends Component {
 }
 
 Card.propTypes = {
-  key: PropTypes.string.isRequired,
+  configId: PropTypes.string.isRequired,
   title: PropTypes.string,
   store: PropTypes.instanceOf(Object),
   listeners: PropTypes.instanceOf(Array),
