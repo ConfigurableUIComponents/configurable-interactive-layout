@@ -17,5 +17,11 @@ describe('Card', () => {
     const cardWithTitle = mount(component);
     expect(cardWithTitle.find('.card')).not.toHaveClassName('with-title');
   });
+
+  it("shows an action menu button when actions are configured", () => {
+
+  });
+
+
 });
 
