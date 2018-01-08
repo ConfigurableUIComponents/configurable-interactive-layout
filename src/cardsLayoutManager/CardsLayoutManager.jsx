@@ -3,19 +3,116 @@ import PropTypes from 'prop-types';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import './CardLayoutStyle.scss';
 import IframeCard from '../InteractiveIframe/iframeCard';
+import maintainCardOrderAcrossBreakpoints from './CardOrganizer';
 import Card from './Card';
 
 import '../../node_modules/react-grid-layout/css/styles.css';
 import '../../node_modules/react-resizable/css/styles.css';
 
 const ResponsiveLayout = WidthProvider(Responsive);
+const COL_MAP = {
+  lg: 12, md: 10, sm: 8, xs: 6,
+};
+const COL_BREAKPOINTS = {
+  lg: 1400, md: 1200, sm: 1024, xs: 800,
+};
+
+// function buildContent(props) {
+//   const data = [];
+//   const { content, ...strippedProps } = props;
+//   const { config } = content;
+
+//   for (let index = 0; index < config.length; index += 1) {
+//     const { i, ...strippedContent } = config[index];
+//     const CustomCard = strippedContent.Type;
+//     const CardContent = strippedContent.Content;
+
+//     if (CustomCard) {
+//       // Custom card type scenario
+//       data.push((
+//         <div key={i}>
+//           <CustomCard
+//             {...strippedProps}
+//             {...strippedContent}
+//             id={i}
+//             Content={CardContent}
+//           />
+//         </div>
+//       ));
+//     } else if (React.isValidElement(<CardContent {...props} {...strippedContent} />)) {
+//       // Custom React component scenario
+//       data.push((
+//         <div key={i}>
+//           <Card {...props} {...strippedContent} id={i} >
+//             <CardContent {...props} {...strippedContent} />
+//           </Card>
+//         </div>
+//       ));
+//     } else {
+//       // Basic content scenario
+//       data.push((
+//         <div key={i}>
+//           <Card
+//             {...props}
+//             id={i}
+//           >
+//             {CardContent}
+//           </Card>
+//         </div>
+//       ));
+//     }
+//   }
+//   return data;
+// }
+
+function getLargestConfiguredLayout(layoutList, breakpointMap) {
+  console.log(`System Breakpoints: ${JSON.stringify(breakpointMap)}`);
+  console.log(`First Configured Layout: ${JSON.stringify(layoutList[Object.keys(layoutList)[0]])}`);
+  return layoutList[Object.keys(layoutList)[0]];
+}
+
+function populateAllBreakpointsWithLayouts(
+  configuredLayouts,
+  breakpoints,
+  largestConfiguredLayout,
+) {
+  const allLayoutsObj = {};
+  for (let i = 0; i < Object.keys(breakpoints).length; i += 1) {
+    const configuredLayout = configuredLayouts[breakpoints[i]];
+    if (configuredLayout) {
+      allLayoutsObj[breakpoints[i]] = configuredLayout;
+    } else {
+      allLayoutsObj[breakpoints[i]] = JSON.parse(JSON.stringify(largestConfiguredLayout));
+    }
+  }
+
+  return allLayoutsObj;
+}
 
 function extractLayout(contentList) {
-  const layoutList = [];
-  for (let index = 0; index < contentList.length; index += 1) {
-    layoutList.push(contentList[index].layout);
-  }
-  return { lg: layoutList };
+  const layoutList = {};
+  // retrieve all configured layouts
+  contentList.forEach((breakpointConfig) => {
+    const { breakpoint, layout } = breakpointConfig;
+    layoutList[breakpoint] = layout;
+  });
+
+  // all breakpoints must have an associated layout (make sure each breakpoint
+  // has a configured layout) ... if there is no layout configured for a specific
+  // breakpoint, use the largest configured layout
+  const largestConfiguredLayout = getLargestConfiguredLayout(layoutList, COL_MAP);
+  const allLayouts =
+    populateAllBreakpointsWithLayouts(layoutList, Object.keys(COL_MAP), largestConfiguredLayout);
+  //   {
+  //   lg: layoutList,
+  //   md: JSON.parse(JSON.stringify(layoutList)),
+  //   sm: JSON.parse(JSON.stringify(layoutList)),
+  //   xs: JSON.parse(JSON.stringify(layoutList)),
+  // };
+  console.log(`Initial Layouts: ${JSON.stringify(allLayouts)}`);
+  const orderedLayouts =
+    maintainCardOrderAcrossBreakpoints(largestConfiguredLayout, allLayouts, COL_MAP);
+  return orderedLayouts;
 }
 
 function onBreakpointChange(newBreakpoint, newCols) {
@@ -26,22 +123,25 @@ export default class CardsLayoutManager extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      layouts: extractLayout(props.layoutProps),
+      layouts: extractLayout(props.content.layouts),
     };
   }
 
   onLayoutChange(curLayout, allLayouts) {
+    console.log('onLayoutChange called ... updating all layouts!');
     this.setState({
-      layouts: allLayouts,
+      layouts: maintainCardOrderAcrossBreakpoints(curLayout, allLayouts, COL_MAP),
     });
   }
 
   buildContent() {
     const data = [];
     const { layoutProps } = this.props;
-
-    for (let index = 0; index < layoutProps.length; index += 1) {
-      const cardProps = layoutProps[index];
+    const { content } = layoutProps;
+    const { config } = content;        
+        
+    for (let index = 0; index < config.length; index += 1) {
+      const cardProps = config[index];
       const cardType = cardProps.type;
       let card;
 
@@ -132,12 +232,8 @@ export default class CardsLayoutManager extends Component {
       <ResponsiveLayout
         className="cards-layout-container"
         layouts={this.state.layouts}
-        breakpoints={{
-                    lg: 1500, md: 1440,
-                }}
-        cols={{
-                    lg: 12, md: 8,
-                }}
+        breakpoints={COL_BREAKPOINTS}
+        cols={COL_MAP}
         isResizable={false}
         rowHeight={100}
         width={1200}
@@ -147,6 +243,7 @@ export default class CardsLayoutManager extends Component {
         draggableCancel=".actions, .card-content, .card-content-no-header"
         onBreakpointChange={(newBreakpoint, newCols) => onBreakpointChange(newBreakpoint, newCols)}
         onLayoutChange={(curLayout, allLayouts) => this.onLayoutChange(curLayout, allLayouts)}
+        compactType={null}
       >
         {this.buildContent()}
       </ResponsiveLayout>
@@ -157,30 +254,34 @@ export default class CardsLayoutManager extends Component {
 CardsLayoutManager.propTypes = {
   eventManager: PropTypes.instanceOf(Object),
   store: PropTypes.instanceOf(Object),
-  layoutProps: PropTypes.arrayOf(PropTypes.shape({
-    i: PropTypes.string.isRequired,
-    title: PropTypes.string,
-    type: PropTypes.string,
-    Content: PropTypes.func.isRequired,
-    layout: PropTypes.shape({
+  layoutProps: PropTypes.shape({
+    config: PropTypes.arrayOf(PropTypes.shape({
       i: PropTypes.string.isRequired,
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired,
-      w: PropTypes.number.isRequired,
-      h: PropTypes.number.isRequired,
-      minW: PropTypes.number,
-      maxW: PropTypes.number,
-    }),
-    actions: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
-      displayName: PropTypes.string,
+      title: PropTypes.string,
+      displayHeader: PropTypes.bool,
+      type: PropTypes.string,
+      Content: PropTypes.func.isRequired,
+      actions: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+        displayName: PropTypes.string,
+      })),
+      listeners: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+      })),
+      data: PropTypes.instanceOf(Object),
+      dataSource: PropTypes.string,
     })),
-    listeners: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
+    layouts: PropTypes.arrayOf(PropTypes.shape({
+      breakpoint: PropTypes.string.isRequired,
+      layout: PropTypes.arrayOf(PropTypes.shape({
+        i: PropTypes.string.isRequired,
+        w: PropTypes.number.isRequired,
+        h: PropTypes.number.isRequired,
+        minW: PropTypes.number,
+        maxW: PropTypes.number,
+      })),
     })),
-    data: PropTypes.instanceOf(Object),
-    dataSource: PropTypes.string,
-  })),
+  }),
 };
 
 CardsLayoutManager.defaultProps = {
