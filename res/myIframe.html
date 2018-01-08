@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+        <p id="myP">"Hi I am an Iframe!"</p>
+    <<script>
+
+        window.addEventListener("DOMContentLoaded", function() {
+
+            // signal the parent that we're loaded.
+            window.parent.postMessage("loaded", window.parent.origin);
+            // listen for messages from the parent.
+            window.addEventListener("message", function(e) {
+                if(e.origin ==='http://localhost:8080') {
+                    const eventName = JSON.parse(e.data).metadata.eventName;
+                        switch (eventName) {
+                            case 'a':
+                                document.getElementById("myP").innerHTML += "and also an " + "event a" + "\n";
+                                break;
+                            case 'b':
+                                document.getElementById("myP").innerHTML += "and also an " + "event b" + "\n";
+                                break;
+                            case 'c':
+                                document.getElementById("myP").innerHTML += "and also an " + "event c" + "\n";
+                                break;
+                        }
+                }
+            }, false)
+        }, false)
+    </script>
+</body>
+</html>
+
+<!--
+window.addEventListener("message",function(e){
+if (e.data == "Itay") {
+document.getElementById("myP").innerHTML = e.data;
+alert("It works!")
+}
+});-->

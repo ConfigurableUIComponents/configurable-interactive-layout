@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import EventManager from './eventManager/EventManager';
-import LayoutManager from '../src/cardsLayoutManager/CardsLayoutManager';
-import cardLayoutProperties from './layout-properties';
-import Store from './store';
+import EventManager from '../eventManager/EventManager';
+import { CardsLayoutManager, Card } from '../../dist/CardsLayoutManager.dist';
+import cardLayoutProperties from '../layout-properties';
+import Store from '../store';
 
 function multiplyByTwoEvent() {
   const doubleValues = Store.card2Data.values.map((row) => {
@@ -25,14 +25,16 @@ export default class TestApp extends Component {
   }
 
   render() {
+    const card = Card;
+    console.log(card);
     return (
       <div>
         <div className="app-header">
           <h1>Layout Manager Test Application</h1>
-          <LayoutManager
-            layoutProps={cardLayoutProperties}
+          <CardsLayoutManager
+            content={cardLayoutProperties}
             store={Store}
-            eventManager={this.eventManager}
+            EventManager={this.eventManager}
           />
         </div>
       </div>

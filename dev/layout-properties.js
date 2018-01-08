@@ -1,27 +1,35 @@
-import CustomBarChart from './CustomBarChart';
+// import CustomBarChart from './CustomBarChart';
 import WrappedCustomBarChart from './WrappedCustomBarChart';
 import DICard from './DataIntegrityCard';
 
 const cardLayoutProperties = {
   config: [
     {
+      i: 'aa',
+      title: 'iframe card example',
+      url: 'myIframe.html',
+      eventIds: ['a', 'b', 'c'],
+      type: 'iframeCard',
+    },
+    {
       i: 'a',
-      title: 'Component A (default: 8x6)',
+      title: 'Application Data',
+      type: 'ReactComponent',
       actions: [
         {
           id: 'DivBy2',
           displayName: 'Divide by 2',
-          iconURL: 'SV_ANN.svg',
+          iconURL: 'trashbin.svg',
         },
         {
           id: 'MulBy2',
           displayName: 'Multiply by 2',
-          // iconURL: 'SV_ANN.svg',
+          iconURL: 'refresh.svg',
         },
         {
           id: 'FromConfig',
           displayName: 'From Config',
-          iconURL: 'SV_ANN.svg',
+          iconURL: 'see_all.svg',
           onClick(actionId) { console.log(`Action Id: ${actionId} Card Id: ${this.props.id}`); },
         },
       ],
@@ -30,7 +38,7 @@ const cardLayoutProperties = {
     },
     {
       i: 'b',
-      title: 'Component B (default: 2x2)',
+      type: 'ReactComponent',
       Content: WrappedCustomBarChart,
       dataSource: 'card2Data',
       listeners: [
@@ -41,15 +49,9 @@ const cardLayoutProperties = {
     },
     {
       i: 'c',
-      title: 'Component C (default: 2x4)',
-      Content: WrappedCustomBarChart,
-      dataSource: 'card2Data',
-    },
-    {
-      i: 'd',
-      title: 'Component D (default: 2x2)',
-      Type: DICard,
-      Content: CustomBarChart,
+      title: 'Custom Card Data Listens for DivBy2 events',
+      type: 'CustomCard',
+      Content: DICard,
       dataSource: 'DIChart1',
       listeners: [
         {
@@ -58,8 +60,21 @@ const cardLayoutProperties = {
       ],
     },
     {
+      i: 'd',
+      type: 'ReactComponent',
+      actions: [
+        {
+          id: 'DivBy2',
+          displayName: 'Divide by 2',
+          iconURL: 'SV_ANN.svg',
+        },
+      ],
+      Content: WrappedCustomBarChart,
+      dataSource: 'card1Data',
+    },
+    {
       i: 'e',
-      title: 'Component E (default: 4x2)',
+      type: 'ReactComponent',
       actions: [
         {
           id: 'DivBy2',
@@ -69,58 +84,28 @@ const cardLayoutProperties = {
       ],
       Content: WrappedCustomBarChart,
       dataSource: 'card1Data',
-    },
-    {
-      i: 'f',
-      title: 'Component F (default: 10x2)',
-      actions: [
-        {
-          id: 'DivBy2',
-          displayName: 'Divide by 2',
-          iconURL: 'SV_ANN.svg',
-        },
-      ],
-      Content: WrappedCustomBarChart,
-      dataSource: 'card1Data',
-    },
-    {
-      i: 'g',
-      title: 'Component G (default: 2x2)',
-      actions: [
-        {
-          id: 'DivBy2',
-          displayName: 'Divide by 2',
-          iconURL: 'SV_ANN.svg',
-        },
-      ],
-      Content: WrappedCustomBarChart,
-      dataSource: 'card1Data',
-    },
   ],
   layouts: [
     {
       breakpoint: 'lg',
       layout: [
         {
-          i: 'a', w: 8, h: 6,
+          i: 'aa', w: 6, h: 3,
         },
         {
-          i: 'b', w: 2, h: 2,
+          i: 'a', w: 6, h: 2,
         },
         {
-          i: 'c', w: 2, h: 4,
+          i: 'b', w: 6, h: 2, minW: 2, maxW: 8,
         },
         {
-          i: 'd', w: 2, h: 2,
+          i: 'c', w: 6, h: 4,
         },
         {
-          i: 'e', w: 4, h: 2,
+          i: 'd', w: 6, h: 2,
         },
         {
-          i: 'f', w: 10, h: 2,
-        },
-        {
-          i: 'g', w: 2, h: 2,
+          i: 'e', w: 6, h: 2,
         },
       ],
     },
@@ -128,7 +113,10 @@ const cardLayoutProperties = {
       breakpoint: 'sm',
       layout: [
         {
-          i: 'a', w: 8, h: 6,
+          i: 'aa', w: 6, h: 2,
+        },
+        {
+          i: 'a', w: 2, h: 2,
         },
         {
           i: 'b', w: 8, h: 2,
@@ -141,12 +129,6 @@ const cardLayoutProperties = {
         },
         {
           i: 'e', w: 8, h: 2,
-        },
-        {
-          i: 'f', w: 8, h: 2,
-        },
-        {
-          i: 'g', w: 8, h: 2,
         },
       ],
     },

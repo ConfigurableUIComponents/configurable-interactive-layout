@@ -4,13 +4,20 @@ import CardHeader from './CardHeader';
 
 export default class Card extends Component {
   render() {
+    let showHeader = true;
+    let cardClassName = 'card';
+    if (!this.props.title && !this.props.actions) showHeader = false;
+    else if (this.props.title) {
+      cardClassName += ' with-title';
+    }
     return (
-      <div className="card">
-        {this.props.displayHeader ?
+      <div className={cardClassName}>
+        {showHeader ?
           <CardHeader
             {...this.props}
-          /> : <div /> }
-        <div className={this.props.displayHeader ? 'card-content-no-header' : 'card-content'} >
+          />
+          : null}
+        <div className="card-content">
           { this.props.children }
         </div>
       </div>
@@ -19,9 +26,9 @@ export default class Card extends Component {
 }
 
 Card.propTypes = {
-  displayHeader: PropTypes.bool,
   title: PropTypes.string,
-  EventManager: PropTypes.instanceOf(Object),
+  store: PropTypes.instanceOf(Object),
+  eventManager: PropTypes.instanceOf(Object),
   actions: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     displayName: PropTypes.string,
@@ -33,8 +40,8 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-  displayHeader: true,
-  title: '',
-  actions: [],
-  EventManager: undefined,
+  title: undefined,
+  actions: undefined,
+  eventManager: undefined,
+  store: undefined,
 };
