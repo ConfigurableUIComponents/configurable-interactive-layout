@@ -4,7 +4,7 @@ import CardHeader from './CardHeader';
 
 export default class Card extends Component {
   componentWillUnmount() {
-    this.props.listeners.map(event => this.props.eventManager.unsubscribe(event.id));
+    // this.props.listeners.map(event => this.props.eventManager.unsubscribe(event.id));
   }
 
   render() {

@@ -55,13 +55,10 @@ export default class ConfigurableCardsLayoutManager extends Component {
   }
 
   getChildrenWithKey() {
-    if (!Array.isArray(this.props.children)) {
-      return this.props.children;
-    }
-    return React.Children.map(this.props.children, child => (
-      <div key={child.props.configId}>
-        {child}
-      </div>));
+    const wrappedChildren = [];
+    React.Children.map(this.props.children, child => (
+      wrappedChildren.push(<div key={child.props.configId}>{child}</div>)));
+    return wrappedChildren;
   }
 
   removeCard(cardId) {
@@ -80,10 +77,10 @@ export default class ConfigurableCardsLayoutManager extends Component {
         className="cards-layout-container"
         layouts={this.state.layouts}
         breakpoints={{
-          lg: 1500,
+          lg: 1500, md: 1440,
         }}
         cols={{
-          lg: 12,
+          lg: 12, md: 8,
         }}
         isResizable={false}
         rowHeight={100}

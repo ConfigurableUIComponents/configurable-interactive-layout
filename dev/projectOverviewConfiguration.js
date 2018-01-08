@@ -1,96 +1,127 @@
-// import Iframe from 'react-iframe';
+import Iframe from 'react-iframe';
 import SprintReview from './SprintReview';
+import LironApp from './TestApp2';
+import WrappedCustomBarChart from './WrappedCustomBarChart';
 import Card from './../src/cardsLayoutManager/Card';
 import ConfigurableCardsLayoutManager from '../src/cardsLayoutManager/ConfigurableCardsLayoutManager';
 
 const projectOverviewConfiguration = {
-
-  type: ConfigurableCardsLayoutManager,
-  props: {
-    defaultView: {
-      // googleCard: {
-      //   x: 0, y: 0, w: 6, h: 2,
-      // },
-      // customBarChart: {
-      //   x: 6, y: 0, w: 6, h: 2, minW: 2, maxW: 8,
-      // },
-      // googleInteractiveCard: {
-      //   x: 0, y: 2, w: 6, h: 4,
-      // },
-      mattanCard: {
-        breakpoints: {
-          lg: { width: 6, height: 2 },
-          md: { width: 4, height: 2 },
-        },
-        column: 2,
-        row: 2,
-      },
-      mattanCardb: {
-        breakpoints: {
-          lg: { width: 6, height: 2 },
-          md: { width: 4, height: 2 },
-        },
-        column: 0,
-        row: 0,
-      },
-    },
-  },
+  type: LironApp,
   children: {
-    mattanCard: {
-      type: Card,
+    responsiveLayout: {
+      type: ConfigurableCardsLayoutManager,
       props: {
-        title: 'Mattan',
+        defaultView: {
+          mattanCard: {
+            breakpoints: {
+              lg: { width: 2, height: 2 },
+              md: { width: 2, height: 2 },
+            },
+            column: 6,
+            row: 0,
+          },
+          mattanCardb: {
+            breakpoints: {
+              lg: { width: 2, height: 2 },
+              md: { width: 2, height: 2 },
+            },
+            column: 8,
+            row: 0,
+          },
+          ynetCard: {
+            breakpoints: {
+              lg: { width: 4, height: 5 },
+              md: { width: 2, height: 2 },
+            },
+            column: 0,
+            row: 2,
+          },
+          customBarChartCard: {
+            breakpoints: {
+              lg: { width: 6, height: 2 },
+              md: { width: 4, height: 2 },
+            },
+            column: 0,
+            row: 0,
+          },
+        },
       },
       children: {
-        mattanCardContent: {
-          type: SprintReview,
+        mattanCard: {
+          type: Card,
+          props: {
+            // title: 'Mattan',
+          },
+          children: {
+            mattanCardContent: {
+              type: SprintReview,
+            },
+          },
+        },
+        mattanCardb: {
+          type: Card,
+          props: {
+            title: 'Mattan With Title',
+          },
+          children: {
+            mattanCardContentb: {
+              type: SprintReview,
+            },
+          },
+        },
+        ynetCard: {
+          type: Card,
+          props: {
+            title: 'Google search card',
+            actions: [],
+          },
+          children: {
+            googleSite: {
+              type: Iframe,
+              props: {
+                url: 'http://www.ynet.co.il',
+                width: '450px',
+                height: '450px',
+                className: 'googleSiteClass',
+              },
+            },
+          },
+        },
+        customBarChartCard: {
+          type: Card,
+          props: {
+            title: 'Steve With Actions',
+            actions: [
+              {
+                id: 'DivBy2',
+                displayName: 'Divide by 2',
+                iconURL: 'SV_ANN.svg',
+              },
+              {
+                id: 'MulBy2',
+                displayName: 'Multiply by 2',
+              },
+              {
+                id: 'FromConfig',
+                displayName: 'From Config',
+                iconURL: 'SV_ANN.svg',
+                onClick(actionId) {
+                  console.log(`Action Id: ${actionId} Card Id: ${this.props.configId}`);
+                },
+              },
+            ],
+          },
+          children: {
+            customBarChartContent: {
+              type: WrappedCustomBarChart,
+              props: {
+                myProps: 1,
+              },
+            },
+          },
         },
       },
     },
-    mattanCardb: {
-      type: Card,
-      props: {
-        title: 'Mattanb',
-      },
-      children: {
-        mattanCardContentb: {
-          type: SprintReview,
-        },
-      },
-    },
-    // googleCard: {
-    //   type: Card,
-    //   props: {
-    //     title: 'Google search card',
-    //     actions: [],
-    //   },
-    //   children: {
-    //     googleSite: {
-    //       type: Iframe,
-    //       props: {
-    //         url: 'www.google.com',
-    //         width: '450px',
-    //         height: '450px',
-    //         className: 'googleSiteClass',
-    //       },
-    //     },
-    //   },
-    // },
-    // customBarChart: {
-    //   type: Card,
-    //   props: {
-    //     title: 'Expense Card',
-    //     actions: [],
-    //   },
-    //   children: {
-    //     expenseBarChart: {
-    //       type: WrappedCustomBarChart,
-    //       props: {
-    //         myProps: 1,
-    //       },
-    //     },
-    //   },
-    // },
   },
 };
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import * as mobx from 'mobx';
 
@@ -9,14 +8,10 @@ import Store from './store';
 @observer
 export default class WrapperCustomBarChart extends Component {
   render() {
-    const jsStore = mobx.toJS(this.props.store[this.props.dataSource]);
+    const dataSource = 'card1Data';
+    const jsStore = mobx.toJS(Store[dataSource]);
     return (
       <CustomBarChart {...jsStore} />
     );
   }
 }
-
-WrapperCustomBarChart.propTypes = {
-  store: PropTypes.shape({ type: PropTypes.oneOf([Store]) }).isRequired,
-  dataSource: PropTypes.string.isRequired,
-};

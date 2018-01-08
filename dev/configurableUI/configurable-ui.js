@@ -16,12 +16,12 @@ class ConfigUi {
     const self = this;
     if (childrenConfig) {
         for (let childId in childrenConfig){
-          let childToAdd = childrenConfig[childId];
-          if (!childToAdd.props){
-            childToAdd.props = {};
+          let childConfig = childrenConfig[childId];
+          if (!childConfig.props){
+            childConfig.props = {};
           }
-          childToAdd.props.configId = childId;
-            children.push(this.createElement(childToAdd));
+          childConfig.props.configId = childId;
+          children.push(this.createElement(childConfig));
         }
     }
     return children;
