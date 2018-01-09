@@ -3,7 +3,31 @@ import WrappedCustomBarChart from './WrappedCustomBarChart';
 import DICard from './DataIntegrityCard';
 
 const cardLayoutProperties = {
-  config: [
+  config: {
+    draggable: false,
+    resizable: false,
+    rowHeight: 100,
+    cardMargin: [10, 10],
+    cardPadding: [10, 10],
+    breakpoints: [
+      {
+        id: 'lg',
+        col: 12,
+        width: 1400,
+      },
+      {
+        id: 'md',
+        col: 10,
+        width: 1200,
+      },
+      {
+        id: 'sm',
+        col: 8,
+        width: 1024,
+      },
+    ],
+  },
+  cards: [
     {
       i: 'aa',
       title: 'iframe card example',
