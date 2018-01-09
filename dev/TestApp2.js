@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-export default class LironApp extends Component {
+export default class ProjectOverviewApp extends Component {
   render() {
     return (
       <div className="app">

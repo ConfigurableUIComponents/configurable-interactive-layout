@@ -1,12 +1,12 @@
 import Iframe from 'react-iframe';
 import SprintReview from './SprintReview';
-import LironApp from './TestApp2';
+import ProjectOverviewApp from './TestApp2';
 import WrappedCustomBarChart from './WrappedCustomBarChart';
 import Card from './../src/cardsLayoutManager/Card';
 import ConfigurableCardsLayoutManager from '../src/cardsLayoutManager/ConfigurableCardsLayoutManager';
 
 const projectOverviewConfiguration = {
-  type: LironApp,
+  type: ProjectOverviewApp,
   children: {
     responsiveLayout: {
       type: ConfigurableCardsLayoutManager,
@@ -72,7 +72,7 @@ const projectOverviewConfiguration = {
         ynetCard: {
           type: Card,
           props: {
-            title: 'Google search card',
+            title: 'Ynet card',
             actions: [],
           },
           children: {
