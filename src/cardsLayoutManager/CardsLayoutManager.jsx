@@ -10,12 +10,6 @@ import '../../node_modules/react-grid-layout/css/styles.css';
 import '../../node_modules/react-resizable/css/styles.css';
 
 const ResponsiveLayout = WidthProvider(Responsive);
-const COL_MAP = {
-  lg: 12, md: 10, sm: 8,
-};
-const COL_BREAKPOINTS = {
-  lg: 1400, md: 1200, sm: 1024,
-};
 
 function getLargestConfiguredLayout(layoutList, breakpointMap) {
   console.log(`System Breakpoints: ${JSON.stringify(breakpointMap)}`);
@@ -41,7 +35,7 @@ function populateAllBreakpointsWithLayouts(
   return allLayoutsObj;
 }
 
-function extractLayout(contentList) {
+function extractLayout(contentList, COL_MAP) {
   const layoutList = {};
   // retrieve all configured layouts
   contentList.forEach((breakpointConfig) => {
@@ -65,24 +59,50 @@ function onBreakpointChange(newBreakpoint, newCols) {
   console.log(`Breakpoint: ${newBreakpoint}, Columns: ${newCols}`);
 }
 
+function buildColMap(breakpoints) {
+  const colMap = {};
+  breakpoints.forEach((breakpoint) => {
+    colMap[breakpoint.id] = breakpoint.col;
+  });
+  return colMap;
+}
+
+function buildBreakpoints(breakpoints) {
+  const breakpointMap = {};
+  breakpoints.forEach((breakpoint) => {
+    breakpointMap[breakpoint.id] = breakpoint.width;
+  });
+  return breakpointMap;
+}
+
 export default class CardsLayoutManager extends Component {
   constructor(props) {
     super(props);
+
+    const breakpointCols = buildColMap(props.layoutProps.config.breakpoints);
+
     this.state = {
-      layouts: extractLayout(props.layoutProps.layouts),
+      layouts: extractLayout(props.layoutProps.layouts, breakpointCols),
+      margins: props.layoutProps.config.cardMargin,
+      padding: props.layoutProps.config.cardPadding,
+      height: props.layoutProps.config.rowHeight,
+      resizable: props.layoutProps.config.resizable,
+      draggable: props.layoutProps.config.draggable,
+      cols: breakpointCols,
+      breakpoints: buildBreakpoints(props.layoutProps.config.breakpoints),
     };
   }
 
   onLayoutChange(curLayout, allLayouts) {
     console.log('onLayoutChange called ... updating all layouts!');
     this.setState({
-      layouts: maintainCardOrderAcrossBreakpoints(curLayout, allLayouts, COL_MAP),
+      layouts: maintainCardOrderAcrossBreakpoints(curLayout, allLayouts, this.state.cols),
     });
   }
 
   buildContent() {
     const data = [];
-    const cardConfigs = this.props.layoutProps.config;
+    const cardConfigs = this.props.layoutProps.cards;
 
     for (let index = 0; index < cardConfigs.length; index += 1) {
       const cardProps = cardConfigs[index];
@@ -176,13 +196,13 @@ export default class CardsLayoutManager extends Component {
       <ResponsiveLayout
         className="cards-layout-container"
         layouts={this.state.layouts}
-        breakpoints={COL_BREAKPOINTS}
-        cols={COL_MAP}
-        isResizable={false}
-        rowHeight={100}
-        width={1200}
-        margin={[20, 20]}
-        containerPadding={[20, 20]}
+        breakpoints={this.state.breakpoints}
+        cols={this.state.cols}
+        isResizable={this.state.resizable}
+        isDraggable={this.state.draggable}
+        rowHeight={this.state.height}
+        margin={this.state.margins}
+        containerPadding={this.state.padding}
         draggableHandle=".header, .card"
         draggableCancel=".actions, .card-content, .card-content-no-header"
         onBreakpointChange={(newBreakpoint, newCols) => onBreakpointChange(newBreakpoint, newCols)}
@@ -199,7 +219,19 @@ CardsLayoutManager.propTypes = {
   eventManager: PropTypes.instanceOf(Object),
   store: PropTypes.instanceOf(Object),
   layoutProps: PropTypes.shape({
-    config: PropTypes.arrayOf(PropTypes.shape({
+    config: PropTypes.shape({
+      draggable: PropTypes.bool,
+      resizable: PropTypes.bool,
+      rowHeight: PropTypes.number,
+      cardMargin: PropTypes.arrayOf(PropTypes.number),
+      cardPadding: PropTypes.arrayOf(PropTypes.number),
+      breakpoints: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        col: PropTypes.number.isRequired,
+        width: PropTypes.number.isRequired,
+      })),
+    }),
+    cards: PropTypes.arrayOf(PropTypes.shape({
       i: PropTypes.string.isRequired,
       title: PropTypes.string,
       displayHeader: PropTypes.bool,
