@@ -11,59 +11,11 @@ import '../../node_modules/react-resizable/css/styles.css';
 
 const ResponsiveLayout = WidthProvider(Responsive);
 const COL_MAP = {
-  lg: 12, md: 10, sm: 8, xs: 6,
+  lg: 12, md: 10, sm: 8,
 };
 const COL_BREAKPOINTS = {
-  lg: 1400, md: 1200, sm: 1024, xs: 800,
+  lg: 1400, md: 1200, sm: 1024,
 };
-
-// function buildContent(props) {
-//   const data = [];
-//   const { content, ...strippedProps } = props;
-//   const { config } = content;
-
-//   for (let index = 0; index < config.length; index += 1) {
-//     const { i, ...strippedContent } = config[index];
-//     const CustomCard = strippedContent.Type;
-//     const CardContent = strippedContent.Content;
-
-//     if (CustomCard) {
-//       // Custom card type scenario
-//       data.push((
-//         <div key={i}>
-//           <CustomCard
-//             {...strippedProps}
-//             {...strippedContent}
-//             id={i}
-//             Content={CardContent}
-//           />
-//         </div>
-//       ));
-//     } else if (React.isValidElement(<CardContent {...props} {...strippedContent} />)) {
-//       // Custom React component scenario
-//       data.push((
-//         <div key={i}>
-//           <Card {...props} {...strippedContent} id={i} >
-//             <CardContent {...props} {...strippedContent} />
-//           </Card>
-//         </div>
-//       ));
-//     } else {
-//       // Basic content scenario
-//       data.push((
-//         <div key={i}>
-//           <Card
-//             {...props}
-//             id={i}
-//           >
-//             {CardContent}
-//           </Card>
-//         </div>
-//       ));
-//     }
-//   }
-//   return data;
-// }
 
 function getLargestConfiguredLayout(layoutList, breakpointMap) {
   console.log(`System Breakpoints: ${JSON.stringify(breakpointMap)}`);
@@ -103,12 +55,6 @@ function extractLayout(contentList) {
   const largestConfiguredLayout = getLargestConfiguredLayout(layoutList, COL_MAP);
   const allLayouts =
     populateAllBreakpointsWithLayouts(layoutList, Object.keys(COL_MAP), largestConfiguredLayout);
-  //   {
-  //   lg: layoutList,
-  //   md: JSON.parse(JSON.stringify(layoutList)),
-  //   sm: JSON.parse(JSON.stringify(layoutList)),
-  //   xs: JSON.parse(JSON.stringify(layoutList)),
-  // };
   console.log(`Initial Layouts: ${JSON.stringify(allLayouts)}`);
   const orderedLayouts =
     maintainCardOrderAcrossBreakpoints(largestConfiguredLayout, allLayouts, COL_MAP);
@@ -136,11 +82,10 @@ export default class CardsLayoutManager extends Component {
 
   buildContent() {
     const data = [];
-    const { layoutProps } = this.props;
-    const { config } = layoutProps;
+    const cardConfigs = this.props.layoutProps.config;
 
-    for (let index = 0; index < config.length; index += 1) {
-      const cardProps = config[index];
+    for (let index = 0; index < cardConfigs.length; index += 1) {
+      const cardProps = cardConfigs[index];
       const cardType = cardProps.type;
       let card;
 

@@ -91,7 +91,7 @@ const cardLayoutProperties = {
       breakpoint: 'lg',
       layout: [
         {
-          i: 'aa', w: 6, h: 3,
+          i: 'aa', w: 6, h: 4,
         },
         {
           i: 'a', w: 6, h: 2,
@@ -107,6 +107,29 @@ const cardLayoutProperties = {
         },
         {
           i: 'e', w: 6, h: 2,
+        },
+      ],
+    },
+    {
+      breakpoint: 'md',
+      layout: [
+        {
+          i: 'aa', w: 6, h: 4,
+        },
+        {
+          i: 'a', w: 2, h: 4,
+        },
+        {
+          i: 'b', w: 2, h: 4, minW: 2, maxW: 8,
+        },
+        {
+          i: 'c', w: 5, h: 2,
+        },
+        {
+          i: 'd', w: 5, h: 2,
+        },
+        {
+          i: 'e', w: 10, h: 2,
         },
       ],
     },
