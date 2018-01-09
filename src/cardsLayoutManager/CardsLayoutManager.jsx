@@ -55,12 +55,6 @@ function extractLayout(contentList) {
   const largestConfiguredLayout = getLargestConfiguredLayout(layoutList, COL_MAP);
   const allLayouts =
     populateAllBreakpointsWithLayouts(layoutList, Object.keys(COL_MAP), largestConfiguredLayout);
-  //   {
-  //   lg: layoutList,
-  //   md: JSON.parse(JSON.stringify(layoutList)),
-  //   sm: JSON.parse(JSON.stringify(layoutList)),
-  //   xs: JSON.parse(JSON.stringify(layoutList)),
-  // };
   console.log(`Initial Layouts: ${JSON.stringify(allLayouts)}`);
   const orderedLayouts =
     maintainCardOrderAcrossBreakpoints(largestConfiguredLayout, allLayouts, COL_MAP);
