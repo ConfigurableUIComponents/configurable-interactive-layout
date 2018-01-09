@@ -84,6 +84,7 @@ const cardLayoutProperties = {
       ],
       Content: WrappedCustomBarChart,
       dataSource: 'card1Data',
+    },
   ],
   layouts: [
     {

@@ -123,7 +123,7 @@ export default class CardsLayoutManager extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      layouts: extractLayout(props.content.layouts),
+      layouts: extractLayout(props.layoutProps.layouts),
     };
   }
 
@@ -137,9 +137,8 @@ export default class CardsLayoutManager extends Component {
   buildContent() {
     const data = [];
     const { layoutProps } = this.props;
-    const { content } = layoutProps;
-    const { config } = content;        
-        
+    const { config } = layoutProps;
+
     for (let index = 0; index < config.length; index += 1) {
       const cardProps = config[index];
       const cardType = cardProps.type;
@@ -285,7 +284,7 @@ CardsLayoutManager.propTypes = {
 };
 
 CardsLayoutManager.defaultProps = {
-  layoutProps: [],
+  layoutProps: undefined,
   store: undefined,
   eventManager: undefined,
 };
