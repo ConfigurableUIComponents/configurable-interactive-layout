@@ -229,7 +229,7 @@ CardsLayoutManager.propTypes = {
 };
 
 CardsLayoutManager.defaultProps = {
-  layoutProps: [],
+  layoutProps: undefined,
   store: undefined,
   eventManager: undefined,
 };

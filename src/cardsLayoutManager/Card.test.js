@@ -18,10 +18,8 @@ describe('Card', () => {
     expect(cardWithTitle.find('.card')).not.toHaveClassName('with-title');
   });
 
-  it("shows an action menu button when actions are configured", () => {
+  it('shows an action menu button when actions are configured', () => {
 
   });
-
-
 });
 
