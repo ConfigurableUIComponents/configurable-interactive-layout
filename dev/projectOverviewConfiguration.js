@@ -3,6 +3,7 @@ import SprintReview from './SprintReview';
 import ProjectOverviewApp from './TestApp2';
 import WrappedCustomBarChart from './WrappedCustomBarChart';
 import Card from './../src/cardsLayoutManager/Card';
+// import IframeCard from '../InteractiveIframe/iframeCard';
 import ConfigurableCardsLayoutManager from '../src/cardsLayoutManager/ConfigurableCardsLayoutManager';
 
 const projectOverviewConfiguration = {
@@ -28,9 +29,9 @@ const projectOverviewConfiguration = {
             column: 8,
             row: 0,
           },
-          ynetCard: {
+          oobIFrameCard: {
             breakpoints: {
-              lg: { width: 4, height: 5 },
+              lg: { width: 4, height: 4 },
               md: { width: 2, height: 2 },
             },
             column: 0,
@@ -69,20 +70,19 @@ const projectOverviewConfiguration = {
             },
           },
         },
-        ynetCard: {
+        oobIFrameCard: {
           type: Card,
           props: {
-            title: 'Ynet card',
+            title: 'IFrame Card',
             actions: [],
           },
           children: {
-            googleSite: {
+            wikipediaSite: {
               type: Iframe,
               props: {
-                url: 'http://www.ynet.co.il',
-                width: '450px',
-                height: '450px',
-                className: 'googleSiteClass',
+                url: 'https://en.wikipedia.org/wiki/React_(JavaScript_library)',
+                height: '400px',
+                width: '600px',
               },
             },
           },
