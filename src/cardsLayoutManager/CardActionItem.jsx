@@ -22,6 +22,9 @@ export default class CardActionItem extends Component {
     if (itemHover && this.action.iconURLHover) {
       return this.action.iconURLHover;
     }
+    if (itemHover && this.action.iconURLHover === undefined && this.action.iconURL) {
+      return this.action.iconURL;
+    }
     return this.props.defaultIcon;
   }
 
@@ -40,11 +43,10 @@ export default class CardActionItem extends Component {
     let { onClickAction } = this;
     onClickAction = onClickAction.bind(this, this.action);
     const actionIcon = this.getActionIconURL();
-    const divStyle = { background: `url('${actionIcon}') no-repeat center center` };
+    // const divStyle = { background: `url('${actionIcon}') no-repeat center center` };
     return (
       <div
         className="action-item"
-        style={divStyle}
         title={this.action.displayName}
         key={this.action.id}
         onClick={onClickAction}
@@ -55,7 +57,9 @@ export default class CardActionItem extends Component {
         onFocus={() => this.onMouseItem(true)}
         onMouseOut={() => this.onMouseItem(false)}
         onBlur={() => this.onMouseItem(false)}
-      />
+      >
+        <img src={actionIcon} alt={this.action.displayName} />
+      </div>
     );
   }
 }
@@ -63,13 +67,12 @@ export default class CardActionItem extends Component {
 
 CardActionItem.propTypes = {
   cardId: PropTypes.string.isRequired,
-  action: PropTypes.arrayOf(PropTypes.shape({
+  action: PropTypes.shape({
     id: PropTypes.string,
     displayName: PropTypes.string,
     iconURL: PropTypes.string,
     iconURLHover: PropTypes.string,
-  })),
+  }),
   defaultIcon: PropTypes.string,
   eventManager: PropTypes.instanceOf(Object),
 };
-
