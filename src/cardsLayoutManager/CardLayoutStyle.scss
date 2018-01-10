@@ -16,99 +16,109 @@
 		padding: 0 $card-padding $card-padding;
 		height: calc(100% - #{$card-padding} - 2*#{$card-border-width});
 	}
+}
 
-	.card-header {
-		font-size: 20px;
-		font-weight: 600;
-		text-transform: uppercase;
-		line-height: $header-height;
-		height: $header-height;	
-		margin-left: 20px;
-		z-index: 1;
-		display: flex;
-		align-items: center;
 
-        &.without-title{
-          right: $card-padding;
-          position: absolute;
-          background-color: $card-bg;
+.card .card-header{
+	font-size: 20px;
+	font-weight: 600;
+	text-transform: uppercase;
+	line-height: $header-height;
+	height: $header-height;
+	margin-left: 20px;
+	z-index: 1;
 
-          opacity: 0;
-          &:hover{
-            opacity: 0.7;
-          }
-        }
-		&.without-title.menu-open{
-			opacity: 0.7;
-		}
-		.actions {
-			order: 2;
-			margin-left: auto;
-			height: 100%;
-			display: flex;
-			align-items: center;
-
-			.actions-menu {
-				order: 2;
-				width: $actions-menu-width;
-				cursor: pointer;
-				float: right;
-				height: inherit;
-				outline: none;
-
-				&.collapsed {
-					background: url('../../res/actions_collapsed.svg') no-repeat center center;
-					&:hover {
-						background: url('../../res/actions_collapsed_hover.svg') no-repeat center center;
-					}
-				}
-
-				&.expanded {
-					background: url('../../res/actions_expanded.svg') no-repeat center center;
-					&:hover {
-						background: url('../../res/actions_expanded_hover.svg') no-repeat center center;
-					}
-				}
+	&.without-title {
+		right: $card-padding;
+		position: absolute;
+		.actions{
+			background-color: $card-bg;
+			opacity: 0;
+			&:hover{
+				opacity: 0.7;
 			}
-
-			.action-items {
-				order: 1;
-				display: inline-block;
-
-				&.dispnone {
-					display: none;
-				}
-
-				.action-item {
-					width: 20px;
-					height: 20px;
-					margin-left: 8px;
-					display: inline-block;
-					outline: none;
-
-					.action-item-no-icon {
-						max-width: 20px;
-						max-height: 20px;
-						white-space: nowrap;
-						overflow: hidden;
-						text-overflow: ellipsis;
-					}
-				}
+			&.menu-open{
+				opacity: 0.7;
 			}
-		}
-		.title{
-			order: 1;	
 		}
 	}
 
-	.card-content {
+	.actions {
+		order: 2;
+		margin-left: auto;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		float: right;
+
+		.actions-menu {
+			order: 2;
+			width: $actions-menu-width;
+			cursor: pointer;
+			float: right;
+			height: inherit;
+			outline: none;
+
+			&.collapsed {
+				background: url('../../res/actions_collapsed.svg') no-repeat center center;
+				&:hover {
+					background: url('../../res/actions_collapsed_hover.svg') no-repeat center center;
+				}
+			}
+
+			&.expanded {
+				background: url('../../res/actions_expanded.svg') no-repeat center center;
+				&:hover {
+					background: url('../../res/actions_expanded_hover.svg') no-repeat center center;
+				}
+			}
+		}
+
+		.action-items {
+			order: 1;
+			display: inline-block;
+
+			&.dispnone {
+				display: none;
+			}
+
+			.action-item {
+				width: 20px;
+				height: 20px;
+				margin-left: 8px;
+				display: inline-block;
+				outline: none;
+
+				.action-item-no-icon {
+					max-width: 20px;
+					max-height: 20px;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+			}
+		}
+	}
+	.title{
+		order: 1;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+}
+
+
+.card{
+	.card-content{
 		background-color: lightgray;
 		height: 100%;
+		width: 100%;
+		overflow-y: auto;
+		overflow-x: auto;
+		cursor: initial;
 	}
 
 	&.with-title .card-content{
 		height: calc(100% - #{$header-height});
 	}
 }
-
-
