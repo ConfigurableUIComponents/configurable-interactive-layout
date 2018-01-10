@@ -18,11 +18,11 @@ const cardLayoutProperties = {
       type: CardsLayoutManager,
       props: {
         config: {
-          draggable: false,
+          draggable: true,
           resizable: false,
           rowHeight: 100,
-          cardMargin: [10, 10],
-          cardPadding: [10, 10],
+          cardMargin: [20, 20],
+          cardPadding: [20, 20],
           breakpoints: [
             {
               id: 'lg',
@@ -46,7 +46,7 @@ const cardLayoutProperties = {
             breakpoint: 'lg',
             layout: [
               {
-                i: 'iframeCardAA', w: 6, h: 4,
+                i: 'iframeCardAA', w: 6, h: 2,
               },
               {
                 i: 'mattanCard', w: 6, h: 2,
@@ -69,16 +69,16 @@ const cardLayoutProperties = {
             breakpoint: 'md',
             layout: [
               {
-                i: 'iframeCardAA', w: 6, h: 4,
+                i: 'iframeCardAA', w: 4, h: 2,
               },
               {
-                i: 'mattanCard', w: 2, h: 4,
+                i: 'mattanCard', w: 2, h: 2,
               },
               {
-                i: 'mattanCardb', w: 2, h: 4, minW: 2, maxW: 8,
+                i: 'mattanCardb', w: 2, h: 2, minW: 2, maxW: 8,
               },
               {
-                i: 'oobIFrameCard', w: 5, h: 2,
+                i: 'oobIFrameCard', w: 5, h: 4,
               },
               {
                 i: 'customBarChartCard', w: 5, h: 2,
@@ -169,19 +169,21 @@ const cardLayoutProperties = {
               {
                 id: 'DivBy2',
                 displayName: 'Divide by 2',
-                iconURL: 'SV_ANN.svg',
+                iconURL: 'trashbin.svg',
+                iconURLHover: 'trashbin_hover.svg',
               },
               {
                 id: 'MulBy2',
                 displayName: 'Multiply by 2',
+                iconURL: 'refresh.svg',
+                iconURLHover: 'refresh_hover.svg',
               },
               {
                 id: 'FromConfig',
                 displayName: 'From Config',
-                iconURL: 'SV_ANN.svg',
-                onClick(actionId) {
-                  console.log(`Action Id: ${actionId} Card Id: ${this.props.configId}`);
-                },
+                iconURL: 'see_all.svg',
+                iconURLHover: 'see_all_hover.svg',
+                onClick(actionId) { console.log(`Action Id: ${actionId} Card Id: ${this.props.cardId}`); },
               },
             ],
           },

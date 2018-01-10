@@ -18,3 +18,4 @@ describe('Interactive Iframe', () => {
     spy.mockRestore();
   });
 });
+

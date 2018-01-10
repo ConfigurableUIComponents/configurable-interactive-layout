@@ -8,13 +8,20 @@ export default class Card extends Component {
   }
 
   render() {
+    let showHeader = true;
+    let cardClassName = 'card';
+    if (!this.props.title && !this.props.actions) showHeader = false;
+    else if (this.props.title) {
+      cardClassName += ' with-title';
+    }
     return (
-      <div className="card">
-        {
+      <div className={cardClassName}>
+        {showHeader ?
           <CardHeader
             cardId={this.props.configId}
             {...this.props}
-          /> }
+          />
+          : null}
         <div className="card-content">
           { this.props.children }
         </div>
