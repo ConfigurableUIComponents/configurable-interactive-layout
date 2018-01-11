@@ -4,8 +4,8 @@ import DICard from './DataIntegrityCard';
 
 const cardLayoutProperties = {
   config: {
-    draggable: true,
-    resizable: true,
+    draggable: false,
+    resizable: false,
     rowHeight: 100,
     cardMargin: [10, 10],
     cardPadding: [10, 10],
