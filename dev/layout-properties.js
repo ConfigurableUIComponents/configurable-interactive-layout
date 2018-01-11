@@ -4,8 +4,8 @@ import DICard from './DataIntegrityCard';
 
 const cardLayoutProperties = {
   config: {
-    draggable: false,
-    resizable: false,
+    draggable: true,
+    resizable: true,
     rowHeight: 100,
     cardMargin: [10, 10],
     cardPadding: [10, 10],
@@ -30,14 +30,14 @@ const cardLayoutProperties = {
   cards: [
     {
       i: 'aa',
-      title: 'iframe card example',
+      title: 'Card AA',
       url: 'myIframe.html',
       eventIds: ['a', 'b', 'c'],
       type: 'iframeCard',
     },
     {
       i: 'a',
-      title: 'Application Data',
+      title: 'Card A',
       type: 'ReactComponent',
       actions: [
         {
@@ -65,6 +65,7 @@ const cardLayoutProperties = {
     },
     {
       i: 'b',
+      title: 'Card B',
       type: 'ReactComponent',
       Content: WrappedCustomBarChart,
       dataSource: 'card2Data',
@@ -76,7 +77,7 @@ const cardLayoutProperties = {
     },
     {
       i: 'c',
-      title: 'Custom Card Data Listens for DivBy2 events',
+      title: 'Card C',
       type: 'CustomCard',
       Content: DICard,
       dataSource: 'DIChart1',
@@ -88,6 +89,7 @@ const cardLayoutProperties = {
     },
     {
       i: 'd',
+      title: 'Card D',
       type: 'ReactComponent',
       actions: [
         {
@@ -101,6 +103,7 @@ const cardLayoutProperties = {
     },
     {
       i: 'e',
+      title: 'Card E',
       type: 'ReactComponent',
       actions: [
         {
