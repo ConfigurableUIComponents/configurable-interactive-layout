@@ -10,9 +10,9 @@ module.exports = merge(common, {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'CardsLayoutManager.dist.js',
+    filename: 'cardsLayoutManager.js',
     publicPath: '/',
-    library: 'CardsLayoutManager',
+    library: 'cardsLayoutManager',
     libraryTarget: 'umd',
   },
   module: {
