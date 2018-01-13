@@ -1,7 +1,7 @@
 {
   "name": "configurable-interactive-layout",
-  "version": "1.0.2",
-  "main": "dist/cardsFramework.dist.js",
+  "version": "1.0.5",
+  "main": "dist/cardsLayoutManager.js",
   "scripts": {
     "build": "webpack --bail -p --config webpack.config.prod.js ",
     "predev-dist": "npm run build",
