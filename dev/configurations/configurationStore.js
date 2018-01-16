@@ -4,7 +4,7 @@ import CardsLayoutManager from '../../src/cardsLayoutManager/CardsLayoutManager'
 import Card from '../../src/cardsLayoutManager/Card';
 import { coreLayoutConfiguration } from './coreLayout';
 
-export const getProjectOverviewConfiguration = ({ data }) => {
+export const getProjectOverviewConfiguration = ({ store }) => {
   return {
       type: CardsLayoutManager,
         props: {
@@ -88,7 +88,7 @@ export const getProjectOverviewConfiguration = ({ data }) => {
           children: {
             mattanCardContent: {
               type: DataComponent,
-              props: { data: data },
+              props: { store },
             },
           },
         }
