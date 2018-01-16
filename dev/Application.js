@@ -24,13 +24,13 @@ export default class Application extends Component {
   }
 
   render() {
+    console.log('render application');
     const projectOverviewLayoutConfiguration = getProjectOverviewConfiguration({ data: this.state.data });
     const projectOverviewLayoutView = new ConfigUi(projectOverviewLayoutConfiguration);
 
     return (<div>
-      <div> data field in application state: { this.state.data } </div>
       { projectOverviewLayoutView.getRootElement() }
-      <div> another div not rendering through configurable UI </div>
+      <div> div not rendering through configurable UI </div>
     </div>)
   };
 }

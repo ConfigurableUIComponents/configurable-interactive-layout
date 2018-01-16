@@ -107,6 +107,7 @@ export default class CardsLayoutManager extends Component {
   }
 
   render() {
+    console.log('render CardsLayoutManager Component');
     return (
       <ResponsiveLayout
         className="cards-layout-container"

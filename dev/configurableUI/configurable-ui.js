@@ -4,6 +4,7 @@ import React from 'react';
 
 class ConfigUi {
   constructor(config) {
+    console.log('ConfigUi constructor');
     this.rootElement = this.createElement(config);
   }
 
