@@ -4,7 +4,7 @@ class Store {
   @observable data = 0;
 
   @computed
-  get data1() {
+  get dataValue() {
     return this.data;
   }
 

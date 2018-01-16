@@ -5,7 +5,6 @@ import { observer } from 'mobx-react';
 export default class DataComponent extends Component {
   render() {
     console.log('DataComponent render');
-
-    return (<div>{this.props.store.data}</div>);
+    return (<div>{this.props.store.dataValue}</div>);
   }
 }

@@ -3,6 +3,7 @@ import DataComponent from '../components/DataComponent';
 import CardsLayoutManager from '../../src/cardsLayoutManager/CardsLayoutManager';
 import Card from '../../src/cardsLayoutManager/Card';
 import { coreLayoutConfiguration } from './coreLayout';
+import React, { Component } from 'react';
 
 export const getProjectOverviewConfiguration = ({ store }) => {
   return {
@@ -99,3 +100,42 @@ export const getProjectOverviewConfiguration = ({ store }) => {
 const getLayoutConfiguration = () => {
   return coreLayoutConfiguration; // merge to come here?
 }
+
+
+export const getRegistrationFormConfiguration= ({ store }) => {
+
+  return {
+    type: 'form',
+    props: {
+
+    },
+    children: {
+      'name' : {
+        type: 'label',
+        props: {
+          className: 'labelcss'
+        }, // todo how do I put content in here
+      },
+      'nameInput' : {
+        type: 'input',
+        props: {
+          onChange: e => store.set({ name: e.target.value }),
+        }
+      },
+      'subform' : {
+        type: 'form',
+        props: {},
+        children: {
+          'addressInput': {
+            type: 'input',
+            props: {
+              onChange: e => store.set({ address: e.target.value } ),
+            }
+          }
+        }
+      }
+
+    },
+  }
+
+};
