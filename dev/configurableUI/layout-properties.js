@@ -2,14 +2,14 @@
 // import WrappedCustomBarChart from './WrappedCustomBarChart';
 // import DICard from './DataIntegrityCard';
 import Iframe from 'react-iframe';
-import IframeCard from '../src/InteractiveIframe/iframeCard';
-import ProjectOverviewApp from './TestApp2';
+import IframeCard from '../../src/InteractiveIframe/iframeCard';
+import ProjectOverviewApp from '../TestApp2';
 // import ConfigurableCardsLayoutManager
 // from '../src/cardsLayoutManager/ConfigurableCardsLayoutManager';
-import CardsLayoutManager from '../src/cardsLayoutManager/CardsLayoutManager';
-import WrappedCustomBarChart from './WrappedCustomBarChart';
-import SprintReview from './SprintReview';
-import Card from '../src/cardsLayoutManager/Card';
+import CardsLayoutManager from '../../src/cardsLayoutManager/CardsLayoutManager';
+import WrappedCustomBarChart from '../components/WrappedCustomBarChart';
+import SprintReview from '../components/SprintReview';
+import Card from '../../src/cardsLayoutManager/Card';
 
 const cardLayoutProperties = {
   type: ProjectOverviewApp,
@@ -114,88 +114,16 @@ const cardLayoutProperties = {
         ],
       },
       children: {
-        iframeCardAA: {
-          type: IframeCard,
-          props: {
-            title: 'iframe card example',
-            url: 'myIframe.html',
-            eventIds: ['a', 'b', 'c'],
-          },
-        },
         mattanCard: {
           type: Card,
           props: {
-            // title: 'Mattan',
           },
           children: {
             mattanCardContent: {
               type: SprintReview,
             },
           },
-        },
-        mattanCardb: {
-          type: Card,
-          props: {
-            title: 'Mattan With Title',
-          },
-          children: {
-            mattanCardContentb: {
-              type: SprintReview,
-            },
-          },
-        },
-        oobIFrameCard: {
-          type: Card,
-          props: {
-            title: 'IFrame Card',
-            actions: [],
-          },
-          children: {
-            wikipediaSite: {
-              type: Iframe,
-              props: {
-                url: 'https://en.wikipedia.org/wiki/React_(JavaScript_library)',
-                height: '400px',
-                width: '600px',
-              },
-            },
-          },
-        },
-        customBarChartCard: {
-          type: Card,
-          props: {
-            title: 'Steve With Actions',
-            actions: [
-              {
-                id: 'DivBy2',
-                displayName: 'Divide by 2',
-                iconURL: 'trashbin.svg',
-                iconURLHover: 'trashbin_hover.svg',
-              },
-              {
-                id: 'MulBy2',
-                displayName: 'Multiply by 2',
-                iconURL: 'refresh.svg',
-                iconURLHover: 'refresh_hover.svg',
-              },
-              {
-                id: 'FromConfig',
-                displayName: 'From Config',
-                iconURL: 'see_all.svg',
-                iconURLHover: 'see_all_hover.svg',
-                onClick(actionId) { console.log(`Action Id: ${actionId} Card Id: ${this.props.cardId}`); },
-              },
-            ],
-          },
-          children: {
-            customBarChartContent: {
-              type: WrappedCustomBarChart,
-              props: {
-                myProps: 1,
-              },
-            },
-          },
-        },
+        }
       },
     },
   },

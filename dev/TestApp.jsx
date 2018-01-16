@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import EventManager from './eventManager/EventManager';
 import LayoutManager from '../src/cardsLayoutManager/CardsLayoutManager';
-import cardLayoutProperties from './layout-properties';
+import cardLayoutProperties from './configurableUI/layout-properties';
 import Store from './store';
 import ConfigUi from './configurableUI/configurable-ui';
 

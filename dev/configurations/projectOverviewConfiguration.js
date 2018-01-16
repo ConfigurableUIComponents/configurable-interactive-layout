@@ -1,10 +1,10 @@
 import Iframe from 'react-iframe';
-import SprintReview from './SprintReview';
-import ProjectOverviewApp from './TestApp2';
-import WrappedCustomBarChart from './WrappedCustomBarChart';
-import Card from './../src/cardsLayoutManager/Card';
+import SprintReview from '../components/SprintReview';
+import ProjectOverviewApp from '../TestApp2';
+import WrappedCustomBarChart from '../components/WrappedCustomBarChart';
+import Card from '../../src/cardsLayoutManager/Card';
 // import IframeCard from '../InteractiveIframe/iframeCard';
-import ConfigurableCardsLayoutManager from '../src/cardsLayoutManager/ConfigurableCardsLayoutManager';
+import ConfigurableCardsLayoutManager from '../../src/cardsLayoutManager/ConfigurableCardsLayoutManager';
 
 const projectOverviewConfiguration = {
   type: ProjectOverviewApp,

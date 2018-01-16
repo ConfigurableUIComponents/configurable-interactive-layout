@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EventManager from '../eventManager/EventManager';
 import { CardsLayoutManager, Card } from '../../dist/CardsLayoutManager.dist';
-import cardLayoutProperties from '../layout-properties';
+import cardLayoutProperties from '../configurableUI/layout-properties';
 import Store from '../store';
 
 function multiplyByTwoEvent() {

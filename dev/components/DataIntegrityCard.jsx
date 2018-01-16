@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import EventManager from './eventManager/EventManager';
+import EventManager from '../eventManager/EventManager';
 import CustomBarChart from './CustomBarChart';
 
-import Card from '../src/cardsLayoutManager/Card';
+import Card from '../../src/cardsLayoutManager/Card';
 
 const DI_DATA = {
   DIChart1: {
