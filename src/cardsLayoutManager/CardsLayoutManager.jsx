@@ -33,12 +33,21 @@ function populateAllBreakpointsWithLayouts(
   return allLayoutsObj;
 }
 
-function extractLayout(contentList, COL_MAP) {
+function extractLayout(contentList, COL_MAP, selectedView) {
   const layoutList = {};
   // retrieve all configured layouts
-  contentList.forEach((breakpointConfig) => {
-    const { breakpoint, layout } = breakpointConfig;
-    layoutList[breakpoint] = layout;
+
+  const cards = Object.keys(contentList[selectedView]);
+  cards.forEach((card) => {
+    const breakpoints = Object.keys(contentList[selectedView][card]);
+    breakpoints.forEach((breakpoint) => {
+      const currLayout = contentList[selectedView][card][breakpoint];
+      currLayout.i = card;
+      if (!layoutList[breakpoint]) {
+        layoutList[breakpoint] = [];
+      }
+      layoutList[breakpoint].push(currLayout);
+    });
   });
 
   // all breakpoints must have an associated layout (make sure each breakpoint
@@ -80,7 +89,7 @@ export default class CardsLayoutManager extends Component {
     const breakpointCols = buildColMap(props.config.breakpoints);
 
     this.state = {
-      layouts: extractLayout(props.layouts, breakpointCols),
+      layouts: extractLayout(props.layouts, breakpointCols, 'defaultView'),
       margins: props.config.cardMargin,
       padding: props.config.cardPadding,
       height: props.config.rowHeight,
@@ -133,21 +142,22 @@ export default class CardsLayoutManager extends Component {
 CardsLayoutManager.propTypes = {
   // eventManager: PropTypes.instanceOf(Object),
   // store: PropTypes.instanceOf(Object),
-  children: PropTypes.arrayOf(PropTypes.shape({
-    configId: PropTypes.string.isRequired,
-    title: PropTypes.string,
-    type: PropTypes.string,
-    // Content: PropTypes.func.isRequired,
-    actions: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
-      displayName: PropTypes.string,
-    })),
-    // listeners: PropTypes.arrayOf(PropTypes.shape({
-    //   id: PropTypes.string,
-    // })),
-    // data: PropTypes.instanceOf(Object),
-    // dataSource: PropTypes.string,
-  })),
+  children: PropTypes.instanceOf(Array),
+  // children: PropTypes.arrayOf(PropTypes.shape({
+  //   configId: PropTypes.string.isRequired,
+  //   title: PropTypes.string,
+  //   type: PropTypes.string,
+  //   // Content: PropTypes.func.isRequired,
+  //   actions: PropTypes.arrayOf(PropTypes.shape({
+  //     id: PropTypes.string,
+  //     displayName: PropTypes.string,
+  //   })),
+  // listeners: PropTypes.arrayOf(PropTypes.shape({
+  //   id: PropTypes.string,
+  // })),
+  // data: PropTypes.instanceOf(Object),
+  // dataSource: PropTypes.string,
+  // })),
   config: PropTypes.shape({
     draggable: PropTypes.bool,
     resizable: PropTypes.bool,
@@ -160,16 +170,17 @@ CardsLayoutManager.propTypes = {
       width: PropTypes.number.isRequired,
     })),
   }),
-  layouts: PropTypes.arrayOf(PropTypes.shape({
-    breakpoint: PropTypes.string.isRequired,
-    layout: PropTypes.arrayOf(PropTypes.shape({
-      i: PropTypes.string.isRequired,
-      w: PropTypes.number.isRequired,
-      h: PropTypes.number.isRequired,
-      minW: PropTypes.number,
-      maxW: PropTypes.number,
-    })),
-  })),
+  // layouts: PropTypes.arrayOf(PropTypes.shape({
+  //   breakpoint: PropTypes.string.isRequired,
+  //   layout: PropTypes.arrayOf(PropTypes.shape({
+  //     i: PropTypes.string.isRequired,
+  //     w: PropTypes.number.isRequired,
+  //     h: PropTypes.number.isRequired,
+  //     minW: PropTypes.number,
+  //     maxW: PropTypes.number,
+  //   })),
+  // })),
+  layouts: PropTypes.instanceOf(Object),
 };
 
 CardsLayoutManager.defaultProps = {

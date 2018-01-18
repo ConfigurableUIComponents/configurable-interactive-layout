@@ -41,77 +41,54 @@ const cardLayoutProperties = {
             },
           ],
         },
-        layouts: [
-          {
-            breakpoint: 'lg',
-            layout: [
-              {
-                i: 'iframeCardAA', w: 6, h: 2,
+        layouts: {
+          defaultView:
+            {
+              iframeCardAA: {
+                lg: {w: 6, h: 2,},
+                md: {w: 4, h: 2,},
+                sm: {w: 6, h: 2},
               },
-              {
-                i: 'mattanCard', w: 6, h: 2,
+              mattanCard: {
+                lg: {w: 6, h: 2,},
+                md: {w: 2, h: 2,},
+                sm: {w: 6, h: 2},
               },
-              {
-                i: 'mattanCardb', w: 6, h: 2, minW: 2, maxW: 8,
+              mattanCardb: {
+                lg: {w: 6, h: 2, minW: 2, maxW: 8,},
+                md: {w: 2, h: 2, minW: 2, maxW: 8,},
+                sm: {w: 2, h: 2},
               },
-              {
-                i: 'oobIFrameCard', w: 6, h: 4,
+              oobIFrameCard: {
+                lg: {w: 6, h: 4,},
+                md: {w: 5, h: 4,},
+                sm: {w: 8, h: 4},
               },
-              {
-                i: 'customBarChartCard', w: 6, h: 2,
+              customBarChartCard: {
+                lg: {w: 6, h: 2,},
+                md: {w: 5, h: 2,},
+                sm: {w: 8, h: 2},
               },
-              {
-                i: 'e', w: 6, h: 2,
+            },
+          lironView:
+            {
+              customBarChartCard: {
+                lg: {w: 6, h: 2,},
+                md: {w: 5, h: 2,},
+                sm: {w: 8, h: 2},
               },
-            ],
-          },
-          {
-            breakpoint: 'md',
-            layout: [
-              {
-                i: 'iframeCardAA', w: 4, h: 2,
+              oobIFrameCard: {
+                lg: {w: 6, h: 4,},
+                md: {w: 5, h: 4,},
+                sm: {w: 8, h: 4},
               },
-              {
-                i: 'mattanCard', w: 2, h: 2,
+              mattanCardb: {
+                lg: {w: 6, h: 2, minW: 2, maxW: 8,},
+                md: {w: 2, h: 2, minW: 2, maxW: 8,},
+                sm: {w: 2, h: 2},
               },
-              {
-                i: 'mattanCardb', w: 2, h: 2, minW: 2, maxW: 8,
-              },
-              {
-                i: 'oobIFrameCard', w: 5, h: 4,
-              },
-              {
-                i: 'customBarChartCard', w: 5, h: 2,
-              },
-              {
-                i: 'e', w: 10, h: 2,
-              },
-            ],
-          },
-          {
-            breakpoint: 'sm',
-            layout: [
-              {
-                i: 'iframeCardAA', w: 6, h: 2,
-              },
-              {
-                i: 'mattanCard', w: 2, h: 2,
-              },
-              {
-                i: 'mattanCardb', w: 8, h: 2,
-              },
-              {
-                i: 'oobIFrameCard', w: 8, h: 4,
-              },
-              {
-                i: 'customBarChartCard', w: 8, h: 2,
-              },
-              {
-                i: 'e', w: 8, h: 2,
-              },
-            ],
-          },
-        ],
+            },
+        },
       },
       children: {
         iframeCardAA: {
