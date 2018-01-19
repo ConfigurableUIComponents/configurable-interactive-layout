@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Responsive, WidthProvider } from 'react-grid-layout';
-import './CardLayoutStyle.scss';
-import maintainCardOrderAcrossBreakpoints from './CardOrganizer';
+import './LayoutStyle.scss';
+import maintainCardOrderAcrossBreakpoints from './ItemsOrganizer';
 
 import '../../node_modules/react-grid-layout/css/styles.css';
 import '../../node_modules/react-resizable/css/styles.css';
@@ -77,17 +77,17 @@ export default class CardsLayoutManager extends Component {
   constructor(props) {
     super(props);
 
-    const breakpointCols = buildColMap(props.config.breakpoints);
+    const breakpointCols = buildColMap(props.layoutConfiguration.breakpoints);
 
     this.state = {
-      layouts: extractLayout(props.layouts, breakpointCols),
-      margins: props.config.cardMargin,
-      padding: props.config.cardPadding,
-      height: props.config.rowHeight,
-      resizable: props.config.resizable,
-      draggable: props.config.draggable,
+      layouts: extractLayout(props.cardsConfiguration, breakpointCols),
+      margins: props.layoutConfiguration.cardMargin,
+      padding: props.layoutConfiguration.cardPadding,
+      height: props.layoutConfiguration.rowHeight,
+      resizable: props.layoutConfiguration.resizable,
+      draggable: props.layoutConfiguration.draggable,
       cols: breakpointCols,
-      breakpoints: buildBreakpoints(props.config.breakpoints),
+      breakpoints: buildBreakpoints(props.layoutConfiguration.breakpoints),
     };
   }
 
@@ -131,24 +131,16 @@ export default class CardsLayoutManager extends Component {
 }
 
 CardsLayoutManager.propTypes = {
-  // eventManager: PropTypes.instanceOf(Object),
-  // store: PropTypes.instanceOf(Object),
   children: PropTypes.arrayOf(PropTypes.shape({
     configId: PropTypes.string.isRequired,
     title: PropTypes.string,
     type: PropTypes.string,
-    // Content: PropTypes.func.isRequired,
     actions: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string,
       displayName: PropTypes.string,
     })),
-    // listeners: PropTypes.arrayOf(PropTypes.shape({
-    //   id: PropTypes.string,
-    // })),
-    // data: PropTypes.instanceOf(Object),
-    // dataSource: PropTypes.string,
   })),
-  config: PropTypes.shape({
+  layoutConfiguration: PropTypes.shape({
     draggable: PropTypes.bool,
     resizable: PropTypes.bool,
     rowHeight: PropTypes.number,
@@ -160,7 +152,7 @@ CardsLayoutManager.propTypes = {
       width: PropTypes.number.isRequired,
     })),
   }),
-  layouts: PropTypes.arrayOf(PropTypes.shape({
+  cardsConfiguration: PropTypes.arrayOf(PropTypes.shape({
     breakpoint: PropTypes.string.isRequired,
     layout: PropTypes.arrayOf(PropTypes.shape({
       i: PropTypes.string.isRequired,
@@ -173,8 +165,6 @@ CardsLayoutManager.propTypes = {
 };
 
 CardsLayoutManager.defaultProps = {
-  config: undefined,
-  layouts: undefined,
-  // store: undefined,
-  // eventManager: undefined,
+  layoutConfiguration: [],
+  cardsConfiguration: [],
 };

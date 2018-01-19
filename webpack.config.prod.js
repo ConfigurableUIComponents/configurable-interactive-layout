@@ -10,9 +10,9 @@ module.exports = merge(common, {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'cardsLayoutManager.js',
+    filename: 'interactiveLayout.js',
     publicPath: '/',
-    library: 'cardsLayoutManager',
+    library: 'interactiveLayout',
     libraryTarget: 'umd',
   },
   module: {
@@ -31,7 +31,7 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
-    new ExtractTextPlugin('cards-framework.css'),
+    new ExtractTextPlugin('interactiveLayout.css'),
   ],
   externals: ['react-dom', 'react'],
 

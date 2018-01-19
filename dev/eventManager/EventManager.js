@@ -10,7 +10,7 @@ export default class EventManager {
     console.log(l);
   }
 
-  publish(eventId, initiatorID, data) {
+  trigger(eventId, initiatorID, data) {
     const eventData = data || {};
     eventData.initiator = initiatorID;
     this.eventEmitter.emit(eventId, eventData);

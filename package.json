@@ -1,11 +1,9 @@
 {
   "name": "configurable-interactive-layout",
-  "version": "1.0.6",
-  "main": "dist/cardsLayoutManager.js",
+  "version": "2.0.0",
+  "main": "dist/interactiveLayout.js",
   "scripts": {
     "build": "webpack --bail -p --config webpack.config.prod.js ",
-    "predev-dist": "npm run build",
-    "dev-dist": "webpack --bail --config webpack.dist.config.js ",
     "lint": "eslint src/ --ext .jsx,.js",
     "lint-fix": "npm run lint -- --fix",
     "dev": "webpack-dev-server --config webpack.dev.config.js --color --hot -d --progress",
@@ -14,17 +12,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-eslint": "^8.0.3",
-    "mobx": "^3.4.1",
-    "mobx-react": "^4.3.5",
-    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-grid-layout": "^0.16.1",
-    "recharts": "^1.0.0-beta.6",
-    "wolfy87-eventemitter": "^5.2.4"
+    "prop-types": "^15.6.0"
   },
   "devDependencies": {
+    "recharts": "^1.0.0-beta.6",
+    "wolfy87-eventemitter": "^5.2.4",
+    "babel-eslint": "^8.0.3",
+    "mobx": "^3.4.1",
+    "mobx-react": "^4.3.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",

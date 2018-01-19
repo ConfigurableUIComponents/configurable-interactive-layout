@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+        <div>title should be displayed</div>
+        <div>listening to event: "counterUpdated" and will cause the iframe to display the updated counter</div>
+        <div>triggering event: "multiplyByMinus" which will multiple the counter by -1</div>
+        <div>the trigger will happen when the button is clicked</div>
+        <div>actions available</div>
+        <br />
+        <div>clicking on the action will reset the counter</div>
+        <div id="counter"></div>
+        <button onclick="multiply()">trigger event in parent- mutliply by minus</button>
+<script>
+
+        function multiply(){
+          var message = {
+            type: "multiplyByMinus",
+            data: {
+              testData: 123
+            }
+          }
+          window.parent.postMessage(JSON.stringify(message), window.parent.origin);
+        }
+
+        window.addEventListener("DOMContentLoaded", function() {
+            // listen for messages from the parent.
+            window.addEventListener("message", function(e) {
+                if(e.origin === window.parent.origin) {
+                    const event = JSON.parse(e.data);
+                    const eventType = JSON.parse(e.data).metadata.type;
+                    const data = JSON.parse(e.data).data;
+                    if(eventType === 'counterUpdated'){
+                      document.getElementById("counter").innerHTML = data.counter;
+                    }
+                }
+            }, false)
+        }, false)
+    </script>
+</body>
+</html>
+
+<!--
+window.addEventListener("message",function(e){
+if (e.data == "Itay") {
+document.getElementById("myP").innerHTML = e.data;
+alert("It works!")
+}
+});-->
