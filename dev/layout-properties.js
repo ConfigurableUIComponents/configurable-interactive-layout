@@ -17,6 +17,7 @@ const cardLayoutProperties = {
     responsiveLayout: {
       type: CardsLayoutManager,
       props: {
+        defaultView: "defaultView",
         config: {
           draggable: true,
           resizable: false,
@@ -46,13 +47,12 @@ const cardLayoutProperties = {
             {
               iframeCardAA: {
                 lg: {w: 6, h: 2,},
-                md: {w: 4, h: 2,},
                 sm: {w: 6, h: 2},
               },
               mattanCard: {
                 lg: {w: 6, h: 2,},
-                md: {w: 2, h: 2,},
-                sm: {w: 6, h: 2},
+                md: {w: 4, h: 2,},
+                sm: {w: 2, h: 2},
               },
               mattanCardb: {
                 lg: {w: 6, h: 2, minW: 2, maxW: 8,},

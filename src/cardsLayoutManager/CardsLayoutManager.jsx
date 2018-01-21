@@ -41,7 +41,8 @@ function extractLayout(contentList, COL_MAP, selectedView) {
   cards.forEach((card) => {
     const breakpoints = Object.keys(contentList[selectedView][card]);
     breakpoints.forEach((breakpoint) => {
-      const currLayout = contentList[selectedView][card][breakpoint];
+      const currLayout = contentList[selectedView][card][breakpoint] ||
+        contentList[selectedView][card].lg;
       currLayout.i = card;
       if (!layoutList[breakpoint]) {
         layoutList[breakpoint] = [];
@@ -89,7 +90,7 @@ export default class CardsLayoutManager extends Component {
     const breakpointCols = buildColMap(props.config.breakpoints);
 
     this.state = {
-      layouts: extractLayout(props.layouts, breakpointCols, 'defaultView'),
+      layouts: extractLayout(props.layouts, breakpointCols, this.props.defaultView),
       margins: props.config.cardMargin,
       padding: props.config.cardPadding,
       height: props.config.rowHeight,
@@ -109,9 +110,13 @@ export default class CardsLayoutManager extends Component {
 
   getChildrenWithKey() {
     const wrappedChildren = [];
-    React.Children.map(this.props.children, child => (
-      // Make sure the child is in the layout
-      wrappedChildren.push(<div key={child.props.configId}>{child}</div>)));
+    React.Children.map(this.props.children, (child) => {
+      const key = child.props.configId;
+      const ret = this.state.layouts.lg.filter(card => card.i === key);
+      if (ret.length > 0) {
+        wrappedChildren.push(<div key={key}>{child}</div>);
+      }
+    });
     return wrappedChildren;
   }
 
@@ -142,6 +147,7 @@ export default class CardsLayoutManager extends Component {
 CardsLayoutManager.propTypes = {
   // eventManager: PropTypes.instanceOf(Object),
   // store: PropTypes.instanceOf(Object),
+  defaultView: PropTypes.string,
   children: PropTypes.instanceOf(Array),
   // children: PropTypes.arrayOf(PropTypes.shape({
   //   configId: PropTypes.string.isRequired,
