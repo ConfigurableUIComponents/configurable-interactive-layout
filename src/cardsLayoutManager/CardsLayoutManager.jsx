@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Responsive, WidthProvider } from 'react-grid-layout';
+import unionBy from 'lodash/unionBy';
+
 import './CardLayoutStyle.scss';
 import maintainCardOrderAcrossBreakpoints from './CardOrganizer';
 
@@ -23,10 +25,12 @@ function populateAllBreakpointsWithLayouts(
   const allLayoutsObj = {};
   for (let i = 0; i < Object.keys(breakpoints).length; i += 1) {
     const configuredLayout = configuredLayouts[breakpoints[i]];
-    if (configuredLayout) {
-      allLayoutsObj[breakpoints[i]] = configuredLayout;
-    } else {
+    if (!configuredLayout) {
       allLayoutsObj[breakpoints[i]] = JSON.parse(JSON.stringify(largestConfiguredLayout));
+    // } else if (configuredLayout.length === largestConfiguredLayout.length) {
+    //   allLayoutsObj[breakpoints[i]] = configuredLayout;
+    } else {
+      allLayoutsObj[breakpoints[i]] = unionBy(configuredLayout, largestConfiguredLayout, 'i');
     }
   }
 
