@@ -47,6 +47,7 @@ const cardLayoutProperties = {
             {
               iframeCardAA: {
                 lg: {w: 6, h: 2,},
+                md: {w: 6, h: 2,},
                 sm: {w: 6, h: 2},
               },
               mattanCard: {

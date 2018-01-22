@@ -25,13 +25,12 @@ function populateAllBreakpointsWithLayouts(
   const allLayoutsObj = {};
   for (let i = 0; i < Object.keys(breakpoints).length; i += 1) {
     const configuredLayout = configuredLayouts[breakpoints[i]];
-    if (!configuredLayout) {
-      allLayoutsObj[breakpoints[i]] = JSON.parse(JSON.stringify(largestConfiguredLayout));
-    // } else if (configuredLayout.length === largestConfiguredLayout.length) {
-    //   allLayoutsObj[breakpoints[i]] = configuredLayout;
-    } else {
-      allLayoutsObj[breakpoints[i]] = unionBy(configuredLayout, largestConfiguredLayout, 'i');
-    }
+    allLayoutsObj[breakpoints[i]] = unionBy(configuredLayout, largestConfiguredLayout, 'i');
+    // if (!configuredLayout) {
+    //   allLayoutsObj[breakpoints[i]] = JSON.parse(JSON.stringify(largestConfiguredLayout));
+    // } else {
+    //   allLayoutsObj[breakpoints[i]] = unionBy(configuredLayout, largestConfiguredLayout, 'i');
+    // }
   }
 
   return allLayoutsObj;
