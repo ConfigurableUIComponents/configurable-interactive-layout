@@ -1,3 +1,5 @@
+import unionBy from 'lodash/unionBy';
+
 function getMatchingEntry(id, layout) {
   return layout.filter(element => element.i === id);
 }
@@ -92,7 +94,7 @@ function layoutComponents(sortedLayoutIds, layout, layoutMaxCol) {
   return orderedLayout;
 }
 
-export default function maintainCardOrderAcrossBreakpoints(currentLayout, allLayouts, colMap) {
+export function maintainCardOrderAcrossBreakpoints(currentLayout, allLayouts, colMap) {
   console.log('Calculating New Layouts');
   console.log(`Current Layout: ${JSON.stringify(currentLayout)}`);
   console.log(`Columns Per Breakpoint: ${JSON.stringify(colMap)}`);
@@ -118,4 +120,71 @@ export default function maintainCardOrderAcrossBreakpoints(currentLayout, allLay
   console.log('All Ordered Layouts:');
   console.log(updatedLayouts);
   return updatedLayouts;
+}
+
+function getLargestConfiguredLayout(layoutList, breakpointMap) {
+  console.log(`System Breakpoints: ${JSON.stringify(breakpointMap)}`);
+  console.log(`First Configured Layout: ${JSON.stringify(layoutList[Object.keys(layoutList)[0]])}`);
+  return layoutList[Object.keys(layoutList)[0]];
+}
+
+function populateAllBreakpointsWithLayouts(
+  configuredLayouts,
+  breakpoints,
+  largestConfiguredLayout,
+) {
+  const allLayoutsObj = {};
+  for (let i = 0; i < Object.keys(breakpoints).length; i += 1) {
+    const configuredLayout = configuredLayouts[breakpoints[i]];
+    allLayoutsObj[breakpoints[i]] = unionBy(configuredLayout, largestConfiguredLayout, 'i');
+  }
+
+  return allLayoutsObj;
+}
+
+export function extractLayout(contentList, COL_MAP, selectedView) {
+  const layoutList = {};
+  // retrieve all configured layouts
+
+  const cards = Object.keys(contentList[selectedView]);
+  cards.forEach((card) => {
+    const breakpoints = Object.keys(contentList[selectedView][card]);
+    breakpoints.forEach((breakpoint) => {
+      const currLayout = contentList[selectedView][card][breakpoint] ||
+        contentList[selectedView][card].lg;
+      currLayout.i = card;
+      if (!layoutList[breakpoint]) {
+        layoutList[breakpoint] = [];
+      }
+      layoutList[breakpoint].push(currLayout);
+    });
+  });
+
+
+  // all breakpoints must have an associated layout (make sure each breakpoint
+  // has a configured layout) ... if there is no layout configured for a specific
+  // breakpoint, use the largest configured layout
+  const largestConfiguredLayout = getLargestConfiguredLayout(layoutList, COL_MAP);
+  const allLayouts =
+    populateAllBreakpointsWithLayouts(layoutList, Object.keys(COL_MAP), largestConfiguredLayout);
+  console.log(`Initial Layouts: ${JSON.stringify(allLayouts)}`);
+  const orderedLayouts =
+    maintainCardOrderAcrossBreakpoints(largestConfiguredLayout, allLayouts, COL_MAP);
+  return orderedLayouts;
+}
+
+export function buildColMap(breakpoints) {
+  const colMap = {};
+  breakpoints.forEach((breakpoint) => {
+    colMap[breakpoint.id] = breakpoint.col;
+  });
+  return colMap;
+}
+
+export function buildBreakpoints(breakpoints) {
+  const breakpointMap = {};
+  breakpoints.forEach((breakpoint) => {
+    breakpointMap[breakpoint.id] = breakpoint.width;
+  });
+  return breakpointMap;
 }
