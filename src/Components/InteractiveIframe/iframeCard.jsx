@@ -18,15 +18,12 @@ export default class IframeCard extends Component {
 
   subscribeToIframeEvents = () => {
     window.addEventListener('message', (e) => {
-      const iframeReference = this.frameReference.contentWindow;
-      if (e.origin === iframeReference.origin) {
-        try {
-          const event = JSON.parse(e.data);
-          console.log(event);
-          this.handleEvent({ type: event.type, data: event.data });
-        } catch (err) {
-          console.warn('cannot handle event; this might be a system event that does not match the interactive iframe api', e);
-        }
+      try {
+        const event = JSON.parse(e.data);
+        console.log(event);
+        this.handleEvent({ type: event.type, data: event.data });
+      } catch (err) {
+        console.warn('cannot handle event; this might be a system event that does not match the interactive iframe api', e);
       }
     });
   }
@@ -39,12 +36,10 @@ export default class IframeCard extends Component {
 
   subscribeToApplicationEvents = () => {
     const em = this.props.eventManager;
+    const { url } = this.props;
     const { eventIds } = this.props;
-
     for (let index = 0; index < eventIds.length; index += 1) {
       em.subscribe(eventIds[index], (eventData) => {
-        const iframeReference = this.frameReference.contentWindow;
-        const targetOrigin = iframeReference.origin;
         const event = {};
         event.metadata = {
           type: eventIds[index],
@@ -52,7 +47,7 @@ export default class IframeCard extends Component {
         event.data = eventData;
         try {
           const stringMessage = JSON.stringify(event);
-          iframeReference.postMessage(stringMessage, targetOrigin);
+          this.frameReference.contentWindow.postMessage(stringMessage, url);
         } catch (error) {
           console.error(error); // eslint-disable-line
         }
