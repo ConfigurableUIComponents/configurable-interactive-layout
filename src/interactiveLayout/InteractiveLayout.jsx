@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Responsive, WidthProvider } from 'react-grid-layout';
+import unionBy from 'lodash/unionBy';
+
 import './LayoutStyle.scss';
 import maintainCardOrderAcrossBreakpoints from './ItemsOrganizer';
 
@@ -23,23 +25,30 @@ function populateAllBreakpointsWithLayouts(
   const allLayoutsObj = {};
   for (let i = 0; i < Object.keys(breakpoints).length; i += 1) {
     const configuredLayout = configuredLayouts[breakpoints[i]];
-    if (configuredLayout) {
-      allLayoutsObj[breakpoints[i]] = configuredLayout;
-    } else {
-      allLayoutsObj[breakpoints[i]] = JSON.parse(JSON.stringify(largestConfiguredLayout));
-    }
+    allLayoutsObj[breakpoints[i]] = unionBy(configuredLayout, largestConfiguredLayout, 'i');
   }
 
   return allLayoutsObj;
 }
 
-function extractLayout(contentList, COL_MAP) {
+function extractLayout(contentList, COL_MAP, selectedView) {
   const layoutList = {};
   // retrieve all configured layouts
-  contentList.forEach((breakpointConfig) => {
-    const { breakpoint, layout } = breakpointConfig;
-    layoutList[breakpoint] = layout;
+
+  const cards = Object.keys(contentList[selectedView]);
+  cards.forEach((card) => {
+    const breakpoints = Object.keys(contentList[selectedView][card]);
+    breakpoints.forEach((breakpoint) => {
+      const currLayout = contentList[selectedView][card][breakpoint] ||
+        contentList[selectedView][card].lg;
+      currLayout.i = card;
+      if (!layoutList[breakpoint]) {
+        layoutList[breakpoint] = [];
+      }
+      layoutList[breakpoint].push(currLayout);
+    });
   });
+
 
   // all breakpoints must have an associated layout (make sure each breakpoint
   // has a configured layout) ... if there is no layout configured for a specific
@@ -80,7 +89,7 @@ export default class CardsLayoutManager extends Component {
     const breakpointCols = buildColMap(props.layoutConfiguration.breakpoints);
 
     this.state = {
-      layouts: extractLayout(props.cardsConfiguration, breakpointCols),
+      layouts: extractLayout(props.cardsConfiguration, breakpointCols, this.props.defaultView),
       margins: props.layoutConfiguration.cardMargin,
       padding: props.layoutConfiguration.cardPadding,
       height: props.layoutConfiguration.rowHeight,
@@ -140,6 +149,7 @@ CardsLayoutManager.propTypes = {
       displayName: PropTypes.string,
     })),
   })),
+  defaultView: PropTypes.string,
   layoutConfiguration: PropTypes.shape({
     draggable: PropTypes.bool,
     resizable: PropTypes.bool,

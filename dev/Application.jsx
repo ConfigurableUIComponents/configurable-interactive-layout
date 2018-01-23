@@ -39,7 +39,7 @@ export default class Application extends Component {
       <div>
         <div className="app-header">
           <h1>Layout Manager Test Application</h1>
-          <LayoutManager cardsConfiguration={cardsConfiguration} layoutConfiguration={ layoutConfiguration } >
+          <LayoutManager cardsConfiguration={cardsConfiguration} layoutConfiguration={ layoutConfiguration } defaultView = "defaultView" >
             <Card configId="counterCard">
               <CounterComponent counter={this.state.counter} />
             </Card>
