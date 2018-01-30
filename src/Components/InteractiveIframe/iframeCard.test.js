@@ -11,7 +11,7 @@ const eventManager = {
 describe('Interactive Iframe', () => {
   it('subscribes to all events passed', () => {
     const spy = jest.spyOn(eventManager, 'subscribe');
-    const component = (<IframeCard eventManager={eventManager} url="testUrl" eventIds={['a', 'b', 'c']} />);
+    const component = (<IframeCard configId="iframecard" eventManager={eventManager} url="testUrl" eventIds={['a', 'b', 'c']} />);
     mount(component);
     expect(spy).toHaveBeenCalledTimes(3);
     spy.mockReset();

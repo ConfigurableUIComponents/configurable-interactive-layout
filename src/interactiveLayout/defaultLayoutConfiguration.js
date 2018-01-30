@@ -1,10 +1,16 @@
-export const layoutConfiguration = {
+const defaultLayoutConfiguration = {
   draggable: true,
   resizable: false,
   rowHeight: 100,
   cardMargin: [20, 20],
   cardPadding: [20, 20],
   breakpoints: [
+    {
+      id: 'lg',
+      col: 12,
+      height: 2,
+      width: 1400,
+    },
     {
       id: 'md',
       col: 10,
@@ -17,5 +23,8 @@ export const layoutConfiguration = {
       height: 2,
       width: 1024,
     },
-  ]
+  ],
 };
+
+export default defaultLayoutConfiguration;
+

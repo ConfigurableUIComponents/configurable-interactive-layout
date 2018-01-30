@@ -9,7 +9,6 @@ import Card from '../src/Components/Card/Card';
 import IframeCard from '../src/Components/InteractiveIframe/iframeCard';
 import EventManager from './eventManager/EventManager';
 
-
 export default class Application extends Component {
 
   constructor(props){
@@ -20,11 +19,21 @@ export default class Application extends Component {
       this.setCounterValue(this.state.counter * -1)
     });
     this.state = {
-      counter: 0
+      counter: 0,
+      selectedView: "defaultView",
+      cardsConfiguration: cardsConfiguration,
     }
     setInterval(() => {
       this.setCounterValue(++this.state.counter);
-    }, 1000);
+    }, 20000);
+  }
+
+  onLayoutChange(cardsOrder) {
+    const newCardsConfiguration = this.state.cardsConfiguration;
+    newCardsConfiguration[this.state.selectedView].cardsOrder = cardsOrder;
+    this.setState({
+      cardsConfiguration: newCardsConfiguration,
+    });
   }
 
   setCounterValue(value) {
@@ -35,11 +44,12 @@ export default class Application extends Component {
   }
 
   render() {
+    const cardsConfig = cardsConfiguration[this.state.selectedView];
     return (
       <div>
         <div className="app-header">
           <h1>Layout Manager Test Application</h1>
-          <LayoutManager cardsConfiguration={cardsConfiguration} layoutConfiguration={ layoutConfiguration } defaultView = "defaultView" >
+          <LayoutManager cardsConfiguration={cardsConfig} layoutConfiguration={ layoutConfiguration } onLayoutChange={this.onLayoutChange.bind(this)} >
             <Card configId="counterCard">
               <CounterComponent counter={this.state.counter} />
             </Card>

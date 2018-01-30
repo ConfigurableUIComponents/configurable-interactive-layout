@@ -12,6 +12,7 @@
         "react/prefer-stateless-function": 0,
         "linebreak-style": 0,
         "react/require-default-props": 0,
-        "no-console": 0
+        "no-console": 0,
+        "max-len": 0
 	}
 }
