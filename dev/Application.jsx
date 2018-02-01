@@ -8,7 +8,7 @@ import DescriptionComponent from './components/DescriptionComponent';
 import Card from '../src/Components/Card/Card';
 import IframeCard from '../src/Components/InteractiveIframe/iframeCard';
 import EventManager from './eventManager/EventManager';
-
+import params from './configurations/mockData/paramsMock';
 export default class Application extends Component {
 
   constructor(props){
@@ -98,7 +98,7 @@ export default class Application extends Component {
             </Card>
             <DescriptionComponent configId={"notAcard"} description={"This is not a card"} />
 
-            <IframeCard configId={"iframeNoTitleNoActionsNoEvents"} url={"http://elegant-dijkstra-d03a99.bitballoon.com"} />
+            <IframeCard configId={"iframeNoTitleNoActionsNoEvents"} params={params} url={"${reportServer}/AmdocsOSS/NetworkNavigator/Report/index.html?reportName=project_overdue_chart.rptdesign&nomenu=1&nohead=1&nonav=1&amdocs_url=NA&userID=${userID}&nosubheader=1"} />
             <IframeCard configId={"iframeWithActions"} url={"http://adoring-kilby-eb53b2.bitballoon.com/"}
                         actions={
                           [{
