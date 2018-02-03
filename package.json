@@ -7,7 +7,8 @@
     "lint": "eslint src/ --ext .jsx,.js",
     "lint-fix": "npm run lint -- --fix",
     "dev": "webpack-dev-server --config webpack.dev.config.js --color --hot -d --progress",
-    "test": "jest --watch"
+    "test": "jest",
+    "test:dev": "jest --watch"
   },
   "author": "",
   "license": "ISC",
