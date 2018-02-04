@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../Card/Card';
 import './iframeCardStyles.scss';
-import URLUtils from '../../utils/URLUtils';
+import UrlUtils from '../../utils/UrlUtils';
 
 const IFRAME_NOT_SUPPORTED_STR = 'This browser does not support iframes.';
 
@@ -19,7 +19,7 @@ export default class IframeCard extends Component {
 
 	getSrcURL = () => {
 	  if (this.props.params) {
-	    return URLUtils.template(this.props.url, this.props.params);
+	    return UrlUtils.template(this.props.url, this.props.params);
 	  }
 	  return this.props.url;
 	}
@@ -46,10 +46,7 @@ export default class IframeCard extends Component {
     const em = this.props.eventManager;
     const { eventIds } = this.props;
     const { params } = this.props;
-    let { url } = this.props;
-    if (params) {
-      url = URLUtils.template(url, params);
-    }
+    let { url } = this.getSrcURL;
     for (let index = 0; index < eventIds.length; index += 1) {
       em.subscribe(eventIds[index], (eventData) => {
         const event = {};
@@ -73,7 +70,7 @@ export default class IframeCard extends Component {
       <Card {...this.props}>
         <iframe
           className="iframeCard"
-          title={this.props.url}
+          title={src}
           src={src}
           ref={(iframe) => { this.frameReference = iframe; }}
         >

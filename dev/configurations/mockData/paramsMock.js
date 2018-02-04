@@ -1,6 +1,6 @@
 const params = {
-  amdocsServer: 'http://eaasrt:40100',
+  amdocsServer: 'http://elegant-dijkstra-d03a99',
   reportServer: 'http://ilmtx241.eaas.amdocs.com:34600',
-  userId: 'AFFSuper',
+  userId: 'bitballoon',
 };
 export default params;

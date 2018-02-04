@@ -1,4 +1,4 @@
-class URLUtils {
+class UrlUtils {
   static template(url, params) {
     let temp = url;
     if (!params) {
@@ -12,4 +12,4 @@ class URLUtils {
     return temp;
   }
 }
-export default URLUtils;
+export default UrlUtils;
