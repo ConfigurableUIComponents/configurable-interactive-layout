@@ -28,7 +28,7 @@ describe('Interactive Iframe', () => {
 	};
 	const url = '${reportServer}/AmdocsOSS/NetworkNavigator/Report/index.html?userID=${userID}&nosubheader=1';
 	const urlAfterTemplating = `${params.reportServer}/AmdocsOSS/NetworkNavigator/Report/index.html?userID=${params.userId}&nosubheader=1`;
-/* eslint-enable */
+  /* eslint-enable */
 
   it('getSrcUrl returns the right url when passing valid params and url', () => {
     const component = (<IframeCard configId="iframecard" eventManager={eventManager} url={url} params={params} eventIds={['a', 'b', 'c']} />);
