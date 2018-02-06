@@ -20,7 +20,7 @@ describe('Interactive Iframe', () => {
 });
 
 describe('Interactive Iframe', () => {
-  /* eslint-disable */
+/* eslint-disable */
 	const params = {
 		amdocsServer: 'http://eaasrt:40100',
 		reportServer: 'http://ilmtx241.eaas.amdocs.com:34600',
@@ -28,7 +28,7 @@ describe('Interactive Iframe', () => {
 	};
 	const url = '${reportServer}/AmdocsOSS/NetworkNavigator/Report/index.html?userID=${userID}&nosubheader=1';
 	const urlAfterTemplating = `${params.reportServer}/AmdocsOSS/NetworkNavigator/Report/index.html?userID=${params.userId}&nosubheader=1`;
-	/* eslint-enable */
+/* eslint-enable */
 
   it('getSrcUrl returns the right url when passing valid params and url', () => {
     const component = (<IframeCard configId="iframecard" eventManager={eventManager} url={url} params={params} eventIds={['a', 'b', 'c']} />);
