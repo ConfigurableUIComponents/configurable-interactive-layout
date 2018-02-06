@@ -1,8 +1,9 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../Card/Card';
 import './iframeCardStyles.scss';
-
+import UrlUtils from '../../utils/UrlUtils';
 
 const IFRAME_NOT_SUPPORTED_STR = 'This browser does not support iframes.';
 
@@ -15,6 +16,13 @@ export default class IframeCard extends Component {
     window.removeEventListener('message', this.handleFrameTasks);
     // TODO need to unsubscribe to events here
   }
+
+	getSrcURL = () => {
+	  if (this.props.params) {
+	    return UrlUtils.template(this.props.url, this.props.params);
+	  }
+	  return this.props.url;
+	}
 
   subscribeToIframeEvents = () => {
     window.addEventListener('message', (e) => {
@@ -36,8 +44,9 @@ export default class IframeCard extends Component {
 
   subscribeToApplicationEvents = () => {
     const em = this.props.eventManager;
-    const { url } = this.props;
     const { eventIds } = this.props;
+    const { params } = this.props;
+    let { url } = this.getSrcURL;
     for (let index = 0; index < eventIds.length; index += 1) {
       em.subscribe(eventIds[index], (eventData) => {
         const event = {};
@@ -56,13 +65,13 @@ export default class IframeCard extends Component {
   }
 
   render() {
+    const src = this.getSrcURL();
     return (
-
       <Card {...this.props}>
         <iframe
           className="iframeCard"
-          title={this.props.url}
-          src={this.props.url}
+          title={src}
+          src={src}
           ref={(iframe) => { this.frameReference = iframe; }}
         >
           {IFRAME_NOT_SUPPORTED_STR}
@@ -82,6 +91,7 @@ IframeCard.propTypes = {
   })),
   eventIds: PropTypes.arrayOf(PropTypes.string),
   url: PropTypes.string.isRequired,
+  params: PropTypes.instanceOf(Object),
 };
 
 IframeCard.defaultProps = {
