@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-export default class DoubleCounterComponent extends Component {
+export default class DescriptionComponent extends Component {
   render() {
     return (
         [
-          <div>{ this.props.title ?  "title should be displayed" : "no title"  } </div>,
-          <div>{ this.props.actions ?  "actions are available" : "no actions"  } </div>,
-          <br />,
-          <div>{ this.props.description ?  this.props.description : ""  } </div>
+          <div key='i1'>{ this.props.title ?  "title should be displayed" : "no title"  } </div>,
+          <div key='i2'>{ this.props.actions ?  "actions are available" : "no actions"  } </div>,
+          <br key = 'b1'/>,
+          <div key='i3'>{ this.props.description ?  this.props.description : ""  } </div>
         ]
     )
   }

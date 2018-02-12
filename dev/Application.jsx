@@ -8,8 +8,7 @@ import DescriptionComponent from './components/DescriptionComponent';
 import Card from '../src/Components/Card/Card';
 import IframeCard from '../src/Components/InteractiveIframe/iframeCard';
 import EventManager from './eventManager/EventManager';
-
-
+import params from './configurations/mockData/paramsMock';
 export default class Application extends Component {
 
   constructor(props){
@@ -20,11 +19,21 @@ export default class Application extends Component {
       this.setCounterValue(this.state.counter * -1)
     });
     this.state = {
-      counter: 0
+      counter: 0,
+      selectedView: "defaultView",
+      cardsConfiguration: cardsConfiguration,
     }
     setInterval(() => {
       this.setCounterValue(++this.state.counter);
-    }, 1000);
+    }, 20000);
+  }
+
+  onLayoutChange(cardsOrder) {
+    const newCardsConfiguration = this.state.cardsConfiguration;
+    newCardsConfiguration[this.state.selectedView].cardsOrder = cardsOrder;
+    this.setState({
+      cardsConfiguration: newCardsConfiguration,
+    });
   }
 
   setCounterValue(value) {
@@ -35,11 +44,12 @@ export default class Application extends Component {
   }
 
   render() {
+    const cardsConfig = cardsConfiguration[this.state.selectedView];
     return (
       <div>
         <div className="app-header">
           <h1>Layout Manager Test Application</h1>
-          <LayoutManager cardsConfiguration={cardsConfiguration} layoutConfiguration={ layoutConfiguration } >
+          <LayoutManager cardsConfiguration={cardsConfig} layoutConfiguration={ layoutConfiguration } onLayoutChange={this.onLayoutChange.bind(this)} >
             <Card configId="counterCard">
               <CounterComponent counter={this.state.counter} />
             </Card>
@@ -88,8 +98,8 @@ export default class Application extends Component {
             </Card>
             <DescriptionComponent configId={"notAcard"} description={"This is not a card"} />
 
-            <IframeCard configId={"iframeNoTitleNoActionsNoEvents"} url={"iframes/iframeNoTitleNoActionsNoEvents.html"} />
-            <IframeCard configId={"iframeWithActions"} url={"iframes/iframeWithActions.html"}
+            <IframeCard configId={"iframeNoTitleNoActionsNoEvents"} params={params} url={"${amdocsServer}.${userId}.com"} />
+            <IframeCard configId={"iframeWithActions"} url={"http://adoring-kilby-eb53b2.bitballoon.com/"}
                         actions={
                           [{
                             id: 'action1',
@@ -99,7 +109,7 @@ export default class Application extends Component {
                             onClick: (actionId) => { this.setCounterValue(0) },
                           }]
                         } />
-            <IframeCard configId={"iframeWithTitleAndActions"} url={"iframes/iframeWithTitleAndActions.html"}
+            <IframeCard configId={"iframeWithTitleAndActions"} url={"http://practical-meitner-c0a310.bitballoon.com/"}
                         title={"iframe with title & actions"}
                         actions={
                           [{
@@ -117,7 +127,7 @@ export default class Application extends Component {
                               onClick: (actionId) => { this.setCounterValue( this.state.counter * 200 )},
                             }]
                         } />
-            <IframeCard configId={"iframeWithTitleAndActionsAndEvents"} url={"iframes/iframeWithTitleAndActionsAndEvents.html"}
+            <IframeCard configId={"iframeWithTitleAndActionsAndEvents"} url={"http://wonderful-borg-b320ed.bitballoon.com/"}
                         title={"iframe with title & actions & events"}
                         eventIds={['counterUpdated']}
                         eventManager={this.eventManager}

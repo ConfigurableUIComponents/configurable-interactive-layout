@@ -1,106 +1,96 @@
-export const cardsConfiguration = [  {
-    breakpoint: 'lg',
-    layout: [
-      {
-        i: 'counterCard', w: 6, h: 2,
+export const cardsConfiguration = {
+  defaultView: {
+    cardsOrder: ['notAcard', 'counterCard', 'actionsDescriptionCard', 'iframeWithTitleAndActionsAndEvents', 'iframeWithActions', 'iframeWithTitleAndActions', 'iframeNoTitleNoActionsNoEvents', 'actionsWithTitleDescriptionCard', 'titleDescriptionCard', 'doubleCounterCard'],
+    cards: {
+      counterCard: {
+        lg: {w: 6, h: 2,},
+        md: {w: 4, h: 2,},
+        sm: {w: 2, h: 2,},
       },
-      {
-        i: 'doubleCounterCard', w: 12, h: 2,
+      doubleCounterCard: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
       },
-      {
-        i: 'titleDescriptionCard', w: 12, h: 2,
+      titleDescriptionCard: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
       },
-      {
-        i: 'actionsDescriptionCard', w: 12, h: 2,
+      actionsDescriptionCard: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
       },
-      {
-        i: 'actionsWithTitleDescriptionCard', w: 12, h: 2,
+      actionsWithTitleDescriptionCard: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
       },
-      {
-        i: 'notAcard', w: 12, h: 2,
+      notAcard: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
       },
-      {
-        i: 'iframeNoTitleNoActionsNoEvents', w: 12, h: 2,
+      iframeNoTitleNoActionsNoEvents: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
       },
-      {
-        i: 'iframeWithActions', w: 12, h: 2,
+      iframeWithActions: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
       },
-      {
-        i: 'iframeWithTitleAndActions', w: 12, h: 2,
+      iframeWithTitleAndActions: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
       },
-      {
-        i: 'iframeWithTitleAndActionsAndEvents', w: 12, h: 2,
-      }
-    ],
+      iframeWithTitleAndActionsAndEvents: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
+      },
+    }
   },
-  {
-    breakpoint: 'md',
-    layout: [
-      {
-        i: 'counterCard', w: 4, h: 2,
+  customView: {
+    cardsOrder: ['titleDescriptionCard', 'iframeWithTitleAndActionsAndEvents', 'actionsWithTitleDescriptionCard'],
+    cards: {
+      titleDescriptionCard: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
       },
-      {
-        i: 'doubleCounterCard', w: 4, h: 2,
+      actionsWithTitleDescriptionCard: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
       },
-      {
-        i: 'titleDescriptionCard', w: 4, h: 2,
+      iframeWithTitleAndActionsAndEvents: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
       },
-      {
-        i: 'actionsDescriptionCard', w: 4, h: 2,
-      },
-      {
-        i: 'actionsWithTitleDescriptionCard', w: 4, h: 2,
-      },
-      {
-        i: 'notAcard', w: 4, h: 2,
-      },
-      {
-        i: 'iframeNoTitleNoActionsNoEvents', w: 4, h: 2,
-      },
-      {
-        i: 'iframeWithActions', w: 4, h: 2,
-      },
-      {
-        i: 'iframeWithTitleAndActions', w: 4, h: 2,
-      },
-      {
-        i: 'iframeWithTitleAndActionsAndEvents', w: 4, h: 2,
-      }
-    ],
+    }
   },
-  {
-    breakpoint: 'sm',
-    layout: [
-      {
-        i: 'counterCard', w: 6, h: 2,
+  viewWithNoRealCard: {
+    cardsOrder: ['titleDescriptionCard', 'counterCard', 'lironCard'],
+    cards: {
+      counterCard: {
+        lg: {w:4, h:2,},
+        md: {w:2, h:2,},
       },
-      {
-        i: 'doubleCounterCard', w: 6, h: 2,
+      titleDescriptionCard: {
+        lg: {w:8, h:2,},
+        md: {w:2, h:2,},
       },
-      {
-        i: 'titleDescriptionCard', w: 6, h: 2,
-      },
-      {
-        i: 'actionsDescriptionCard', w: 6, h: 2,
-      },
-      {
-        i: 'actionsWithTitleDescriptionCard', w: 6, h: 2,
-      },
-      {
-        i: 'notAcard', w: 6, h: 2,
-      },
-      {
-        i: 'iframeNoTitleNoActionsNoEvents', w: 6, h: 2,
-      },
-      {
-        i: 'iframeWithActions', w: 6, h: 2,
-      },
-      {
-        i: 'iframeWithTitleAndActions', w: 6, h: 2,
-      },
-      {
-        i: 'iframeWithTitleAndActionsAndEvents', w: 6, h: 2,
+      lironCard: {
+        lg: {w:8, h:2,},
       }
-    ],
+    },
   },
-];
+  viewWithoutCardsConfig: {
+    cardsOrder: ['titleDescriptionCard', 'counterCard'],
+  }
+};
