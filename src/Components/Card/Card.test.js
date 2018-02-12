@@ -18,8 +18,11 @@ describe('Card', () => {
     expect(cardWithTitle.find('.card')).not.toHaveClassName('with-title');
   });
 
-  it('shows an action menu button when actions are configured', () => {
-
+  it('render child and grandchild', () => {
+    const component = (<Card id={expectedId} title={expectedTitle}><div className="child">Kobi<span className="grandchild">123</span></div></Card>);
+    const cardwithChild = mount(component);
+    expect(cardwithChild.find('.child')).toHaveLength(1);
+    expect(cardwithChild.find('.grandchild')).toHaveLength(1);
   });
 });
 
