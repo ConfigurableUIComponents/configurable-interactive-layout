@@ -127,8 +127,8 @@ export default class Application extends Component {
                               onClick: (actionId) => { this.setCounterValue( this.state.counter * 200 )},
                             }]
                         } />
-            <IframeCard configId={"iframeWithTitleAndActionsAndEvents"} url={"http://wonderful-borg-b320ed.bitballoon.com/"}
-                        title={"iframe with title & actions & events"}
+            <IframeCard title={"iframe with title & actions & events"}
+                        configId={"iframeWithTitleAndActionsAndEvents"} url={"http://wonderful-borg-b320ed.bitballoon.com/"}
                         eventIds={['counterUpdated']}
                         eventManager={this.eventManager}
                         actions={
