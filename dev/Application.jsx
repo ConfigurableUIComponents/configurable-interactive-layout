@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ConfigurableMenu } from 'configurable-menu';
 import LayoutManager from '../src/interactiveLayout/InteractiveLayout';
 import { cardsConfiguration } from './configurations/basic/cards-configurations';
 import { layoutConfiguration } from './configurations/basic/layout-configuration';
@@ -8,11 +9,34 @@ import DescriptionComponent from './components/DescriptionComponent';
 import Card from '../src/Components/Card/Card';
 import IframeCard from '../src/Components/InteractiveIframe/iframeCard';
 import EventManager from './eventManager/EventManager';
+import cloneDeep from 'lodash/cloneDeep';
+
+import '../node_modules/configurable-menu/dist/configurableMenu.css';
+
+const items = [];
+const itemNames = [];
+
 
 export default class Application extends Component {
 
   constructor(props){
     super(props);
+
+    for(var Element in cardsConfiguration)
+    {
+      itemNames.push(Element);
+    }
+     console.log(itemNames);
+    for (var i =0 ; i<itemNames.length-1 ;i++) {
+      items.push({type:'button',id:itemNames[i],displayName:itemNames[i]})
+    }
+    var j = itemNames.length;
+
+    items.push({type:'checkbox',id:'jjjj',displayName:'gggg'})
+
+    console.log(items);
+    console.log(itemNames);
+
     this.eventManager = new EventManager();
     this.eventManager.subscribe('multiplyByMinus', (event) => {
       console.log('event mutliplyByMinus', event);
@@ -20,16 +44,40 @@ export default class Application extends Component {
     });
     this.state = {
       counter: 0,
-      selectedView: "defaultView",
+      selectedView: itemNames[1],
       cardsConfiguration: cardsConfiguration,
+      selectedItem: { id: itemNames[1] },
+      sidebarOpened: true,
     }
-    setInterval(() => {
-      this.setCounterValue(++this.state.counter);
-    }, 20000);
+
+  }
+
+  onCloseSidebar = () => {
+    this.setState({
+      sidebarOpened: false,
+    });
+  }
+
+  onOpenSidebar = () => {
+    this.setState({
+      sidebarOpened: true
+    });
+  }
+
+  onSelectionChange = (data) => {
+    this.setState({
+      selectedItem: data ,
+      selectedView : data.id ,
+    }, () => {
+      console.log('onSelectionChange', 'item', this.state.selectedItem);
+      console.log('onSelectionChange', 'view', this.state.selectedView);
+    })
   }
 
   onLayoutChange(cardsOrder) {
-    const newCardsConfiguration = this.state.cardsConfiguration;
+    console.log('onLayoutChange', 'this.state.selectedItem', this.state.selectedItem);
+    console.log('onLayoutChange', ' this.state.selectedView',  this.state.selectedView);
+    const newCardsConfiguration = JSON.parse(JSON.stringify(this.state.cardsConfiguration));
     newCardsConfiguration[this.state.selectedView].cardsOrder = cardsOrder;
     this.setState({
       cardsConfiguration: newCardsConfiguration,
@@ -44,9 +92,13 @@ export default class Application extends Component {
   }
 
   render() {
-    const cardsConfig = cardsConfiguration[this.state.selectedView];
+    console.log('render: this.state.selectedView', this.state.selectedView);
+    const cardsConfig = cloneDeep(this.state.cardsConfiguration[this.state.selectedView]);
+    console.log('cardsConfig', cardsConfig);
     return (
+
       <div>
+        <ConfigurableMenu open={true} title="Views Menu" items={items} selectedItem={this.state.selectedItem} onSelectionChnage={this.onSelectionChange}  />
         <div className="app-header">
           <h1>Layout Manager Test Application</h1>
           <LayoutManager cardsConfiguration={cardsConfig} layoutConfiguration={ layoutConfiguration } onLayoutChange={this.onLayoutChange.bind(this)} >

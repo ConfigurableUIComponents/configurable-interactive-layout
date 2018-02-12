@@ -92,5 +92,26 @@ export const cardsConfiguration = {
   },
   viewWithoutCardsConfig: {
     cardsOrder: ['titleDescriptionCard', 'counterCard'],
-  }
+  },
+  customViewclickBox: {
+    cardsOrder: ['titleDescriptionCard', 'iframeWithTitleAndActionsAndEvents', 'actionsWithTitleDescriptionCard'],
+    cards: {
+      titleDescriptionCard: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
+      },
+      actionsWithTitleDescriptionCard: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
+      },
+      iframeWithTitleAndActionsAndEvents: {
+        lg: {w: 12, h: 2,},
+        md: {w: 6, h: 2,},
+        sm: {w: 4, h: 2,},
+      },
+    }
+  },
+
 };
