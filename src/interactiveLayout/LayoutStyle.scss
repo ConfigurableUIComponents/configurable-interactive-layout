@@ -109,8 +109,8 @@
 
 
 .card{
+
 	.card-content{
-		background-color: lightgray;
 		height: 100%;
 		width: 100%;
 		overflow-y: auto;
@@ -121,4 +121,8 @@
 	&.with-title .card-content{
 		height: calc(100% - #{$header-height});
 	}
+}
+
+.iframe-card-container{
+	overflow: hidden;
 }
