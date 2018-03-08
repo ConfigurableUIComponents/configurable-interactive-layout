@@ -53,6 +53,8 @@ export default class CardsLayoutManager extends Component {
 
   render() {
     const { cards, cardsOrder } = this.props.cardsConfiguration;
+    if (cardsOrder.length === 0) return null;
+
     const childrenWithKeys = this.getChildrenWithKeys(cardsOrder);
 
     // Revise Cards Order to include only children
