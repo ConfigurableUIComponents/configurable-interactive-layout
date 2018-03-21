@@ -33,7 +33,9 @@ function layoutComponents(sortedLayoutIds, layout, layoutMaxCol) {
     if (match.w > layoutMaxCol) {
       match.w = layoutMaxCol;
     }
-
+    // xPos = match.x || xPos;
+    // console.log('layoutMaxCol', layoutMaxCol);
+    // console.log('match.x, xPos', match.x, xPos);
     // find next available space for component
     let spaceFound = false;
     while (!spaceFound) {
@@ -94,9 +96,9 @@ export function maintainCardOrderAcrossBreakpoints(currentLayout, allLayouts, co
   // determine order of current layout (id order from top-left to bottom-right)
   const sortedLayout = currentLayout.sort((layout1, layout2) => {
     if (layout1.y === layout2.y) {
-      return layout1.x > layout2.x;
+      return layout1.x > layout2.x ? 1 : -1;
     }
-    return layout1.y > layout2.y;
+    return layout1.y > layout2.y ? 1 : -1;
   });
   const sortedIds = sortedLayout.map(layout => layout.i);
   // console.log(`Card id order by placement (pre-reordering): ${sortedIds}`);

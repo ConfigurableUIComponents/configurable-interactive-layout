@@ -1,11 +1,11 @@
 export const cardsConfiguration = {
   defaultView: {
-    cardsOrder: ['notAcard', 'counterCard', 'actionsDescriptionCard', 'iframeWithTitleAndActionsAndEvents', 'iframeWithActions', 'iframeWithTitleAndActions', 'iframeNoTitleNoActionsNoEvents', 'actionsWithTitleDescriptionCard', 'titleDescriptionCard', 'doubleCounterCard'],
+    cardsOrder: ['counterCard', 'actionsDescriptionCard'],
     cards: {
       counterCard: {
-        lg: {w: 6, h: 2,},
-        md: {w: 4, h: 2,},
-        sm: {w: 2, h: 2,},
+        lg: {w: 6, h: 2},
+        md: {w: 4, h: 2},
+        sm: {w: 2, h: 2},
       },
       doubleCounterCard: {
         lg: {w: 12, h: 2,},
@@ -13,12 +13,12 @@ export const cardsConfiguration = {
         sm: {w: 4, h: 2,},
       },
       titleDescriptionCard: {
-        lg: {w: 12, h: 2,},
+        lg: {w: 6, h: 2,},
         md: {w: 6, h: 2,},
         sm: {w: 4, h: 2,},
       },
       actionsDescriptionCard: {
-        lg: {w: 12, h: 2,},
+        lg: {w: 6, h: 2,},
         md: {w: 6, h: 2,},
         sm: {w: 4, h: 2,},
       },

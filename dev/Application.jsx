@@ -9,6 +9,7 @@ import Card from '../src/Components/Card/Card';
 import IframeCard from '../src/Components/InteractiveIframe/iframeCard';
 import EventManager from './eventManager/EventManager';
 import params from './configurations/mockData/paramsMock';
+
 export default class Application extends Component {
 
   constructor(props){
@@ -22,10 +23,19 @@ export default class Application extends Component {
       counter: 0,
       selectedView: "defaultView",
       cardsConfiguration: cardsConfiguration,
-    }
-    setInterval(() => {
-      this.setCounterValue(++this.state.counter);
-    }, 20000);
+    };
+    // setTimeout(() => {
+    //   const cardsConfiguration = this.state.cardsConfiguration;
+    //   cardsConfiguration[this.state.selectedView].cardsOrder.push('actionsWithTitleDescriptionCard');
+    //   this.setState({cardsConfiguration});
+    //   console.log("done set state");
+    // }, 10000)
+    // setTimeout(() => {
+    //   const cardsConfiguration = this.state.cardsConfiguration;
+    //   cardsConfiguration[this.state.selectedView].cardsOrder = ['counterCard', 'actionsWithTitleDescriptionCard'];
+    //   this.setState({cardsConfiguration});
+    //   console.log("done set state");
+    // }, 15000)
   }
 
   onLayoutChange(cardsOrder) {
@@ -98,48 +108,48 @@ export default class Application extends Component {
             </Card>
             <DescriptionComponent configId={"notAcard"} description={"This is not a card"} />
 
-            <IframeCard configId={"iframeNoTitleNoActionsNoEvents"} params={params} url={"${amdocsServer}.${userId}.com"} />
-            <IframeCard configId={"iframeWithActions"} url={"http://adoring-kilby-eb53b2.bitballoon.com/"}
-                        actions={
-                          [{
-                            id: 'action1',
-                            displayName: 'restart counter',
-                            iconURL: 'icons/trashbin.svg',
-                            iconURLHover: 'icons/trashbin_hover.svg',
-                            onClick: (actionId) => { this.setCounterValue(0) },
-                          }]
-                        } />
-            <IframeCard configId={"iframeWithTitleAndActions"} url={"http://practical-meitner-c0a310.bitballoon.com/"}
-                        title={"iframe with title & actions"}
-                        actions={
-                          [{
-                            id: 'action1',
-                            displayName: 'restart counter',
-                            iconURL: 'icons/trashbin.svg',
-                            iconURLHover: 'icons/trashbin_hover.svg',
-                            onClick: (actionId) => { this.setCounterValue(0) },
-                          },
-                            {
-                              id: 'action2',
-                              displayName: 'multiply counter',
-                              iconURL: 'icons/see_all.svg',
-                              iconURLHover: 'icons/see_all_hover.svg',
-                              onClick: (actionId) => { this.setCounterValue( this.state.counter * 200 )},
-                            }]
-                        } />
-            <IframeCard title={"iframe with title & actions & events"}
-                        configId={"iframeWithTitleAndActionsAndEvents"} url={"http://wonderful-borg-b320ed.bitballoon.com/"}
-                        eventIds={['counterUpdated']}
-                        eventManager={this.eventManager}
-                        actions={
-                          [{
-                            id: 'action1',
-                            displayName: 'restart counter',
-                            iconURL: 'icons/trashbin.svg',
-                            iconURLHover: 'icons/trashbin_hover.svg',
-                            onClick: (actionId) => { this.setCounterValue(0) },
-                          }]
-                        } />
+            {/*<IframeCard configId={"iframeNoTitleNoActionsNoEvents"} params={params} url={"${amdocsServer}.${userId}.com"} />*/}
+            {/*<IframeCard configId={"iframeWithActions"} url={"http://adoring-kilby-eb53b2.bitballoon.com/"}*/}
+                        {/*actions={*/}
+                          {/*[{*/}
+                            {/*id: 'action1',*/}
+                            {/*displayName: 'restart counter',*/}
+                            {/*iconURL: 'icons/trashbin.svg',*/}
+                            {/*iconURLHover: 'icons/trashbin_hover.svg',*/}
+                            {/*onClick: (actionId) => { this.setCounterValue(0) },*/}
+                          {/*}]*/}
+                        {/*} />*/}
+            {/*<IframeCard configId={"iframeWithTitleAndActions"} url={"http://practical-meitner-c0a310.bitballoon.com/"}*/}
+                        {/*title={"iframe with title & actions"}*/}
+                        {/*actions={*/}
+                          {/*[{*/}
+                            {/*id: 'action1',*/}
+                            {/*displayName: 'restart counter',*/}
+                            {/*iconURL: 'icons/trashbin.svg',*/}
+                            {/*iconURLHover: 'icons/trashbin_hover.svg',*/}
+                            {/*onClick: (actionId) => { this.setCounterValue(0) },*/}
+                          {/*},*/}
+                            {/*{*/}
+                              {/*id: 'action2',*/}
+                              {/*displayName: 'multiply counter',*/}
+                              {/*iconURL: 'icons/see_all.svg',*/}
+                              {/*iconURLHover: 'icons/see_all_hover.svg',*/}
+                              {/*onClick: (actionId) => { this.setCounterValue( this.state.counter * 200 )},*/}
+                            {/*}]*/}
+                        {/*} />*/}
+            {/*<IframeCard title={"iframe with title & actions & events"}*/}
+                        {/*configId={"iframeWithTitleAndActionsAndEvents"} url={"http://wonderful-borg-b320ed.bitballoon.com/"}*/}
+                        {/*eventIds={['counterUpdated']}*/}
+                        {/*eventManager={this.eventManager}*/}
+                        {/*actions={*/}
+                          {/*[{*/}
+                            {/*id: 'action1',*/}
+                            {/*displayName: 'restart counter',*/}
+                            {/*iconURL: 'icons/trashbin.svg',*/}
+                            {/*iconURLHover: 'icons/trashbin_hover.svg',*/}
+                            {/*onClick: (actionId) => { this.setCounterValue(0) },*/}
+                          {/*}]*/}
+                        {/*} />*/}
           </LayoutManager>
         </div>
       </div>

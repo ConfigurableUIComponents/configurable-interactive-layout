@@ -1,5 +1,5 @@
 const defaultLayoutConfiguration = {
-  draggable: true,
+  draggable: false,
   resizable: false,
   rowHeight: 100,
   cardMargin: [20, 20],

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import intersection from 'lodash/intersection';
@@ -9,8 +11,11 @@ import { maintainCardOrderAcrossBreakpoints, extractLayout, buildColMap, buildBr
 
 import '../../node_modules/react-grid-layout/css/styles.css';
 import '../../node_modules/react-resizable/css/styles.css';
+import cloneDeep from 'lodash/cloneDeep';
+import each from 'lodash/each';
 
 const ResponsiveLayout = WidthProvider(Responsive);
+
 
 export default class CardsLayoutManager extends Component {
   constructor(props) {
@@ -18,21 +23,37 @@ export default class CardsLayoutManager extends Component {
     const breakpoints = props.layoutConfiguration.breakpoints || defaultLayoutConfiguration.breakpoints;
     const breakpointCols = buildColMap(breakpoints);
 
+    const { cards, cardsOrder } = cloneDeep(props.cardsConfiguration);
+
+    const childrenWithKeys = this.getChildrenWithKeys(cardsOrder);
+
+    // Revise Cards Order to include only children
+    const childrenKeys = childrenWithKeys.map(child => child.key);
+    const revisedCardsOrder = intersection(cardsOrder, childrenKeys);
+
+
+    const layouts = cloneDeep(extractLayout(cards, revisedCardsOrder, breakpoints));
+
     this.state = {
       margins: props.layoutConfiguration.cardMargin || defaultLayoutConfiguration.cardMargin,
       padding: props.layoutConfiguration.cardPadding || defaultLayoutConfiguration.cardPadding,
       height: props.layoutConfiguration.rowHeight || defaultLayoutConfiguration.rowHeight,
-      resizable: props.layoutConfiguration.resizable || defaultLayoutConfiguration.resizable,
-      draggable: props.layoutConfiguration.draggable || defaultLayoutConfiguration.draggable,
+      resizable: false,
+      draggable: props.layoutConfiguration.draggable !== undefined ? props.layoutConfiguration.draggable : defaultLayoutConfiguration.draggable,
       cols: breakpointCols,
       breakpoints: buildBreakpoints(breakpoints),
+      layouts, cardsOrder
     };
   }
 
-  onLayoutChange(curLayout, allLayouts) {
+  onDragStop(curLayout) {
+    console.log('onDragStop', curLayout);
+    const allLayouts = this.state.layouts;
     const newLayout = maintainCardOrderAcrossBreakpoints(curLayout, allLayouts, this.state.cols);
+    console.log('onDragStop newLayout', newLayout);
     const bp = Object.keys(newLayout)[0];
     const cardsOrder = newLayout[bp].map(card => (card.i));
+    this.setState({cardsOrder, layouts: allLayouts});
     this.props.onLayoutChange(cardsOrder);
   }
 
@@ -51,27 +72,26 @@ export default class CardsLayoutManager extends Component {
     return filtered;
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({cardsOrder: nextProps.cardsConfiguration.cardsOrder})
+  }
+
   render() {
-    const { cards, cardsOrder } = this.props.cardsConfiguration;
-    if (cardsOrder.length === 0) return null;
-
-    const childrenWithKeys = this.getChildrenWithKeys(cardsOrder);
-
-    // Revise Cards Order to include only children
-    const childrenKeys = childrenWithKeys.map(child => child.key);
-    const revisedCardsOrder = intersection(cardsOrder, childrenKeys);
+    console.log('this.state.cardsOrder', this.state.cardsOrder)
+    const childrenWithKeys = this.getChildrenWithKeys(this.state.cardsOrder);
 
     const breakpointsConfig = this.props.layoutConfiguration.breakpoints;
-    const layouts = extractLayout(cards, revisedCardsOrder, breakpointsConfig);
 
-    if (!layouts) {
-      return null;
-    }
+
+    // if (!layouts) {
+    //   return null;
+    // }
+
 
     return (
       <ResponsiveLayout
         className="cards-layout-container"
-        layouts={layouts}
+        layouts={this.state.layouts}
         breakpoints={this.state.breakpoints}
         cols={this.state.cols}
         isResizable={this.state.resizable}
@@ -81,8 +101,9 @@ export default class CardsLayoutManager extends Component {
         containerPadding={this.state.padding}
         draggableHandle=".header, .card"
         draggableCancel=".actions, .card-content, .card-content-no-header"
-        onLayoutChange={(curLayout, allLayouts) => this.onLayoutChange(curLayout, allLayouts)}
-        compactType={null}
+        onBreakpointChange={(newBreakpoint, newCols) => console.log('newBreakpoint, newCols', newBreakpoint, newCols)}
+        onDragStop={this.onDragStop.bind(this)}
+        compactType="vertical"
       >
         {childrenWithKeys}
       </ResponsiveLayout>

@@ -6,16 +6,22 @@ export const layoutConfiguration = {
   cardPadding: [20, 20],
   breakpoints: [
     {
+      id: 'lg',
+      col: 12,
+      height: 2,
+      width: 1200,
+    },
+    {
       id: 'md',
       col: 10,
       height: 2,
-      width: 1200,
+      width: 1024,
     },
     {
       id: 'sm',
       col: 8,
       height: 2,
-      width: 1024,
+      width: 800,
     },
   ]
 };
