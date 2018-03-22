@@ -1,6 +1,6 @@
 export const cardsConfiguration = {
   defaultView: {
-    cardsOrder: ['counterCard', 'actionsDescriptionCard'],
+    cardsOrder: ['counterCard', 'actionsDescriptionCard', 'doubleCounterCard', 'titleDescriptionCard'],
     cards: {
       counterCard: {
         lg: {w: 6, h: 2},

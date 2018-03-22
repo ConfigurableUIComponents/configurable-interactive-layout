@@ -24,18 +24,20 @@ export default class Application extends Component {
       selectedView: "defaultView",
       cardsConfiguration: cardsConfiguration,
     };
-    // setTimeout(() => {
-    //   const cardsConfiguration = this.state.cardsConfiguration;
-    //   cardsConfiguration[this.state.selectedView].cardsOrder.push('actionsWithTitleDescriptionCard');
-    //   this.setState({cardsConfiguration});
-    //   console.log("done set state");
-    // }, 10000)
-    // setTimeout(() => {
-    //   const cardsConfiguration = this.state.cardsConfiguration;
-    //   cardsConfiguration[this.state.selectedView].cardsOrder = ['counterCard', 'actionsWithTitleDescriptionCard'];
-    //   this.setState({cardsConfiguration});
-    //   console.log("done set state");
-    // }, 15000)
+  }
+
+  addCard = () => {
+      const cardsConfiguration = this.state.cardsConfiguration;
+      cardsConfiguration[this.state.selectedView].cardsOrder.push('actionsWithTitleDescriptionCard');
+      this.setState({cardsConfiguration});
+      console.log("done set state");
+  };
+
+  removeCard = () => {
+      const cardsConfiguration = this.state.cardsConfiguration;
+      cardsConfiguration[this.state.selectedView].cardsOrder = ['counterCard', 'actionsDescriptionCard', 'doubleCounterCard', 'titleDescriptionCard'];
+      this.setState({cardsConfiguration});
+      console.log("done set state");
   }
 
   onLayoutChange(cardsOrder) {
@@ -59,7 +61,12 @@ export default class Application extends Component {
       <div>
         <div className="app-header">
           <h1>Layout Manager Test Application</h1>
-          <LayoutManager cardsConfiguration={cardsConfig} layoutConfiguration={ layoutConfiguration } onLayoutChange={this.onLayoutChange.bind(this)} >
+          <button onClick={this.addCard}> Add Card </button>
+          <button onClick={this.removeCard}> Remove Card </button>
+          <LayoutManager
+              cardsConfiguration={cardsConfig}
+              layoutConfiguration={ layoutConfiguration }
+              onLayoutChange={this.onLayoutChange.bind(this)} >
             <Card configId="counterCard">
               <CounterComponent counter={this.state.counter} />
             </Card>

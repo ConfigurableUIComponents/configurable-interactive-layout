@@ -14,26 +14,12 @@ import '../../node_modules/react-resizable/css/styles.css';
 import cloneDeep from 'lodash/cloneDeep';
 import each from 'lodash/each';
 
-const ResponsiveLayout = WidthProvider(Responsive);
-
-
 export default class CardsLayoutManager extends Component {
   constructor(props) {
     super(props);
     const breakpoints = props.layoutConfiguration.breakpoints || defaultLayoutConfiguration.breakpoints;
     const breakpointCols = buildColMap(breakpoints);
-
-    const { cards, cardsOrder } = cloneDeep(props.cardsConfiguration);
-
-    const childrenWithKeys = this.getChildrenWithKeys(cardsOrder);
-
-    // Revise Cards Order to include only children
-    const childrenKeys = childrenWithKeys.map(child => child.key);
-    const revisedCardsOrder = intersection(cardsOrder, childrenKeys);
-
-
-    const layouts = cloneDeep(extractLayout(cards, revisedCardsOrder, breakpoints));
-
+    this.ResponsiveLayout = WidthProvider(Responsive);
     this.state = {
       margins: props.layoutConfiguration.cardMargin || defaultLayoutConfiguration.cardMargin,
       padding: props.layoutConfiguration.cardPadding || defaultLayoutConfiguration.cardPadding,
@@ -42,18 +28,18 @@ export default class CardsLayoutManager extends Component {
       draggable: props.layoutConfiguration.draggable !== undefined ? props.layoutConfiguration.draggable : defaultLayoutConfiguration.draggable,
       cols: breakpointCols,
       breakpoints: buildBreakpoints(breakpoints),
-      layouts, cardsOrder
     };
   }
 
+
   onDragStop(curLayout) {
     console.log('onDragStop', curLayout);
-    const allLayouts = this.state.layouts;
+    const allLayouts = this.layouts;
     const newLayout = maintainCardOrderAcrossBreakpoints(curLayout, allLayouts, this.state.cols);
     console.log('onDragStop newLayout', newLayout);
     const bp = Object.keys(newLayout)[0];
     const cardsOrder = newLayout[bp].map(card => (card.i));
-    this.setState({cardsOrder, layouts: allLayouts});
+    this.ResponsiveLayout = WidthProvider(Responsive);
     this.props.onLayoutChange(cardsOrder);
   }
 
@@ -72,26 +58,34 @@ export default class CardsLayoutManager extends Component {
     return filtered;
   }
 
-  componentWillReceiveProps(nextProps){
-    this.setState({cardsOrder: nextProps.cardsConfiguration.cardsOrder})
-  }
+  // componentWillReceiveProps(nextProps){
+  //   this.setState({cardsOrder: nextProps.cardsConfiguration.cardsOrder})
+  // }
 
   render() {
-    console.log('this.state.cardsOrder', this.state.cardsOrder)
-    const childrenWithKeys = this.getChildrenWithKeys(this.state.cardsOrder);
+    const { cards, cardsOrder } = this.props.cardsConfiguration;
+    if (cardsOrder.length === 0) return null;
+
+    const childrenWithKeys = this.getChildrenWithKeys(cardsOrder);
+
+    // Revise Cards Order to include only children
+    const childrenKeys = childrenWithKeys.map(child => child.key);
+    const revisedCardsOrder = intersection(cardsOrder, childrenKeys);
 
     const breakpointsConfig = this.props.layoutConfiguration.breakpoints;
+    const layouts = extractLayout(cards, revisedCardsOrder, breakpointsConfig);
 
+    if (!layouts) {
+      return null;
+    }
+    this.layouts = layouts;
 
-    // if (!layouts) {
-    //   return null;
-    // }
-
+    const ResponsiveLayout = this.ResponsiveLayout;
 
     return (
       <ResponsiveLayout
         className="cards-layout-container"
-        layouts={this.state.layouts}
+        layouts={layouts}
         breakpoints={this.state.breakpoints}
         cols={this.state.cols}
         isResizable={this.state.resizable}
