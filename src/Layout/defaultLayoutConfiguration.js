@@ -1,4 +1,6 @@
-const defaultLayoutConfiguration = {
+/* eslint-disable */
+
+export const defaultLayoutConfiguration = {
   draggable: false,
   resizable: false,
   rowHeight: 100,
@@ -8,23 +10,19 @@ const defaultLayoutConfiguration = {
     {
       id: 'lg',
       col: 12,
-      height: 2,
-      width: 1400,
+      width: 1280,
     },
     {
       id: 'md',
-      col: 10,
-      height: 2,
-      width: 1200,
+      col: 8,
+      width: 960,
     },
     {
       id: 'sm',
-      col: 8,
-      height: 2,
-      width: 1024,
+      col: 6,
+      width: 1,
     },
   ],
 };
 
-export default defaultLayoutConfiguration;
 

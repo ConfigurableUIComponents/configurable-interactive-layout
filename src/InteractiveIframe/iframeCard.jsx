@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../Card/Card';
 import './iframeCardStyles.scss';
-import UrlUtils from '../../utils/UrlUtils';
+import UrlUtils from './UrlUtils';
 
 const IFRAME_NOT_SUPPORTED_STR = 'This browser does not support iframes.';
 

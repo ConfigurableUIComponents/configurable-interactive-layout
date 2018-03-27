@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import LayoutManager from '../src/interactiveLayout/InteractiveLayout';
+import LayoutManager from '../src/Layout/Layout';
 import { cardsConfiguration } from './configurations/basic/cards-configurations';
+import { personalizedCardsConfiguration } from './configurations/basic/personalized-configurations';
 import { layoutConfiguration } from './configurations/basic/layout-configuration';
 import CounterComponent from './components/CounterComponent';
 import DoubleCounterComponent from './components/DoubleCounterComponent';
 import DescriptionComponent from './components/DescriptionComponent';
-import Card from '../src/Components/Card/Card';
-import IframeCard from '../src/Components/InteractiveIframe/iframeCard';
+import Card from '../src/Card/Card';
+import IframeCard from '../src/InteractiveIframe/iframeCard';
 import EventManager from './eventManager/EventManager';
 import params from './configurations/mockData/paramsMock';
+import cloneDeep from 'lodash/cloneDeep';
+import { addCardInNewRow, removeCard } from '../src/Layout/layoutUtils';
 
 export default class Application extends Component {
 
@@ -21,31 +24,36 @@ export default class Application extends Component {
     });
     this.state = {
       counter: 0,
-      selectedView: "defaultView",
-      cardsConfiguration: cardsConfiguration,
+      cardsConfiguration: personalizedCardsConfiguration,
     };
   }
 
   addCard = () => {
       const cardsConfiguration = this.state.cardsConfiguration;
-      cardsConfiguration[this.state.selectedView].cardsOrder.push('actionsWithTitleDescriptionCard');
-      this.setState({cardsConfiguration});
-      console.log("done set state");
+      const card =
+          {
+            id: 'doubleCounterCard',
+            configuration: {
+              lg: {w: 12, h: 2,},
+              md: {w: 6, h: 2,},
+              sm: {w: 4, h: 2,},
+            }
+          }
+      const newConfiguration = addCardInNewRow(cardsConfiguration, card);
+      this.setState({cardsConfiguration: newConfiguration});
   };
 
-  removeCard = () => {
-      const cardsConfiguration = this.state.cardsConfiguration;
-      cardsConfiguration[this.state.selectedView].cardsOrder = ['counterCard', 'actionsDescriptionCard', 'doubleCounterCard', 'titleDescriptionCard'];
-      this.setState({cardsConfiguration});
-      console.log("done set state");
+  removeCardFromLayout = () => {
+    const cardsConfiguration = this.state.cardsConfiguration;
+    const newConfiguration = removeCard(cardsConfiguration, 'counterCard');
+    this.setState({cardsConfiguration: newConfiguration})
   }
 
-  onLayoutChange(cardsOrder) {
-    const newCardsConfiguration = this.state.cardsConfiguration;
-    newCardsConfiguration[this.state.selectedView].cardsOrder = cardsOrder;
-    this.setState({
-      cardsConfiguration: newCardsConfiguration,
-    });
+  onLayoutChange = (updatedCards) => {
+    console.log('application will save this personalized layout', updatedCards);
+    const cardsConfiguration = cloneDeep(this.state.cardsConfiguration);
+    cardsConfiguration.cards = cloneDeep(updatedCards);
+    this.setState({cardsConfiguration});
   }
 
   setCounterValue(value) {
@@ -56,15 +64,14 @@ export default class Application extends Component {
   }
 
   render() {
-    const cardsConfig = cardsConfiguration[this.state.selectedView];
     return (
       <div>
         <div className="app-header">
           <h1>Layout Manager Test Application</h1>
           <button onClick={this.addCard}> Add Card </button>
-          <button onClick={this.removeCard}> Remove Card </button>
+          <button onClick={this.removeCardFromLayout}> Remove Card </button>
           <LayoutManager
-              cardsConfiguration={cardsConfig}
+              cardsConfiguration={this.state.cardsConfiguration}
               layoutConfiguration={ layoutConfiguration }
               onLayoutChange={this.onLayoutChange.bind(this)} >
             <Card configId="counterCard">

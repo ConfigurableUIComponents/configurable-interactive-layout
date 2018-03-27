@@ -1,4 +1,8 @@
+import { addCardInNewRow, removeCard } from './Layout/layoutUtils.js';
 
-export { default as CardsLayoutManager } from './interactiveLayout/InteractiveLayout';
-export { default as Card } from './Components/Card/Card';
-export { default as IframeCard } from './Components/InteractiveIframe/iframeCard';
+export { default as CardsLayoutManager } from './Layout/Layout';
+export { default as Card } from './Card/Card';
+export { default as IframeCard } from './InteractiveIframe/iframeCard';
+export { addCardInNewRow , removeCard };
+
+
