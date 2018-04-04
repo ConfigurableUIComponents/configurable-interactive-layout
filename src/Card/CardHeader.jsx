@@ -19,11 +19,7 @@ export default class CardHeader extends Component {
 CardHeader.propTypes = {
   cardId: PropTypes.string.isRequired,
   title: PropTypes.string,
-  actions: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    displayName: PropTypes.string,
-    iconURL: PropTypes.string,
-  })),
+  actions: PropTypes.instanceOf(Object),
   eventManager: PropTypes.instanceOf(Object),
 };
 

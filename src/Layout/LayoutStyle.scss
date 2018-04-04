@@ -51,7 +51,7 @@
 		align-items: center;
 		float: right;
 
-		.actions-menu {
+		.cards-actions-menu {
 			order: 2;
 			width: $actions-menu-width;
 			cursor: pointer;
@@ -74,7 +74,7 @@
 			}
 		}
 
-		.action-items {
+		.card-action-items {
 			order: 1;
 			display: inline-block;
 
@@ -82,14 +82,14 @@
 				display: none;
 			}
 
-			.action-item {
+			.card-action-item {
 				width: 20px;
 				height: 20px;
 				margin-left: 8px;
 				display: inline-block;
 				outline: none;
 
-				.action-item-no-icon {
+				.card-action-item-no-icon {
 					max-width: 20px;
 					max-height: 20px;
 					white-space: nowrap;
