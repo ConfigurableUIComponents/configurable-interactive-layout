@@ -1,3 +1,3 @@
 export const layoutConfiguration = {
-  draggable: true
+  draggable: false
 };

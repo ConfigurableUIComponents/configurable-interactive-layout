@@ -62,10 +62,7 @@ Card.propTypes = {
   store: PropTypes.instanceOf(Object),
   listeners: PropTypes.instanceOf(Array),
   eventManager: PropTypes.instanceOf(Object),
-  actions: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    displayName: PropTypes.string,
-  })),
+  actions: PropTypes.instanceOf(Object),
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,

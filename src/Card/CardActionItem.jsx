@@ -33,15 +33,14 @@ export default class CardActionItem extends Component {
     if (onClickAction === undefined) {
       onClickAction = this.publishActionEvent;
     }
-    return onClickAction.bind(this, this.action.id);
+    return onClickAction;
   }
 
   publishActionEvent(actionId) {
     this.props.eventManager.publish(actionId, this.props.cardId, {});
   }
   render() {
-    let { onClickAction } = this;
-    onClickAction = onClickAction.bind(this, this.action);
+    const { onClickAction } = this;
     const actionIcon = this.getActionIconURL();
     // const divStyle = { background: `url('${actionIcon}') no-repeat center center` };
     return (
