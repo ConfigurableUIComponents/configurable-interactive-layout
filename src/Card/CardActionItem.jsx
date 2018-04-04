@@ -46,7 +46,7 @@ export default class CardActionItem extends Component {
     // const divStyle = { background: `url('${actionIcon}') no-repeat center center` };
     return (
       <div
-        className="action-item"
+        className="card-action-item"
         title={this.action.displayName}
         key={this.action.id}
         onClick={onClickAction}

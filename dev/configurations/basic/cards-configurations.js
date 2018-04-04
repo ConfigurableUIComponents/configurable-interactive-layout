@@ -1,5 +1,5 @@
 export const cardsConfiguration = {
-    cardsOrder: ['counterCard', 'actionsDescriptionCard', 'doubleCounterCard', 'titleDescriptionCard'],
+    cardsOrder: ['counterCard', 'actionsDescriptionCard', 'doubleCounterCard', 'titleDescriptionCard', 'actionsDescriptionCard'],
     cards: {
       counterCard: {
         lg: {w: 6, h: 2},

@@ -18,7 +18,7 @@ describe('Header', () => {
       }];
     const component = (<Header id="headerTest" title="titleTest" actions={actions} />);
     const HeaderActions = mount(component);
-    expect(HeaderActions.find('.actions-menu.collapsed')).toHaveLength(1);
+    expect(HeaderActions.find('.cards-actions-menu.collapsed')).toHaveLength(1);
   });
 
   it('renders collapsed (not expanded) action menu', () => {
@@ -37,7 +37,7 @@ describe('Header', () => {
     ];
     const component = (<Header id="headerTest" title="titleTest" actions={actions} />);
     const HeaderActions = mount(component);
-    expect(HeaderActions.find('.actions-menu.expanded')).toHaveLength(0);
+    expect(HeaderActions.find('.cards-actions-menu.expanded')).toHaveLength(0);
   });
 
   it('opens the actions menu and changes the class name to "expanded"', () => {
@@ -51,11 +51,11 @@ describe('Header', () => {
     ];
     const component = (<Header id="headerTest" title="titleTest" actions={actions} />);
     const HeaderActions = mount(component);
-    const actionMenuButton = HeaderActions.find('.actions-menu.collapsed');
+    const actionMenuButton = HeaderActions.find('.cards-actions-menu.collapsed');
     expect(actionMenuButton).toHaveLength(1);
     actionMenuButton.simulate('click');
-    expect(HeaderActions.find('.actions-menu.expanded')).toHaveLength(1);
-    expect(HeaderActions.find('.action-item')).toHaveLength(1);
+    expect(HeaderActions.find('.cards-actions-menu.expanded')).toHaveLength(1);
+    expect(HeaderActions.find('.card-action-item')).toHaveLength(1);
   });
 
   // it('simulates click on an action button', () => {
@@ -70,10 +70,10 @@ describe('Header', () => {
   //   ];
   //   const component = (<Header id="headerTest" title="titleTest" actions={actions} />);
   //   const HeaderActions = mount(component);
-  //   const actionMenuButton = HeaderActions.find('.actions-menu.collapsed');
+  //   const actionMenuButton = HeaderActions.find('.cards-actions-menu.collapsed');
   //   expect(actionMenuButton).toHaveLength(1);
   //   actionMenuButton.simulate('click');
-  //   expect(HeaderActions.find('.action-item')).toHaveLength(1);
+  //   expect(HeaderActions.find('.card-action-item')).toHaveLength(1);
   // });
 });
 

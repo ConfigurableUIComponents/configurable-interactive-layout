@@ -37,8 +37,8 @@ export default class CardActions extends Component {
   }
 
   render() {
-    const actionItemsClassName = `action-items ${this.state.menuOpen ? '' : 'dispnone'}`;
-    const actionsMenuClassName = `actions-menu ${this.state.menuOpen ? 'expanded' : 'collapsed'}`;
+    const actionItemsClassName = `card-action-items ${this.state.menuOpen ? '' : 'dispnone'}`;
+    const actionsMenuClassName = `cards-actions-menu ${this.state.menuOpen ? 'expanded' : 'collapsed'}`;
     const actionsClassName = `actions ${this.state.menuOpen ? 'menu-open' : ''}`;
 
     if (this.items.length > 0) {
