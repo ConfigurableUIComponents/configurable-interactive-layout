@@ -74,7 +74,7 @@ export default class Application extends Component {
               cardsConfiguration={this.state.cardsConfiguration}
               layoutConfiguration={ layoutConfiguration }
               onLayoutChange={this.onLayoutChange.bind(this)} >
-            <Card configId="counterCard">
+            <Card isNewCard={true} configId="counterCard">
               <CounterComponent counter={this.state.counter} />
             </Card>
             <Card configId="doubleCounterCard">
