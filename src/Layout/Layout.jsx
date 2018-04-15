@@ -49,6 +49,7 @@ export default class CardsLayoutManager extends Component {
 
   onDragStop(curLayout) {
     const allLayouts = this.state.layouts;
+    if(!this.state.currentBreakpoint) console.error("on drag stop- currentBreakpoint= ", this.state.currentBreakpoint);
     allLayouts[this.state.currentBreakpoint] = curLayout;
     const cards = cloneDeep(this.props.cardsConfiguration.cards);
     convertLayoutToCards(this.state.currentBreakpoint, curLayout, cards);

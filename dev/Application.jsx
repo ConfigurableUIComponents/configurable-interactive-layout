@@ -24,7 +24,7 @@ export default class Application extends Component {
     });
     this.state = {
       counter: 0,
-      cardsConfiguration: cardsConfiguration,
+      cardsConfiguration: personalizedCardsConfiguration,
     };
   }
 
