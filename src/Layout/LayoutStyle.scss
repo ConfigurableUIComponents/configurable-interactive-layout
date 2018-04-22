@@ -24,7 +24,7 @@
   text-transform: uppercase;
   line-height: $header-height;
   height: $header-height;
-  z-index: 1;
+  z-index: 2;
 
   &.without-title {
     right: $card-padding;
