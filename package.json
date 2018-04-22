@@ -1,6 +1,6 @@
 {
   "name": "configurable-interactive-layout",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "main": "dist/interactiveLayout.js",
   "scripts": {
     "build": "webpack --bail -p --config webpack.config.prod.js ",

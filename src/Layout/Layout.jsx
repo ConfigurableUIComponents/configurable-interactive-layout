@@ -119,7 +119,7 @@ export default class CardsLayoutManager extends Component {
         margin={this.margins}
         containerPadding={this.padding}
         draggableHandle=".header, .card"
-        draggableCancel=".actions, .card-content, .card-content-no-header"
+        draggableCancel=".actions, .card-content, .card-content-no-header, .title"
         onBreakpointChange={this.onBreakpointChange}
         onDragStop={this.onDragStop.bind(this)}
         compactType={"vertical"}

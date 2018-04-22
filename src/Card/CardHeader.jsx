@@ -11,7 +11,7 @@ export default class CardHeader extends Component {
     return (
       <div className={this.createHeaderClassName()}>
         {this.props.actions ? <CardActions {...this.props} /> : null }
-        {this.props.title ? <div className="title" title={this.props.title}>{this.props.title}</div> : null }
+        {this.props.title ? <div className="title-wrapper"><span className="title" title={this.props.title}>{this.props.title}</span></div> : null }
       </div>);
   }
 }

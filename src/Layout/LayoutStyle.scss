@@ -1,132 +1,133 @@
 @import '../UI_Elements';
 
 #cards-framework-container {
-	background-color: $layout-bg;
-	font-family: $font-stack;
+  background-color: $layout-bg;
+  font-family: $font-stack;
 }
 
 .card {
-	background-color: $card-bg;
-	border: $card-border-width solid $card-border;
-	cursor: pointer;
-	padding: $card-padding;
-	height: calc(100% - 2*#{$card-padding} - 2*#{$card-border-width});
+  background-color: $card-bg;
+  border: $card-border-width solid $card-border;
+  cursor: pointer;
+  padding: $card-padding;
+  height: calc(100% - 2 * #{$card-padding} - 2 * #{$card-border-width});
 
-	&.with-title{
-		padding: 0 $card-padding $card-padding;
-		height: calc(100% - #{$card-padding} - 2*#{$card-border-width});
-	}
+  &.with-title {
+    padding: 0 $card-padding $card-padding;
+    height: calc(100% - #{$card-padding} - 2 * #{$card-border-width});
+  }
 }
 
+.card .card-header {
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: $header-height;
+  height: $header-height;
+  z-index: 1;
 
-.card .card-header{
-	font-size: 20px;
-	font-weight: 600;
-	text-transform: uppercase;
-	line-height: $header-height;
-	height: $header-height;
-	margin-left: 20px;
-	z-index: 1;
+  &.without-title {
+    right: $card-padding;
+    position: absolute;
+    .actions {
+      background-color: $card-bg;
+      opacity: 0;
+      &:hover {
+        opacity: 0.7;
+      }
+      &.menu-open {
+        opacity: 0.7;
+      }
+    }
+  }
 
-	&.without-title {
-		right: $card-padding;
-		position: absolute;
-		.actions{
-			background-color: $card-bg;
-			opacity: 0;
-			&:hover{
-				opacity: 0.7;
-			}
-			&.menu-open{
-				opacity: 0.7;
-			}
-		}
-	}
+  .actions {
+    order: 2;
+    margin-left: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    float: right;
 
-	.actions {
-		order: 2;
-		margin-left: auto;
-		height: 100%;
-		display: flex;
-		align-items: center;
-		float: right;
+    .cards-actions-menu {
+      order: 2;
+      width: $actions-menu-width;
+      cursor: pointer;
+      float: right;
+      height: inherit;
+      outline: none;
 
-		.cards-actions-menu {
-			order: 2;
-			width: $actions-menu-width;
-			cursor: pointer;
-			float: right;
-			height: inherit;
-			outline: none;
+      &.collapsed {
+        background: url('../../res/actions_collapsed.svg') no-repeat center center;
+        &:hover {
+          background: url('../../res/actions_collapsed_hover.svg') no-repeat center center;
+        }
+      }
 
-			&.collapsed {
-				background: url('../../res/actions_collapsed.svg') no-repeat center center;
-				&:hover {
-					background: url('../../res/actions_collapsed_hover.svg') no-repeat center center;
-				}
-			}
+      &.expanded {
+        background: url('../../res/actions_expanded.svg') no-repeat center center;
+        &:hover {
+          background: url('../../res/actions_expanded_hover.svg') no-repeat center center;
+        }
+      }
+    }
 
-			&.expanded {
-				background: url('../../res/actions_expanded.svg') no-repeat center center;
-				&:hover {
-					background: url('../../res/actions_expanded_hover.svg') no-repeat center center;
-				}
-			}
-		}
+    .card-action-items {
+      order: 1;
+      display: inline-block;
 
-		.card-action-items {
-			order: 1;
-			display: inline-block;
+      &.dispnone {
+        display: none;
+      }
 
-			&.dispnone {
-				display: none;
-			}
+      .card-action-item {
+        width: 20px;
+        height: 20px;
+        margin-left: 8px;
+        display: inline-block;
+        outline: none;
 
-			.card-action-item {
-				width: 20px;
-				height: 20px;
-				margin-left: 8px;
-				display: inline-block;
-				outline: none;
+        .card-action-item-no-icon {
+          max-width: 20px;
+          max-height: 20px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+  .title-wrapper {
+    order: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    .title {
+      cursor: initial;
+    }
 
-				.card-action-item-no-icon {
-					max-width: 20px;
-					max-height: 20px;
-					white-space: nowrap;
-					overflow: hidden;
-					text-overflow: ellipsis;
-				}
-			}
-		}
-	}
-	.title{
-		order: 1;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden;
-	}
+  }
+
 }
 
+.card {
 
-.card{
+  .card-content {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    cursor: initial;
+  }
 
-	.card-content{
-		height: 100%;
-		width: 100%;
-		overflow-y: auto;
-		overflow-x: auto;
-		cursor: initial;
-	}
-
-	&.with-title .card-content{
-		height: calc(100% - #{$header-height});
-	}
+  &.with-title .card-content {
+    height: calc(100% - #{$header-height});
+  }
 }
 
-.iframe-card-container{
-	overflow: hidden;
+.iframe-card-container {
+  overflow: hidden;
 }
-
 
 .react-grid-layout {
   position: relative;
@@ -136,7 +137,6 @@
 .react-grid-item.cssTransforms {
   transition-property: none !important;
 }
-
 
 .react-grid-item.react-grid-placeholder {
   background: none !important;
@@ -150,6 +150,6 @@
   user-select: none;
 }
 
-.highlight{
+.highlight {
   border: 3px solid #fff5b5;
 }

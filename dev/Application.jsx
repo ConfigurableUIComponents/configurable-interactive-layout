@@ -74,7 +74,17 @@ export default class Application extends Component {
               cardsConfiguration={this.state.cardsConfiguration}
               layoutConfiguration={ layoutConfiguration }
               onLayoutChange={this.onLayoutChange.bind(this)} >
-            <Card isNewCard={true} configId="counterCard">
+            <Card isNewCard={true} configId="counterCard" title="my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title"
+                  actions={{
+                    'action1' : {
+
+                      displayName: 'restart counter',
+                      iconURL: 'icons/trashbin.svg',
+                      iconURLHover: 'icons/trashbin_hover.svg',
+                      onClick: () => { this.setCounterValue(0) },
+                    }
+                  }}
+            >
               <CounterComponent counter={this.state.counter} />
             </Card>
             <Card configId="doubleCounterCard">
