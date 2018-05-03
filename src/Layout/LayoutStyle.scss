@@ -5,10 +5,15 @@
   font-family: $font-stack;
 }
 
+.draggable {
+	.card {
+		cursor: pointer;
+	}
+}
+
 .card {
   background-color: $card-bg;
   border: $card-border-width solid $card-border;
-  cursor: pointer;
   padding: $card-padding;
   height: calc(100% - 2 * #{$card-padding} - 2 * #{$card-border-width});
 

@@ -96,7 +96,7 @@ export default class CardsLayoutManager extends Component {
           left to right, top to bottom, based on cardsOrder array
       */
       const cardsOrder = this.props.cardsConfiguration.cardsOrder;
-      if (cardsOrder.length === 0) return null;
+      if (cardsOrder === undefined && cardsOrder.length === 0) return null;
 
       childrenWithKeys = this.getChildrenWithKeys(cardsOrder);
       // Revise Cards Order to include only children
@@ -106,15 +106,16 @@ export default class CardsLayoutManager extends Component {
     }
 
     if (!layouts) return null;
-
+    let isDraggable = this.props.layoutConfiguration.draggable;
+    let classDraggable = isDraggable ? "draggable" : "";
     return (
       <ResponsiveLayout
-        className="cards-layout-container"
+        className={"cards-layout-container " + classDraggable}
         layouts={layouts}
         breakpoints={this.breakpoints}
         cols={this.cols}
         isResizable={false}
-        isDraggable={this.props.layoutConfiguration.draggable} // this is dynamic
+        isDraggable={isDraggable} // this is dynamic
         rowHeight={this.rowHeight}
         margin={this.margins}
         containerPadding={this.padding}
