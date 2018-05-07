@@ -46,7 +46,7 @@ export default class CardActionItem extends Component {
     return (
       <div
         className="card-action-item"
-        title={this.action.displayName}
+        data-tooltip={this.action.displayName}
         key={this.action.id}
         onClick={onClickAction}
         onKeyUp={onClickAction}
