@@ -104,8 +104,14 @@ export default class CardsLayoutManager extends Component {
       const revisedCardsOrder = intersection(cardsOrder, childrenKeys);
       layouts = extractLayout(cards, revisedCardsOrder, defaultLayoutConfiguration.breakpoints);
     }
-
-    if (!layouts) return null;
+      if (!layouts) {
+          return (
+              <div className="empty-layout">
+                  <div className="empty-layout-icon"></div>
+                  <div>NO DATA</div>
+              </div>
+          );
+      }
     let isDraggable = this.props.layoutConfiguration.draggable;
     let classDraggable = isDraggable ? "draggable" : "";
     return (

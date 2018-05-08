@@ -1,5 +1,7 @@
 @import '../UI_Elements';
 
+
+
 #cards-framework-container {
   background-color: $layout-bg;
   font-family: $font-stack;
@@ -186,4 +188,25 @@
 
 .highlight {
   border: 3px solid #fff5b5;
+}
+
+.empty-layout {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #404f5a;
+  font-size: 20px;
+
+
+  div {
+    margin-bottom: 8px;
+  }
+}
+
+.empty-layout-icon {
+  background: url("../../res/no_data.svg") no-repeat center center;
+  height: 113px;
+  width: 161px;
 }

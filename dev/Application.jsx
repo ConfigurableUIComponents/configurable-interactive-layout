@@ -70,110 +70,67 @@ export default class Application extends Component {
           <h1>Layout Manager Test Application</h1>
           <button onClick={this.addCard}> Add Card </button>
           <button onClick={this.removeCardFromLayout}> Remove Card </button>
+        </div>
           <LayoutManager
               cardsConfiguration={this.state.cardsConfiguration}
               layoutConfiguration={ layoutConfiguration }
               onLayoutChange={this.onLayoutChange.bind(this)} >
-            <Card isNewCard={true} configId="counterCard" title="my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title"
+              <Card isNewCard={true} configId="counterCard" title="my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title"
+                    actions={{
+                        'action1' : {
+
+                            displayName: 'restart counter',
+                            iconURL: 'icons/trashbin.svg',
+                            iconURLHover: 'icons/trashbin_hover.svg',
+                            onClick: () => { this.setCounterValue(0) },
+                        }
+                    }}
+              >
+                  <CounterComponent counter={this.state.counter} />
+              </Card>
+              <Card configId="doubleCounterCard">
+                  <DoubleCounterComponent counter={this.state.counter} />
+              </Card>
+              <Card configId="titleDescriptionCard" title="Card with title">
+                  <DescriptionComponent title={true} />
+              </Card>
+              <Card
+                  configId="actionsDescriptionCard"
                   actions={{
-                    'action1' : {
+                      'action1' : {
 
-                      displayName: 'restart counter',
-                      iconURL: 'icons/trashbin.svg',
-                      iconURLHover: 'icons/trashbin_hover.svg',
-                      onClick: () => { this.setCounterValue(0) },
-                    }
+                          displayName: 'restart counter',
+                          iconURL: 'icons/trashbin.svg',
+                          iconURLHover: 'icons/trashbin_hover.svg',
+                          onClick: () => { this.setCounterValue(0) },
+                      }
                   }}
-            >
-              <CounterComponent counter={this.state.counter} />
-            </Card>
-            <Card configId="doubleCounterCard">
-              <DoubleCounterComponent counter={this.state.counter} />
-            </Card>
-            <Card configId="titleDescriptionCard" title="Card with title">
-              <DescriptionComponent title={true} />
-            </Card>
-            <Card
-                configId="actionsDescriptionCard"
-                actions={{
-                  'action1' : {
-
-                    displayName: 'restart counter',
-                    iconURL: 'icons/trashbin.svg',
-                    iconURLHover: 'icons/trashbin_hover.svg',
-                    onClick: () => { this.setCounterValue(0) },
-                  }
-                }}
-            >
-              <DescriptionComponent actions={true} description={"hover the top right corner & click the action to restart the counter"} />
-            </Card>
-            <Card
-                configId="actionsWithTitleDescriptionCard"
-                title={"Card with actions and title"}
-                actions={
-                  {action1: {
-                    displayName: 'restart counter',
-                    iconURL: 'icons/trashbin.svg',
-                    iconURLHover: 'icons/trashbin_hover.svg',
-                    onClick: () => { this.setCounterValue(0) },
-                  },
-                    action2: {
-                    displayName: 'multiply counter',
-                    iconURL: 'icons/see_all.svg',
-                    iconURLHover: 'icons/see_all_hover.svg',
-                    onClick: () => { this.setCounterValue(this.state.counter * 100) },
-                  }
-                }}
-            >
-              <DescriptionComponent title={true} actions={true}
-                                    description={"one action will restart the counter, second will multiple by 100"} />
-            </Card>
-            <DescriptionComponent configId={"notAcard"} description={"This is not a card"} />
-
-            {/*<IframeCard configId={"iframeNoTitleNoActionsNoEvents"} params={params} url={"${amdocsServer}.${userId}.com"} />*/}
-            {/*<IframeCard configId={"iframeWithActions"} url={"http://adoring-kilby-eb53b2.bitballoon.com/"}*/}
-                        {/*actions={*/}
-                          {/*[{*/}
-                            {/*id: 'action1',*/}
-                            {/*displayName: 'restart counter',*/}
-                            {/*iconURL: 'icons/trashbin.svg',*/}
-                            {/*iconURLHover: 'icons/trashbin_hover.svg',*/}
-                            {/*onClick: (actionId) => { this.setCounterValue(0) },*/}
-                          {/*}]*/}
-                        {/*} />*/}
-            {/*<IframeCard configId={"iframeWithTitleAndActions"} url={"http://practical-meitner-c0a310.bitballoon.com/"}*/}
-                        {/*title={"iframe with title & actions"}*/}
-                        {/*actions={*/}
-                          {/*[{*/}
-                            {/*id: 'action1',*/}
-                            {/*displayName: 'restart counter',*/}
-                            {/*iconURL: 'icons/trashbin.svg',*/}
-                            {/*iconURLHover: 'icons/trashbin_hover.svg',*/}
-                            {/*onClick: (actionId) => { this.setCounterValue(0) },*/}
-                          {/*},*/}
-                            {/*{*/}
-                              {/*id: 'action2',*/}
-                              {/*displayName: 'multiply counter',*/}
-                              {/*iconURL: 'icons/see_all.svg',*/}
-                              {/*iconURLHover: 'icons/see_all_hover.svg',*/}
-                              {/*onClick: (actionId) => { this.setCounterValue( this.state.counter * 200 )},*/}
-                            {/*}]*/}
-                        {/*} />*/}
-            {/*<IframeCard title={"iframe with title & actions & events"}*/}
-                        {/*configId={"iframeWithTitleAndActionsAndEvents"} url={"http://wonderful-borg-b320ed.bitballoon.com/"}*/}
-                        {/*eventIds={['counterUpdated']}*/}
-                        {/*eventManager={this.eventManager}*/}
-                        {/*actions={*/}
-                          {/*[{*/}
-                            {/*id: 'action1',*/}
-                            {/*displayName: 'restart counter',*/}
-                            {/*iconURL: 'icons/trashbin.svg',*/}
-                            {/*iconURLHover: 'icons/trashbin_hover.svg',*/}
-                            {/*onClick: (actionId) => { this.setCounterValue(0) },*/}
-                          {/*}]*/}
-                        {/*} />*/}
+              >
+                  <DescriptionComponent actions={true} description={"hover the top right corner & click the action to restart the counter"} />
+              </Card>
+              <Card
+                  configId="actionsWithTitleDescriptionCard"
+                  title={"Card with actions and title"}
+                  actions={
+                      {action1: {
+                              displayName: 'restart counter',
+                              iconURL: 'icons/trashbin.svg',
+                              iconURLHover: 'icons/trashbin_hover.svg',
+                              onClick: () => { this.setCounterValue(0) },
+                          },
+                          action2: {
+                              displayName: 'multiply counter',
+                              iconURL: 'icons/see_all.svg',
+                              iconURLHover: 'icons/see_all_hover.svg',
+                              onClick: () => { this.setCounterValue(this.state.counter * 100) },
+                          }
+                      }}
+              >
+                  <DescriptionComponent title={true} actions={true}
+                                        description={"one action will restart the counter, second will multiple by 100"} />
+              </Card>
+              <DescriptionComponent configId={"notAcard"} description={"This is not a card"} />
           </LayoutManager>
-        </div>
       </div>
     );
   }
