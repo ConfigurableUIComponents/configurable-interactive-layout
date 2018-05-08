@@ -43,9 +43,10 @@ export default class CardActionItem extends Component {
     const { onClickAction } = this;
     const actionIcon = this.getActionIconURL();
     // const divStyle = { background: `url('${actionIcon}') no-repeat center center` };
+    const actionTooltip = (this.action.displayName) ? ' action-tooltip' : null;
     return (
       <div
-        className="card-action-item"
+        className={`card-action-item${actionTooltip}`}
         data-tooltip={this.action.displayName}
         key={this.action.id}
         onClick={onClickAction}
