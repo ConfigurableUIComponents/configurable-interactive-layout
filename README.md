@@ -1,7 +1,7 @@
 # Configurable-Interactive-Layout
 
 This library provides a set of components to create a Layout based on Amdocs Open Network Style Guide.
-The React components exposed in this lib are:
+The React components exposed in this library are:
 
   - Layout
   - Card
