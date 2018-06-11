@@ -31,7 +31,7 @@ render() {
 
 ### Layout
 
-  - A React component with an api wrapping react-grid-layout
+  - A React component with an API wrapping react-grid-layout
   - Renders any number of child components and, according to the configuration props passed, organized them, adds styles and support for drag and drop.
 
     #### layoutConfiguration [optional]
