@@ -94,12 +94,15 @@ function layoutComponents(sortedLayoutIds, layout, layoutMaxCol) {
 
 export function maintainCardOrderAcrossBreakpoints(currentLayout, allLayouts, colMap) {
   // determine order of current layout (id order from top-left to bottom-right)
-  const sortedLayout = currentLayout.sort((layout1, layout2) => {
-    if (layout1.y === layout2.y) {
-      return layout1.x > layout2.x ? 1 : -1;
-    }
-    return layout1.y > layout2.y ? 1 : -1;
-  });
+  let sortedLayout = currentLayout;
+  if(currentLayout[0].y !== undefined){
+    sortedLayout = currentLayout.sort((layout1, layout2) => {
+      if (layout1.y === layout2.y) {
+        return layout1.x > layout2.x ? 1 : -1;
+      }
+      return layout1.y > layout2.y ? 1 : -1;
+    });
+  }
   const sortedIds = sortedLayout.map(layout => layout.i);
   // console.log(`Card id order by placement (pre-reordering): ${sortedIds}`);
 
