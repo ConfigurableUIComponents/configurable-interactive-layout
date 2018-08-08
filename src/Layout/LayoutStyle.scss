@@ -20,8 +20,8 @@
   height: calc(100% - 2 * #{$card-padding} - 2 * #{$card-border-width});
 
   &.with-title {
-    padding: 0 $card-padding $card-padding;
-    height: calc(100% - #{$card-padding} - 2 * #{$card-border-width});
+    padding: 0px;
+    height: 100%;
   }
 }
 
@@ -32,6 +32,7 @@
   line-height: $header-height;
   height: $header-height;
   z-index: 2;
+  padding: 0px 10px 0px 10px;
 
   &.without-title {
     right: $card-padding;
@@ -151,14 +152,15 @@
 
   .card-content {
     height: 100%;
-    width: 100%;
+    width: calc(100% - 20px);
     overflow-y: auto;
     overflow-x: auto;
     cursor: initial;
+    padding: 0px 10px 10px 10px;
   }
 
   &.with-title .card-content {
-    height: calc(100% - #{$header-height});
+    height: calc(100% - #{$header-height} + 10px);
   }
 }
 
