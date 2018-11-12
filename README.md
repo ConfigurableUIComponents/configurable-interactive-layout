@@ -32,7 +32,8 @@ render() {
 ### Layout
 
   - A React component with an API wrapping react-grid-layout
-  - Renders any number of child components and, according to the configuration props passed, organized them, adds styles and support for drag and drop.
+  - Renders any number of child components. 
+  - You can add styles and support for drag and drop by configuring the properties in this section.
 
     #### layoutConfiguration [optional]
     Override default layout configurations
@@ -130,12 +131,13 @@ render() {
      
 
 ### Card
-  - A React component used to render any content and, according to the configuration props passed, can have a title and actions menu
-  - Cards are typically used as the child components of the Layout
+  - A React component used to render any content. 
+  - Cards are typically used as the child components of the Layout.
+  - You can add a title and actions menu by configuring the properties in this section.
   
   ##### configId [string]
    ```javascript
-  A unique identifier of the card; should match the relevant recored in the cardsConfiguration layout prop
+  A unique identifier of the card; should match the relevant record in the cardsConfiguration layout property
   ```
   
   ##### title [optional][string]
