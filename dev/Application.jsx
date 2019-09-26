@@ -75,7 +75,10 @@ export default class Application extends Component {
               cardsConfiguration={this.state.cardsConfiguration}
               layoutConfiguration={ layoutConfiguration }
               onLayoutChange={this.onLayoutChange.bind(this)} >
-              <Card isNewCard={true} configId="counterCard" title="my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title"
+              <Card isNewCard={true}
+                    configId="counterCard"
+                    title="my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title"
+                    cardCssClass="general"
                     actions={{
                         'action1' : {
 
@@ -88,7 +91,8 @@ export default class Application extends Component {
               >
                   <CounterComponent counter={this.state.counter} />
               </Card>
-              <Card configId="doubleCounterCard">
+              <Card configId="doubleCounterCard"
+                    cardCssClass="transparent">
                   <DoubleCounterComponent counter={this.state.counter} />
               </Card>
               <Card configId="titleDescriptionCard" title="Card with title">

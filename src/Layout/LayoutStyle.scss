@@ -18,12 +18,23 @@
   border: $card-border-width solid $card-border;
   padding: $card-padding;
   height: calc(100% - 2 * #{$card-padding} - 2 * #{$card-border-width});
-
   &.with-title {
     padding: 0px;
     height: 100%;
   }
 }
+.general {
+  background-color: $card-bg;
+  border: 0 solid;
+  padding: $card-padding;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.05);
+}
+
+.transparent {
+  background-color: transparent;
+  border: 0 solid;
+}
+
 
 .card .card-header {
   font-size: 20px;

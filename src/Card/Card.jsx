@@ -28,7 +28,10 @@ export default class Card extends Component {
 
   render() {
     let showHeader = true;
-    let cardClassName = 'card';
+    let cardClassName = 'card ';
+    if (this.props.cardCssClass) {
+      cardClassName += this.props.cardCssClass;
+    }
     let cardRef;
     if (!this.props.title && !this.props.actions) showHeader = false;
     else if (this.props.title) {
@@ -58,6 +61,7 @@ export default class Card extends Component {
 Card.propTypes = {
   configId: PropTypes.string.isRequired,
   title: PropTypes.string,
+  cardCssClass: PropTypes.string,
   isNewCard: PropTypes.bool,
   store: PropTypes.instanceOf(Object),
   listeners: PropTypes.instanceOf(Array),
