@@ -110,8 +110,7 @@ export function maintainCardOrderAcrossBreakpoints(currentLayout, allLayouts, co
   const colTypes = Object.keys(colMap);
   for (let i = 0; i < colTypes.length; i += 1) {
     // console.log(`Ordering for: ${colTypes[i]}`);
-    updatedLayouts[colTypes[i]] =
-      layoutComponents(sortedIds, allLayouts[colTypes[i]], colMap[colTypes[i]]);
+    updatedLayouts[colTypes[i]] = layoutComponents(sortedIds, allLayouts[colTypes[i]], colMap[colTypes[i]]);
   }
   return updatedLayouts;
 }
@@ -185,8 +184,6 @@ export function extractLayout(itemsConfig, itemsOrder, breakpointsConfig) {
     return null;
   }
   const largestConfiguredLayout = layoutList[breakpoints[0]];
-  const orderedLayouts =
-    maintainCardOrderAcrossBreakpoints(largestConfiguredLayout, layoutList, COL_MAP);
+  const orderedLayouts = maintainCardOrderAcrossBreakpoints(largestConfiguredLayout, layoutList, COL_MAP);
   return orderedLayouts;
 }
-

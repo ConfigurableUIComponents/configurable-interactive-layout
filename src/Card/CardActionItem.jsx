@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { composeThemeFromProps } from '@css-modules-theme/react';
+
+import buildThemeProperties from '../Utils';
+
+import style from '../Layout/LayoutStyle.scss';
 
 export default class CardActionItem extends Component {
   constructor(props) {
@@ -7,25 +12,28 @@ export default class CardActionItem extends Component {
     this.state = {
       hover: false,
     };
-    this.action = this.props.action;
+    this.action = props.action;
     this.onClickAction = this.assignOnClickAction();
   }
+
   onMouseItem(hover) {
     this.setState({ hover });
   }
 
   getActionIconURL() {
-    const itemHover = this.state.hover;
-    if (!itemHover && this.action.iconURL) {
+    const { hover } = this.state;
+    const { defaultIcon } = this.props;
+
+    if (!hover && this.action.iconURL) {
       return this.action.iconURL;
     }
-    if (itemHover && this.action.iconURLHover) {
+    if (hover && this.action.iconURLHover) {
       return this.action.iconURLHover;
     }
-    if (itemHover && this.action.iconURLHover === undefined && this.action.iconURL) {
+    if (hover && this.action.iconURLHover === undefined && this.action.iconURL) {
       return this.action.iconURL;
     }
-    return this.props.defaultIcon;
+    return defaultIcon;
   }
 
   assignOnClickAction() {
@@ -37,16 +45,23 @@ export default class CardActionItem extends Component {
   }
 
   publishActionEvent(actionId) {
-    this.props.eventManager.publish(actionId, this.props.cardId, {});
+    const { cardId, eventManager } = this.props;
+    eventManager.publish(actionId, cardId, {});
   }
+
   render() {
+    const { theme, themeProps } = this.props;
+    const themingProperties = buildThemeProperties(theme, themeProps);
+    const themeStyles = composeThemeFromProps(style, themingProperties, {
+      compose: 'Merge',
+    });
     const { onClickAction } = this;
     const actionIcon = this.getActionIconURL();
     // const divStyle = { background: `url('${actionIcon}') no-repeat center center` };
-    const actionTooltip = (this.action.displayName) ? ' action-tooltip' : null;
+    const actionTooltip = (this.action.displayName) ? ` ${themeStyles.actionTooltip}` : null;
     return (
       <div
-        className={`card-action-item${actionTooltip}`}
+        className={`${themeStyles.cardActionItem}${actionTooltip}`}
         data-tooltip={this.action.displayName}
         key={this.action.id}
         onClick={onClickAction}
@@ -75,4 +90,16 @@ CardActionItem.propTypes = {
   }),
   defaultIcon: PropTypes.string,
   eventManager: PropTypes.instanceOf(Object),
+  themeProps: PropTypes.shape({
+    compose: PropTypes.string,
+    prefix: PropTypes.string,
+  }),
+  theme: PropTypes.instanceOf(Object),
+};
+
+CardActionItem.defaultProps = {
+  themeProps: {
+    compose: 'merge',
+    prefix: 'configurableInteractiveLayout-',
+  },
 };

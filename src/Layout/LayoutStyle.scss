@@ -2,59 +2,170 @@
 
 
 
-#cards-framework-container {
-  background-color: $layout-bg;
-  font-family: $font-stack;
+#cardsFrameworkContainer {
+  background-color: $layoutBg;
+  font-family: $fontStack;
 }
 
-.draggable {
-	.card {
-		cursor: pointer;
-	}
+.draggable .card {
+	cursor: pointer;
 }
 
 .card {
-  background-color: $card-bg;
-  border: $card-border-width solid $card-border;
-  padding: $card-padding;
-  height: calc(100% - 2 * #{$card-padding} - 2 * #{$card-border-width});
-  &.with-title {
-    padding: 0px;
-    height: 100%;
-  }
-}
-.general {
-  background-color: $card-bg;
-  border: 0 solid;
-  padding: $card-padding;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.05);
+  background-color: $cardBg;
+  border: $cardBorderWidth solid $cardBorder;
+  padding: $cardPadding;
+  height: calc(100% - 2 * #{$cardPadding} - 2 * #{$cardBorderWidth});
 }
 
-.transparent {
-  background-color: transparent;
-  border: 0 solid;
+.withTitle {
+  padding: 0px;
+  height: 100%;
 }
 
-
-.card .card-header {
+/* Temp Trial */
+.cardHeader {
   font-size: 20px;
   font-weight: 600;
   text-transform: uppercase;
-  line-height: $header-height;
-  height: $header-height;
+  line-height: $headerHeight;
+  height: $headerHeight;
+  z-index: 2;
+  padding: 0px 10px 0px 10px;
+}
+
+.titleWrapper {
+  order: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.title {
+  cursor: initial;
+}
+
+.withoutTitle {
+  right: $cardPadding;
+  position: absolute;
+  
+}
+
+.withoutTitle .actions {
+  background-color: $cardBg;
+  opacity: 0;
+}
+
+.withoutTitle:hover {
+  opacity: 0.7;
+}
+
+.menuOpen {
+  opacity: 0.7;
+}
+
+.actions {
+  order: 2;
+  margin-left: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  float: right;
+}
+
+.cardsActionsMenu {
+  order: 2;
+  width: $actionsMenuWidth;
+  cursor: pointer;
+  float: right;
+  height: inherit;
+  outline: none;
+}
+
+.cardHeader .actions .collapsed {
+  background: url('../../res/actions_collapsed.svg') no-repeat center center;
+}
+
+.cardHeader .actions .collapsed:hover {
+    background: url('../../res/actions_collapsed_hover.svg') no-repeat center center;
+}
+
+.cardHeader .actions .expanded {
+  background: url('../../res/actions_expanded.svg') no-repeat center center;
+}
+
+.cardHeader .actions .expanded:hover {
+    background: url('../../res/actions_expanded_hover.svg') no-repeat center center;
+}
+
+.cardActionItems {
+  order: 1;
+  display: inline-block;
+}
+
+.dispnone {
+  display: none;
+}
+
+.cardActionItem {
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  display: inline;
+  outline: none;
+  text-transform: capitalize;
+  position: relative;
+  cursor: pointer;
+}
+
+.cardActionItem:hover::after {
+  line-height: 18px;
+  font-family: "Segoe UI Semibold";
+  border-radius: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+  background: #000;
+  bottom: 34px;
+  color: #fff;
+  content: attr(data-tooltip);
+  left: -50%;
+  padding: 6px 6px;
+  position: absolute;
+  z-index: 98;
+  text-align: center;
+}
+
+.cardActionItem:hover::before {
+  border: solid;
+  border-color: #000 transparent;
+  border-width: 6px 6px 0 6px;
+  bottom: 28px;
+  content: "";
+  left: 35%;
+  position: absolute;
+  z-index: 99;
+}
+
+/*
+.card .cardHeader {
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: $headerHeight;
+  height: $headerHeight;
   z-index: 2;
   padding: 0px 10px 0px 10px;
 
-  &.without-title {
-    right: $card-padding;
+  &.withoutTitle {
+    right: $cardPadding;
     position: absolute;
     .actions {
-      background-color: $card-bg;
+      background-color: $cardBg;
       opacity: 0;
       &:hover {
         opacity: 0.7;
       }
-      &.menu-open {
+      &.menuOpen {
         opacity: 0.7;
       }
     }
@@ -68,9 +179,9 @@
     align-items: center;
     float: right;
 
-    .cards-actions-menu {
+    .cardsActionsMenu {
       order: 2;
-      width: $actions-menu-width;
+      width: $actionsMenuWidth;
       cursor: pointer;
       float: right;
       height: inherit;
@@ -91,7 +202,7 @@
       }
     }
 
-    .card-action-items {
+    .cardActionItems {
       order: 1;
       display: inline-block;
 
@@ -99,7 +210,7 @@
         display: none;
       }
 
-      .card-action-item {
+      .cardActionItem {
         width: 20px;
         height: 20px;
         margin-left: 8px;
@@ -136,7 +247,7 @@
           z-index: 99;
         }
 
-        .card-action-item-no-icon {
+        .cardActionItemNoIcon {
           max-width: 20px;
           max-height: 20px;
           white-space: nowrap;
@@ -146,7 +257,7 @@
       }
     }
   }
-  .title-wrapper {
+  .titleWrapper {
     order: 1;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -158,10 +269,10 @@
   }
 
 }
-
+*/
 .card {
 
-  .card-content {
+  .cardContent {
     height: 100%;
     overflow-y: auto;
     overflow-x: auto;
@@ -169,42 +280,20 @@
     padding: 0px 10px 10px 10px;
   }
 
-  &.with-title .card-content {
-    height: calc(100% - #{$header-height} - 10px);
+  &.withTitle .cardContent {
+    height: calc(100% - #{$headerHeight} - 10px);
   }
 }
 
-.iframe-card-container {
+.iframeCardContainer {
   overflow: hidden;
-}
-
-.react-grid-layout {
-  position: relative;
-  transition: none !important;
-  background-color: #f3f6f6;
-}
-
-.react-grid-item.cssTransforms {
-  transition-property: none !important;
-}
-
-.react-grid-item.react-grid-placeholder {
-  background: none !important;
-  opacity: 0.2;
-  transition-duration: 100ms;
-  z-index: 2;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
 }
 
 .highlight {
   border: 3px solid #fff5b5;
 }
 
-.empty-layout {
+.emptyLayout {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -219,8 +308,29 @@
   }
 }
 
-.empty-layout-icon {
+.emptyLayoutIcon {
   background: url("../../res/no_data.svg") no-repeat center center;
   height: 113px;
   width: 161px;
+}
+
+:global(.react-grid-layout) {
+  position: relative;
+  transition: none !important;
+}
+
+:global(.react-grid-item.cssTransforms) {
+  transition-property: none !important;
+}
+
+:global(.react-grid-item.react-grid-placeholder) {
+  background: none !important;
+  opacity: 0.2;
+  transition-duration: 100ms;
+  z-index: 2;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
