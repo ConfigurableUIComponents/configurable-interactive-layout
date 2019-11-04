@@ -39,6 +39,7 @@ export default class Card extends Component {
       children,
       theme,
       themeProps,
+      cardCssClass,
     } = this.props;
     const {
       isNewCard,
@@ -49,17 +50,25 @@ export default class Card extends Component {
       compose: 'Merge',
     });
 
-    let cardClassName = themeStyles.card;
     let cardRef;
-    if (!title && !actions) showHeader = false;
-    else if (title) {
+    let cardClassName = themeStyles.card;
+
+    if (cardCssClass) {
+      cardClassName += themeStyles[cardCssClass];
+    }
+
+    if (!title && !actions) {
+      showHeader = false;
+    } else if (title) {
       cardClassName += ` ${themeStyles.withTitle}`;
     }
+
     if (isNewCard && React.createRef) {
       cardRef = React.createRef();
       this.newCardRef = cardRef; // we will use this reference to scroll the view to this card
       cardClassName += ` ${themeStyles.highlight}`;
     }
+
     return (
       <div ref={cardRef} className={cardClassName}>
         {showHeader ? <CardHeader cardId={configId} {...this.props} /> : null}
@@ -83,6 +92,7 @@ Card.propTypes = {
     PropTypes.string,
     PropTypes.element,
   ]).isRequired,
+  cardCssClass: PropTypes.string,
   themeProps: PropTypes.shape({
     compose: PropTypes.string,
     prefix: PropTypes.string,
