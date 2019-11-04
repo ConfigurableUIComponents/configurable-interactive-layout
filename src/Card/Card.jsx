@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { composeThemeFromProps } from '@css-modules-theme/react';
+
 import CardHeader from './CardHeader';
+import buildThemeProperties from '../Utils';
+
+import style from '../Layout/LayoutStyle.scss';
 
 const NEW_CARD_HIGHLIGHT_TIMEOUT = 1000;
 
@@ -28,27 +33,38 @@ export default class Card extends Component {
 
   render() {
     let showHeader = true;
-    let cardClassName = 'card';
+    const {
+      actions, title,
+      configId,
+      children,
+      theme,
+      themeProps,
+    } = this.props;
+    const {
+      isNewCard,
+    } = this.state;
+
+    const themingProperties = buildThemeProperties(theme, themeProps);
+    const themeStyles = composeThemeFromProps(style, themingProperties, {
+      compose: 'Merge',
+    });
+
+    let cardClassName = themeStyles.card;
     let cardRef;
-    if (!this.props.title && !this.props.actions) showHeader = false;
-    else if (this.props.title) {
-      cardClassName += ' with-title';
+    if (!title && !actions) showHeader = false;
+    else if (title) {
+      cardClassName += ` ${themeStyles.withTitle}`;
     }
-    if (this.state.isNewCard && React.createRef) {
+    if (isNewCard && React.createRef) {
       cardRef = React.createRef();
       this.newCardRef = cardRef; // we will use this reference to scroll the view to this card
-      cardClassName += ' highlight';
+      cardClassName += ` ${themeStyles.highlight}`;
     }
     return (
       <div ref={cardRef} className={cardClassName}>
-        {showHeader ?
-          <CardHeader
-            cardId={this.props.configId}
-            {...this.props}
-          />
-          : null}
-        <div className="card-content">
-          { this.props.children }
+        {showHeader ? <CardHeader cardId={configId} {...this.props} /> : null}
+        <div className={themeStyles.cardContent}>
+          { children }
         </div>
       </div>
     );
@@ -67,6 +83,11 @@ Card.propTypes = {
     PropTypes.string,
     PropTypes.element,
   ]).isRequired,
+  themeProps: PropTypes.shape({
+    compose: PropTypes.string,
+    prefix: PropTypes.string,
+  }),
+  theme: PropTypes.instanceOf(Object),
 };
 
 Card.defaultProps = {
@@ -74,4 +95,8 @@ Card.defaultProps = {
   actions: undefined,
   eventManager: undefined,
   store: undefined,
+  themeProps: {
+    compose: 'merge',
+    prefix: 'configurableInteractiveLayout-',
+  },
 };

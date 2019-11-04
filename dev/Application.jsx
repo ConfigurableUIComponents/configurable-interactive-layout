@@ -13,6 +13,8 @@ import params from './configurations/mockData/paramsMock';
 import cloneDeep from 'lodash/cloneDeep';
 import { addCardInNewRow, removeCard } from '../src/Layout/layoutUtils';
 
+import ThemeStyle from './ThemeStyle.scss';
+
 export default class Application extends Component {
 
   constructor(props){
@@ -74,8 +76,12 @@ export default class Application extends Component {
           <LayoutManager
               cardsConfiguration={this.state.cardsConfiguration}
               layoutConfiguration={ layoutConfiguration }
-              onLayoutChange={this.onLayoutChange.bind(this)} >
-              <Card isNewCard={true} configId="counterCard" title="my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title"
+              onLayoutChange={this.onLayoutChange.bind(this)}
+              theme={ThemeStyle} >
+              <Card isNewCard={true}
+                    configId="counterCard"
+                    title="my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title"
+                    theme={ThemeStyle}
                     actions={{
                         'action1' : {
 
@@ -88,7 +94,8 @@ export default class Application extends Component {
               >
                   <CounterComponent counter={this.state.counter} />
               </Card>
-              <Card configId="doubleCounterCard">
+              <Card configId="doubleCounterCard"
+                    cardCssClass="transparent">
                   <DoubleCounterComponent counter={this.state.counter} />
               </Card>
               <Card configId="titleDescriptionCard" title="Card with title">

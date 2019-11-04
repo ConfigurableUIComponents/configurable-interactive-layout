@@ -2,18 +2,18 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { Responsive, WidthProvider } from 'react-grid-layout';
+import { composeThemeFromProps } from '@css-modules-theme/react';
+
+import buildThemeProperties from '../Utils';
 import { defaultLayoutConfiguration } from './defaultLayoutConfiguration';
-import './LayoutStyle.scss';
 import { extractLayout, buildColMap, buildBreakpoints } from './ItemsOrganizer';
 import { convertCardsToLayouts, convertLayoutToCards } from './layoutUtils';
 
 import intersection from 'lodash/intersection';
 import cloneDeep from 'lodash/cloneDeep';
 
-import '../../node_modules/react-grid-layout/css/styles.css';
-import '../../node_modules/react-resizable/css/styles.css';
+import style from './LayoutStyle.scss';
 
 const ResponsiveLayout = WidthProvider(Responsive);
 
@@ -77,6 +77,11 @@ export default class CardsLayoutManager extends Component {
   }
 
   render() {
+    const { theme, themeProps } = this.props;
+    const themingProperties = buildThemeProperties(theme, themeProps);
+    const themeStyles = composeThemeFromProps(style, themingProperties, {
+      compose: 'Merge',
+    });
 
     let layouts;
     let cards = this.props.cardsConfiguration.cards;
@@ -106,17 +111,18 @@ export default class CardsLayoutManager extends Component {
     }
       if (!layouts) {
           return (
-              <div className="empty-layout">
-                  <div className="empty-layout-icon"></div>
+              <div className={themeStyles.emptyLayout}>
+                  <div className={themeStyles.emptyLayoutIcon}></div>
                   <div>NO DATA</div>
               </div>
           );
       }
     let isDraggable = this.props.layoutConfiguration.draggable;
     let classDraggable = isDraggable ? "draggable" : "";
+    
     return (
       <ResponsiveLayout
-        className={"cards-layout-container " + classDraggable}
+        className={`${themeStyles.cardsLayoutContainer} ${themeStyles.classDraggable}`}
         layouts={layouts}
         breakpoints={this.breakpoints}
         cols={this.cols}
@@ -126,7 +132,7 @@ export default class CardsLayoutManager extends Component {
         margin={this.margins}
         containerPadding={this.padding}
         draggableHandle=".header, .card"
-        draggableCancel=".actions, .card-content, .card-content-no-header, .title"
+        draggableCancel=".actions, .cardContent, .cardContentNoHeader, .title"
         onBreakpointChange={this.onBreakpointChange}
         onDragStop={this.onDragStop.bind(this)}
         compactType={"vertical"}
@@ -155,9 +161,18 @@ CardsLayoutManager.propTypes = {
   cardsConfiguration: PropTypes.instanceOf(Object),
   onLayoutChange: PropTypes.instanceOf(Object),
   cardsOrder: PropTypes.instanceOf(Array),
+  themeProps: PropTypes.shape({
+    compose: PropTypes.string,
+    prefix: PropTypes.string,
+  }),
+  theme: PropTypes.instanceOf(Object),
 };
 
 CardsLayoutManager.defaultProps = {
   layoutConfiguration: [],
   cardsConfiguration: [],
+  themeProps: {
+    compose: 'merge',
+    prefix: 'configurableInteractiveLayout-',
+  },
 };

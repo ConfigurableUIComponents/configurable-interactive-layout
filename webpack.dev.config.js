@@ -1,54 +1,36 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.config');
 
 module.exports = merge(common, {
 
   devServer: {
-    contentBase: [path.join(__dirname, 'dev')],
-    open: true,
-    overlay: {
-      warnings: false,
-      errors: true,
-    },
+    // Silence WebpackDevServer's own logs since they're generally not useful.
+    // It will still show compile warnings and errors with this setting.
+    clientLogLevel: 'none',
+    // Enable gzip compression of generated files.
+    compress: true,
+    // where to pull the source from
+    contentBase: './dist',
+    // enable hot module replacement
+    hot: true,
+    // launch a browser by default on start up
+    open: true
   },
-  entry: [
-    path.join(__dirname, './dev/main.js'),
-  ],
+  entry: {
+    'configurable-interactive-layout': [
+      path.join(__dirname, './dev', '/main.js')
+    ]
+  },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'index_bundle.js',
+    filename: '[name].bundle.js'
   },
-  module: {
-    rules: [{
-      test: /\.(css|scss)$/,
-      use: [{
-        loader: 'style-loader',
-      }, {
-        loader: 'css-loader',
-        options: {
-          sourceMap: true,
-        },
-      }, {
-        loader: 'sass-loader',
-        options: {
-          sourceMap: true,
-        },
-      }],
-    },
-    {
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      use: [{
-        loader: 'eslint-loader',
-        options: {
-          failOnError: true,
-        },
-      }],
-    }],
-  },
-  plugins: [new HtmlWebpackPlugin({
-    title: 'Dev Mode - Cards Framework',
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "Dev Mode - Cards Framework",
+      filename: 'index.html'
+    })
+  ]
 });
