@@ -70,7 +70,7 @@ export default class Card extends Component {
     }
 
     return (
-      <div ref={cardRef} className={cardClassName}>
+      <div ref={cardRef} className={cardClassName} id={this.props.configId}>
         {showHeader ? <CardHeader cardId={configId} {...this.props} /> : null}
         <div className={themeStyles.cardContent}>
           { children }
