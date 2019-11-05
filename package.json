@@ -1,6 +1,6 @@
 {
   "name": "configurable-interactive-layout",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "dist/interactiveLayout.js",
   "scripts": {
     "build": "webpack --bail -p --config webpack.config.prod.js ",
@@ -12,9 +12,6 @@
   },
   "author": "",
   "license": "ISC",
-  "publishConfig": {
-    "registry": "http://aeenexus3:8081/repository/npm-aee/"
-  },
   "babel": {
     "presets": [
       "@babel/preset-env",

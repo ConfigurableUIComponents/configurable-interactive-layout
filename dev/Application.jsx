@@ -94,8 +94,7 @@ export default class Application extends Component {
               >
                   <CounterComponent counter={this.state.counter} />
               </Card>
-              <Card configId="doubleCounterCard"
-                    cardCssClass="transparent">
+              <Card configId="doubleCounterCard" cardCssClass="transparent">
                   <DoubleCounterComponent counter={this.state.counter} />
               </Card>
               <Card configId="titleDescriptionCard" title="Card with title">
