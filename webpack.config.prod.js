@@ -5,7 +5,7 @@ const common = require('./webpack.config');
 module.exports = merge(common, {
 
   entry: {
-    'configurable-view-visualizations': [
+    'configurable-interactive-layout': [
       path.join(__dirname, './src', '/index.js')
     ]
   },
