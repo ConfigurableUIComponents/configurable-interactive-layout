@@ -40,7 +40,7 @@ export default class Card extends Component {
       cardClassName += ' highlight';
     }
     return (
-      <div ref={cardRef} className={cardClassName}>
+      <div ref={cardRef} className={cardClassName} id={this.props.configId}>
         {showHeader ?
           <CardHeader
             cardId={this.props.configId}
