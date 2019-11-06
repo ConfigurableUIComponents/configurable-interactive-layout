@@ -1,6 +1,6 @@
 {
   "name": "configurable-interactive-layout",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "main": "/dist/configurable-interactive-layout.bundle.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.prod.js --mode production",
