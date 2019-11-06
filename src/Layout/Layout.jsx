@@ -119,8 +119,6 @@ export default class CardsLayoutManager extends Component {
       }
     let isDraggable = this.props.layoutConfiguration.draggable;
     let classDraggable = isDraggable ? "draggable" : "";
-
-    alert(themeStyles.cardsLayoutContainer);
     
     return (
       <ResponsiveLayout
