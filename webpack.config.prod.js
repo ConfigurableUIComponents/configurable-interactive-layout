@@ -3,18 +3,19 @@ const merge = require('webpack-merge');
 const common = require('./webpack.config');
 
 module.exports = merge(common, {
-
+  devtool: 'source-map',
   entry: {
     'configurable-interactive-layout': [
-      path.join(__dirname, './src', '/index.js')
+      path.join(__dirname, '/index.js')
     ]
   },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].bundle.js',
     publicPath: '/',
-    library: 'interactiveLayout',
+    library: 'configurableInteractiveLayout',
     libraryTarget: 'umd',
+    sourceMapFilename: "[name].js.map",
   },
   externals: [
     'react-dom',

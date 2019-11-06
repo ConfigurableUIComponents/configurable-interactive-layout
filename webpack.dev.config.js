@@ -5,7 +5,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.config');
 
 module.exports = merge(common, {
-
+  devtool: 'source-map',
   devServer: {
     // Silence WebpackDevServer's own logs since they're generally not useful.
     // It will still show compile warnings and errors with this setting.

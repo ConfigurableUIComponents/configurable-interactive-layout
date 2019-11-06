@@ -5,6 +5,10 @@
   font-family: $fontStack;
 }
 
+.cardsLayoutContainer {
+  background-color: white;
+}
+
 .draggable .card {
 	cursor: pointer;
 }

@@ -1,9 +1,9 @@
 {
   "name": "configurable-interactive-layout",
-  "version": "3.0.2",
-  "main": "dist/interactiveLayout.js",
+  "version": "3.0.4",
+  "main": "/dist/configurable-interactive-layout.bundle.js",
   "scripts": {
-    "build": "webpack --bail -p --config webpack.config.prod.js ",
+    "build": "webpack --config ./webpack.config.prod.js --mode production",
     "lint": "eslint src/ --ext .jsx,.js",
     "lint-fix": "npm run lint -- --fix",
     "dev": "webpack-dev-server --config webpack.dev.config.js --mode development",
@@ -12,6 +12,12 @@
   },
   "author": "",
   "license": "ISC",
+  "files": [
+    "dist/",
+    "index.js",
+    "package.json",
+    "README.MD"
+  ],
   "babel": {
     "presets": [
       "@babel/preset-env",
