@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 
 class DoubleCounterComponent extends Component {
   render() {
@@ -18,7 +18,7 @@ class DoubleCounterComponent extends Component {
 }
 
 DoubleCounterComponent.propTypes = {
-  counter: T.oneOfType([T.string, T.number]),
+  counter: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default DoubleCounterComponent;

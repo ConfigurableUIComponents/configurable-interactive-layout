@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 
 class CounterComponent extends Component {
   componentWillMount() {
@@ -17,7 +17,7 @@ class CounterComponent extends Component {
 }
 
 CounterComponent.propTypes = {
-  counter: T.number,
+  counter: PropTypes.number,
 };
 
 export default CounterComponent;

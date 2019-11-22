@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 
 class DescriptionComponent extends Component {
   render() {
@@ -24,9 +24,9 @@ class DescriptionComponent extends Component {
 }
 
 DescriptionComponent.propTypes = {
-  description: T.string,
-  actions: T.bool,
-  title: T.bool,
+  description: PropTypes.string,
+  actions: PropTypes.bool,
+  title: PropTypes.bool,
 };
 
 export default DescriptionComponent;
