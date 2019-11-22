@@ -14,6 +14,7 @@
         "react/require-default-props": 0,
         "no-console": 0,
         "max-len": 0,
-        "consistent-return": 0
+        "consistent-return": 0,
+        "react/destructuring-assignment": 0
 	}
 }

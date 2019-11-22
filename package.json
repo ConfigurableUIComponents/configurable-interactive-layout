@@ -1,50 +1,81 @@
 {
   "name": "configurable-interactive-layout",
-  "version": "3.0.4",
-  "main": "/dist/configurable-interactive-layout.bundle.js",
+  "version": "3.1.0",
+  "description": "Component used for rendering visualizations in a card structure.",
+  "keywords": [
+    "react",
+    "react-component",
+    "reactjs"
+  ],
+  "license": "ISC",
+  "author": "",
+  "files": [
+    "*.md",
+    "dev",
+    "es6",
+    "lib",
+    "umd",
+    "src",
+    "res"
+  ],
+  "main": "lib/index",
+  "module": "es6/index",
+  "jsnext:main": "es6/index",
   "scripts": {
-    "build": "webpack --config ./webpack.config.prod.js --mode production",
+    "analyse": "cross-env NODE_ENV=analyse webpack src/index.js -o umd/configurable-interactive-layout.js",
+    "build": "npm run build-cjs && npm run build-es6 && rimraf umd && npm run build-umd && npm run build-min",
+    "build-cjs": "rimraf lib && cross-env NODE_ENV=commonjs babel ./src -d lib --copy-files --keep-file-extension",
+    "build-es6": "rimraf es6 && cross-env NODE_ENV=es6 babel ./src -d es6 --copy-files --keep-file-extension",
+    "build-min": "cross-env NODE_ENV=production webpack src/index.js -o umd/configurable-interactive-layout.min.js",
+    "build-umd": "cross-env NODE_ENV=development webpack src/index.js -o umd/configurable-interactive-layout.js",
     "lint": "eslint src/ --ext .jsx,.js",
+    "lint-dev": "eslint dev/ --ext .jsx,.js",
+    "lint-dev-fix": "npm run lint-dev -- --fix",
     "lint-fix": "npm run lint -- --fix",
-    "dev": "webpack-dev-server --config webpack.dev.config.js --mode development",
+    "sort-package-json": "sort-package-json && git add package.json",
+    "start": "webpack-dev-server --progress --inline --config dev/webpack.config.js",
     "test": "jest",
     "test:dev": "jest --watch"
   },
-  "author": "",
-  "license": "ISC",
-  "files": [
-    "dist/",
-    "index.js",
-    "package.json",
-    "README.MD"
+  "pre-commit": [
+    "sort-package-json",
+    "lint"
   ],
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties"
-    ]
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test-configurations/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/test-configurations/styleMock.js"
+    },
+    "setupTestFrameworkScriptFile": "./test-configurations/setupTests.js"
   },
   "dependencies": {
     "@css-modules-theme/react": "^2.2.0",
     "lodash": "^4.17.4",
     "react-grid-layout": "0.16.6",
-    "sass-loader": "^7.1.0"
-  },
-  "peerDependencies": {
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "sass-loader": "^7.1.0",
+    "wolfy87-eventemitter": "^5.2.4"
   },
   "devDependencies": {
+    "@babel/cli": "^7.6.4",
     "@babel/core": "^7.4.4",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-bind": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.6.3",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
+    "babel-plugin-istanbul": "^5.0.0",
+    "babel-plugin-lodash": "^3.3.0",
+    "babel-preset-airbnb": "^2.6.0",
+    "circular-dependency-plugin": "^5.0.2",
+    "cross-env": "^5.2.1",
     "css-loader": "^3.2.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
@@ -63,28 +94,31 @@
     "mobx": "^3.4.1",
     "mobx-react": "^4.3.5",
     "node-sass": "^4.12.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "pngquant-bin": "^5.0.2",
+    "pre-commit": "^1.1.3",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-iframe": "^1.1.0",
     "recharts": "^1.0.0-beta.6",
     "regenerator-runtime": "^0.11.1",
+    "rimraf": "^2.7.1",
+    "sass-loader": "^7.1.0",
+    "sort-package-json": "^1.23.1",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
     "svg-fill-loader": "0.0.8",
     "url-loader": "^0.6.2",
     "webpack": "^4.32.0",
+    "webpack-bundle-analyzer": "^3.5.2",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.4.1",
-    "webpack-merge": "^4.2.1",
-    "wolfy87-eventemitter": "^5.2.4"
+    "webpack-merge": "^4.2.1"
   },
-  "jest": {
-    "setupTestFrameworkScriptFile": "./test-configurations/setupTests.js",
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test-configurations/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/test-configurations/styleMock.js"
-    }
+  "peerDependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }
