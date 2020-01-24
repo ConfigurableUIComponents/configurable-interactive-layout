@@ -7,6 +7,7 @@ import CounterComponent from './components/CounterComponent';
 import DoubleCounterComponent from './components/DoubleCounterComponent';
 import DescriptionComponent from './components/DescriptionComponent';
 import Card from '../../src/Card/Card';
+import IFrameCard from '../../src/InteractiveIframe/iframeCard';
 import EventManager from './eventManager/EventManager';
 import { addCardInNewRow, removeCard } from '../../src/Layout/layoutUtils';
 
@@ -76,6 +77,12 @@ export default class Application extends Component {
           onLayoutChange={this.onLayoutChange}
           theme={ThemeStyle}
         >
+          <IFrameCard
+            title="My Iframe Card"
+            configId="iframeNoTitleNoActionsNoEvents"
+            theme={ThemeStyle}
+            url="https://amdocsil.invisionapp.com/share/WRSRHDQJAC8#/screens/371516559"
+          />
           <Card
             isNewCard
             configId="counterCard"

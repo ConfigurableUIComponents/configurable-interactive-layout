@@ -1,9 +1,14 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { composeThemeFromProps } from '@css-modules-theme/react';
+
 import Card from '../Card/Card';
 import './iframeCardStyles.scss';
 import UrlUtils from './UrlUtils';
+import buildThemeProperties from '../Utils';
+
+import style from '../Layout/LayoutStyle.scss';
 
 const IFRAME_NOT_SUPPORTED_STR = 'This browser does not support iframes.';
 
@@ -66,10 +71,20 @@ export default class IframeCard extends Component {
 
   render() {
     const src = this.getSrcURL();
+    const {       
+      theme,
+      themeProps,
+    } = this.props;
+
+    const themingProperties = buildThemeProperties(theme, themeProps);
+    const themeStyles = composeThemeFromProps(style, themingProperties, {
+      compose: 'Merge',
+    });
+
     return (
       <Card {...this.props}>
         <iframe
-          className="iframeCard"
+          className={themeStyles.iframeCard}
           title={src}
           src={src}
           ref={(iframe) => { this.frameReference = iframe; }}
@@ -92,6 +107,11 @@ IframeCard.propTypes = {
   eventIds: PropTypes.arrayOf(PropTypes.string),
   url: PropTypes.string.isRequired,
   params: PropTypes.instanceOf(Object),
+  themeProps: PropTypes.shape({
+    compose: PropTypes.string,
+    prefix: PropTypes.string,
+  }),
+  theme: PropTypes.instanceOf(Object),
 };
 
 IframeCard.defaultProps = {
@@ -99,4 +119,8 @@ IframeCard.defaultProps = {
   actions: undefined,
   eventManager: undefined,
   eventIds: [],
+  themeProps: {
+    compose: 'merge',
+    prefix: 'configurableInteractiveLayout-',
+  },
 };
