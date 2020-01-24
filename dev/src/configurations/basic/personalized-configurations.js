@@ -65,11 +65,26 @@ export const personalizedCardsConfiguration = {
     //   md: {w: 6, h: 2,},
     //   sm: {w: 4, h: 2,},
     // },
-    // iframeNoTitleNoActionsNoEvents: {
-    //   lg: {w: 12, h: 2,},
-    //   md: {w: 6, h: 2,},
-    //   sm: {w: 4, h: 2,},
-    // },
+    iframeNoTitleNoActionsNoEvents: {
+      lg: {
+        w: 12,
+        h: 4,
+        x: 0,
+        y: 6,
+      },
+      md: {
+        w: 4,
+        h: 4,
+        x: 0,
+        y: 6,
+      },
+      sm: {
+        w: 2,
+        h: 4,
+        x: 0,
+        y: 6,
+      },
+    },
     // iframeWithActions: {
     //   lg: {w: 12, h: 2,},
     //   md: {w: 6, h: 2,},

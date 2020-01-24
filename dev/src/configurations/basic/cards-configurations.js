@@ -32,9 +32,9 @@ export const cardsConfiguration = {
       sm: { w: 4, h: 2 },
     },
     iframeNoTitleNoActionsNoEvents: {
-      lg: { w: 12, h: 2 },
-      md: { w: 6, h: 2 },
-      sm: { w: 4, h: 2 },
+      lg: { w: 12, h: 4 },
+      md: { w: 6, h: 4 },
+      sm: { w: 4, h: 4 },
     },
     iframeWithActions: {
       lg: { w: 12, h: 2 },

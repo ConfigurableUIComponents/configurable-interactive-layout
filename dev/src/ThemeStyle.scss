@@ -12,8 +12,13 @@
   
 /* Transparent Card */
 .configurableInteractiveLayout-transparent {
-    background-color: transparent;
+    background-color: green;
     border: 0 solid;
+}
+
+/* iFrameCard */
+.configurableInteractiveLayout-iframeCard {
+    width: 100%;
 }
 
 :global(body) {
