@@ -64,6 +64,8 @@ export default class Application extends Component {
   };
 
   render() {
+    const externalProps = { screenId: 371516559 };
+    const iframeURL = 'https://amdocsil.invisionapp.com/share/WRSRHDQJAC8#/screens/${screenId}'; // eslint-disable-line
     return (
       <div>
         <div className="app-header">
@@ -81,7 +83,8 @@ export default class Application extends Component {
             title="My Iframe Card"
             configId="iframeNoTitleNoActionsNoEvents"
             theme={ThemeStyle}
-            url="https://amdocsil.invisionapp.com/share/WRSRHDQJAC8#/screens/371516559"
+            externalProps={externalProps}
+            url={iframeURL}
           />
           <Card
             isNewCard
