@@ -1,3 +1,8 @@
+## 3.1.2 (Feb 5, 2020)
+
+### bug fix
+- integration of Mosaic externalProps and iframeCard params properties (for taking route properties and using them to replace placeholder in iframeCard URL)
+
 ## 3.1.1 (January 24, 2020)
 
 ### feat

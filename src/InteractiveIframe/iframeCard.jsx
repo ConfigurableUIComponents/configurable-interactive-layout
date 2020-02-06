@@ -23,8 +23,9 @@ export default class IframeCard extends Component {
   }
 
 	getSrcURL = () => {
-	  if (this.props.params) {
-	    return UrlUtils.template(this.props.url, this.props.params);
+	  if (this.props.params || this.props.externalProps) {
+      const params = this.props.params || this.props.externalProps;
+	    return UrlUtils.template(this.props.url, params);
 	  }
 	  return this.props.url;
 	}
@@ -107,6 +108,7 @@ IframeCard.propTypes = {
   eventIds: PropTypes.arrayOf(PropTypes.string),
   url: PropTypes.string.isRequired,
   params: PropTypes.instanceOf(Object),
+  externalProps: PropTypes.instanceOf(Object),
   themeProps: PropTypes.shape({
     compose: PropTypes.string,
     prefix: PropTypes.string,

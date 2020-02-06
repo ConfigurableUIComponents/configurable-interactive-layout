@@ -1,6 +1,6 @@
 {
   "name": "configurable-interactive-layout",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Component used for rendering visualizations in a card structure.",
   "keywords": [
     "react",
