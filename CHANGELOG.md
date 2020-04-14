@@ -1,3 +1,6 @@
+## 3.1.3 (Apr 14, 2020)
+- generate package-lock and update CHANGELOG
+
 ## 3.1.2 (Feb 5, 2020)
 
 ### bug fix
