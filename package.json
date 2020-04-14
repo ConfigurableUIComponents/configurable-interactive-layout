@@ -1,6 +1,6 @@
 {
   "name": "configurable-interactive-layout",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "description": "Component used for rendering visualizations in a card structure.",
   "keywords": [
     "react",
@@ -9,6 +9,9 @@
   ],
   "license": "ISC",
   "author": "",
+  "main": "lib/index",
+  "module": "es6/index",
+  "jsnext:main": "es6/index",
   "files": [
     "*.md",
     "dev",
@@ -18,9 +21,6 @@
     "src",
     "res"
   ],
-  "main": "lib/index",
-  "module": "es6/index",
-  "jsnext:main": "es6/index",
   "scripts": {
     "analyse": "cross-env NODE_ENV=analyse webpack src/index.js -o umd/configurable-interactive-layout.js",
     "build": "npm run build-cjs && npm run build-es6 && rimraf umd && npm run build-umd && npm run build-min",
