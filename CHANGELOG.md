@@ -1,3 +1,6 @@
+## 3.1.3 (May 20, 2020)
+Fixed space between csscard class name 
+
 ## 3.1.2 (Feb 5, 2020)
 
 ### bug fix
