@@ -54,7 +54,7 @@ export default class Card extends Component {
     let cardClassName = themeStyles.card;
 
     if (cardCssClass) {
-      cardClassName = themeStyles[cardCssClass];
+      cardClassName += ` ${themeStyles[cardCssClass]}`;
     }
 
     if (!title && !actions) {
