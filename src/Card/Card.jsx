@@ -6,6 +6,7 @@ import CardHeader from './CardHeader';
 import buildThemeProperties from '../Utils';
 
 import style from '../Layout/LayoutStyle.scss';
+import PlaceholderTextComponent from '../../dev/src/components/PlaceholderComponent';
 
 const NEW_CARD_HIGHLIGHT_TIMEOUT = 1000;
 
@@ -82,7 +83,10 @@ export default class Card extends Component {
 
 Card.propTypes = {
   configId: PropTypes.string.isRequired,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(PlaceholderTextComponent),
+  ]),
   isNewCard: PropTypes.bool,
   store: PropTypes.instanceOf(Object),
   listeners: PropTypes.instanceOf(Array),

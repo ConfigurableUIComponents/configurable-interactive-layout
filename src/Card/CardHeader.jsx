@@ -6,6 +6,7 @@ import CardActions from './CardActions';
 import buildThemeProperties from '../Utils';
 
 import style from '../Layout/LayoutStyle.scss';
+import PlaceholderTextComponent from '../../dev/src/components/PlaceholderComponent';
 
 export default class CardHeader extends Component {
   createHeaderClassName() {
@@ -26,18 +27,26 @@ export default class CardHeader extends Component {
       compose: 'Merge',
     });
 
+    if (typeof title === 'string') {
+      return (
+        <div className={this.createHeaderClassName()}>
+          {actions ? <CardActions {...this.props} /> : null }
+          {title ? <div className={themeStyles.titleWrapper}><span className={themeStyles.title} title={title}>{title}</span></div> : null }
+        </div>
+      );
+    }
     return (
-      <div className={this.createHeaderClassName()}>
-        {actions ? <CardActions {...this.props} /> : null }
-        {title ? <div className={themeStyles.titleWrapper}><span className={themeStyles.title} title={title}>{title}</span></div> : null }
-      </div>
+      <PlaceholderTextComponent {...this.props} />
     );
   }
 }
 
 CardHeader.propTypes = {
   cardId: PropTypes.string.isRequired,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(PlaceholderTextComponent),
+  ]),
   actions: PropTypes.instanceOf(Object),
   eventManager: PropTypes.instanceOf(Object),
   themeProps: PropTypes.shape({

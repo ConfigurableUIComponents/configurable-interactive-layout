@@ -1,3 +1,6 @@
+## 3.2.0 (Feb 1, 2021)
+Add PlaceholderText component to handle dynamic values in header.
+
 ## 3.1.3 (May 20, 2020)
 Fixed space between csscard class name 
 
