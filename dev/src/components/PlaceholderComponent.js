@@ -5,13 +5,8 @@ const reactStringReplace = require('react-string-replace');
 
 
 
-class PlaceholderTextComponent extends Component {
-    constructor(props){
-        super(props)
-    }
-
-    render() {
-        const {text, regex, cssClass} = this.props;
+function PlaceholderTextComponent( {text, regex, cssClass}){
+    {
 
         return (
             <span>
@@ -22,6 +17,9 @@ class PlaceholderTextComponent extends Component {
         )
     }
 }
+   
+
+
 
 PlaceholderTextComponent.propTypes = {
     text: PropTypes.string.isRequired,
