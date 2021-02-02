@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import reactStringReplace from 'react-string-replace';
 
-const reactStringReplace = require('react-string-replace');
 
 function PlaceholderTextComponent({ title }) {
   return (
     <React.Fragment>
-      {title.text}
-      (
       {reactStringReplace(title.text, title.regex, (match, i) => (
         <span key={i} className={title.cssClass} />
       ))
     }
-      )
     </React.Fragment>
   );
 }
