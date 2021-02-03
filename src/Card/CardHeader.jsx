@@ -27,16 +27,18 @@ export default class CardHeader extends Component {
       compose: 'Merge',
     });
 
-    if (typeof title === 'string') {
-      return (
-        <div className={this.createHeaderClassName()}>
-          {actions ? <CardActions {...this.props} /> : null }
-          {title ? <div className={themeStyles.titleWrapper}><span className={themeStyles.title} title={title}>{title}</span></div> : null }
-        </div>
-      );
-    }
     return (
-      <PlaceholderTextComponent {...this.props} />
+      <div className={this.createHeaderClassName()}>
+        {actions ? <CardActions {...this.props} /> : null }
+        {title && typeof title === 'string'
+          ? (
+            <div className={themeStyles.titleWrapper}>
+              <span className={themeStyles.title} title={title}>
+                {title}
+              </span>
+            </div>
+          ) : title }
+      </div>
     );
   }
 }
@@ -45,7 +47,7 @@ CardHeader.propTypes = {
   cardId: PropTypes.string.isRequired,
   title: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.instanceOf(Object),
+    PropTypes.instanceOf(PlaceholderTextComponent),
   ]),
   actions: PropTypes.instanceOf(Object),
   eventManager: PropTypes.instanceOf(Object),

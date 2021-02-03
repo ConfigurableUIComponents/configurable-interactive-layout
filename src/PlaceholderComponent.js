@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import reactStringReplace from 'react-string-replace';
 
 
-function PlaceholderTextComponent({ title }) {
+function PlaceholderTextComponent({ text, cssClass, regex }) {
   return (
     <React.Fragment>
-      {reactStringReplace(title.text, title.regex, (match, i) => (
-        <span key={i} className={title.cssClass} />
+      {reactStringReplace(text, regex, (match, i) => (
+        <span key={i} className={cssClass} />
       ))
     }
     </React.Fragment>
@@ -15,14 +15,15 @@ function PlaceholderTextComponent({ title }) {
 }
 
 PlaceholderTextComponent.propTypes = {
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.instanceOf(Object),
-  ]),
+  text: PropTypes.string,
+  cssClass: PropTypes.string,
+  regex: PropTypes.instanceOf(RegExp),
 };
 
 PlaceholderTextComponent.defaultProps = {
-  title: undefined,
+  text: undefined,
+  cssClass: undefined,
+  regex: /\$\{(.*?)\}/g,
 };
 
 export default PlaceholderTextComponent;
