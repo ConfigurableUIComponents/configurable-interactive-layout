@@ -82,7 +82,10 @@ export default class Card extends Component {
 
 Card.propTypes = {
   configId: PropTypes.string.isRequired,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Object),
+  ]),
   isNewCard: PropTypes.bool,
   store: PropTypes.instanceOf(Object),
   listeners: PropTypes.instanceOf(Array),
