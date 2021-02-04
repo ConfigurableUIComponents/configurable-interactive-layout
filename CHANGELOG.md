@@ -1,3 +1,6 @@
+## 3.2.1 (Feb 4, 2021)
+Fix issues with npm publishing.
+
 ## 3.2.0 (Feb 1, 2021)
 Add PlaceholderText component to handle dynamic values in header.
 
