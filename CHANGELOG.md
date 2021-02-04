@@ -1,3 +1,6 @@
+## 3.2.2 (Feb 4, 2021)
+Export placeholder component.
+
 ## 3.2.1 (Feb 4, 2021)
 Fix issues with npm publishing.
 
