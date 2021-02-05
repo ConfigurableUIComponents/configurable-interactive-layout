@@ -1,3 +1,7 @@
+## 3.2.3 (Feb 4, 2021)
+-Renamed PlaceholderText component.
+-Added default css class for PlaceholderText component.
+
 ## 3.2.2 (Feb 4, 2021)
 Export placeholder component.
 

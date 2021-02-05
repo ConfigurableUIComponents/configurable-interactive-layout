@@ -6,7 +6,7 @@ import CardActions from './CardActions';
 import buildThemeProperties from '../Utils';
 
 import style from '../Layout/LayoutStyle.scss';
-import PlaceholderTextComponent from '../PlaceholderComponent';
+import PlaceholderText from '../PlaceholderText';
 
 export default class CardHeader extends Component {
   createHeaderClassName() {
@@ -47,7 +47,7 @@ CardHeader.propTypes = {
   cardId: PropTypes.string.isRequired,
   title: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.instanceOf(PlaceholderTextComponent),
+    PropTypes.instanceOf(PlaceholderText),
   ]),
   actions: PropTypes.instanceOf(Object),
   eventManager: PropTypes.instanceOf(Object),

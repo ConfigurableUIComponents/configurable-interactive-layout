@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import reactStringReplace from 'react-string-replace';
+import '../res/style/style.css';
 
 
-function PlaceholderTextComponent({ text, cssClass, regex }) {
+function PlaceholderText({ text, cssClass, regex }) {
   return (
     <React.Fragment>
       {reactStringReplace(text, regex, (match, i) => (
@@ -14,16 +15,16 @@ function PlaceholderTextComponent({ text, cssClass, regex }) {
   );
 }
 
-PlaceholderTextComponent.propTypes = {
+PlaceholderText.propTypes = {
   text: PropTypes.string,
   cssClass: PropTypes.string,
   regex: PropTypes.instanceOf(RegExp),
 };
 
-PlaceholderTextComponent.defaultProps = {
+PlaceholderText.defaultProps = {
   text: undefined,
-  cssClass: undefined,
+  cssClass: 'placeholdertextloader',
   regex: /\$\{(.*?)\}/g,
 };
 
-export default PlaceholderTextComponent;
+export default PlaceholderText;

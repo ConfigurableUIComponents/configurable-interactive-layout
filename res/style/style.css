@@ -1,0 +1,8 @@
+:global(.placeholdertextloader){
+    background-repeat: no-repeat;
+    background: url('../three-dots.svg') no-repeat;
+    padding-right: 40px;
+}
+
+
+
