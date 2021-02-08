@@ -12,7 +12,11 @@ import EventManager from './eventManager/EventManager';
 import { addCardInNewRow, removeCard } from '../../src/Layout/layoutUtils';
 
 import ThemeStyle from './ThemeStyle.scss';
+import PlaceholderText from '../../src/PlaceholderText';
 
+
+const re = /\$\{(.*?)\}/g;
+const placeholder = <PlaceholderText text="components ${count}" regex={re} />;
 export default class Application extends Component {
   constructor(props) {
     super(props);
@@ -89,7 +93,7 @@ export default class Application extends Component {
           <Card
             isNewCard
             configId="counterCard"
-            title="my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title my title"
+            title={placeholder}
             theme={ThemeStyle}
             actions={{
               action1: {

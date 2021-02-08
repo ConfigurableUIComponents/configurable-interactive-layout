@@ -1,3 +1,6 @@
+## 3.2.4 (Feb 8, 2021)
+-Use theme to make default css local.
+
 ## 3.2.3 (Feb 4, 2021)
 -Renamed PlaceholderText component.
 -Added default css class for PlaceholderText component.
