@@ -12,8 +12,7 @@ function PlaceholderText({
     compose: 'Merge',
   });
   const cssStyle = (cssClass) ? `${themeStyles[cssClass]}` : style.placeholdertextloader;
-  console.log(themeProps);
-  console.log(cssStyle);
+
   return (
     <React.Fragment>
       {reactStringReplace(text, regex, (match, i) => (
