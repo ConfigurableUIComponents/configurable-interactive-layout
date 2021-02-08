@@ -198,12 +198,6 @@
   padding-right: 40px;
 }
 
-.emptyLayoutIcon {
-  background: url("../../res/no_data.svg") no-repeat center center;
-  height: 113px;
-  width: 161px;
-}
-
 :global(.react-grid-layout) {
   position: relative;
   transition: none !important;
