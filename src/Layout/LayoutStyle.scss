@@ -192,6 +192,12 @@
   }
 }
 
+.placeholdertextloader{
+  background-repeat: no-repeat;
+  background: url('../../res/three-dots.svg') no-repeat;
+  padding-right: 40px;
+}
+
 .emptyLayoutIcon {
   background: url("../../res/no_data.svg") no-repeat center center;
   height: 113px;
