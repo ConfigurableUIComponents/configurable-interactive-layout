@@ -36,7 +36,7 @@ PlaceholderText.propTypes = {
 
 PlaceholderText.defaultProps = {
   text: undefined,
-  cssClass: undefined,
+  cssClass: "placeholdertextloader",
   regex: /\$\{(.*?)\}/g,
   themeProps: {
     compose: 'merge',
