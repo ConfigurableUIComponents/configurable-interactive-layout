@@ -1,3 +1,6 @@
+## 3.2.5 (Feb 9, 2021)
+-Add theme to props.
+
 ## 3.2.4 (Feb 8, 2021)
 -Use theme to make default css local.
 
