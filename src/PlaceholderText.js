@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import reactStringReplace from 'react-string-replace';
 import { composeThemeFromProps } from '@css-modules-theme/react';
+import buildThemeProperties from './Utils';
 import style from './Layout/LayoutStyle.scss';
 
 
 function PlaceholderText({
-  text, cssClass, regex, themeProps,
+  text, cssClass, regex, theme, themeProps,
 }) {
-  const themeStyles = composeThemeFromProps(style, cssClass, {
+  const themingProperties = buildThemeProperties(theme, themeProps);
+  const themeStyles = composeThemeFromProps(style, themingProperties, {
     compose: 'Merge',
   });
   const cssStyle = (cssClass) ? `${themeStyles[cssClass]}` : style.placeholdertextloader;
@@ -31,11 +33,12 @@ PlaceholderText.propTypes = {
     compose: PropTypes.string,
     prefix: PropTypes.string,
   }),
+  theme: PropTypes.instanceOf(Object),
 };
 
 PlaceholderText.defaultProps = {
   text: undefined,
-  cssClass: "placeholdertextloader",
+  cssClass: 'placeholdertextloader',
   regex: /\$\{(.*?)\}/g,
   themeProps: {
     compose: 'merge',
