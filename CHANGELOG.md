@@ -1,3 +1,6 @@
+## 3.3.0 (Apr 29, 2021)
+-Set up and enable cypress
+
 ## 3.2.5 (Feb 9, 2021)
 -Add theme to props.
 

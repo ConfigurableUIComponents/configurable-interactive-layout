@@ -1,6 +1,6 @@
 {
   "name": "configurable-interactive-layout",
-  "version": "3.2.5",
+  "version": "3.3.0",
   "description": "Component used for rendering visualizations in a card structure.",
   "keywords": [
     "react",
@@ -28,6 +28,7 @@
     "build-es6": "rimraf es6 && cross-env NODE_ENV=es6 babel ./src -d es6 --copy-files --keep-file-extension",
     "build-min": "cross-env NODE_ENV=production webpack src/index.js -o umd/configurable-interactive-layout.min.js",
     "build-umd": "cross-env NODE_ENV=development webpack src/index.js -o umd/configurable-interactive-layout.js",
+    "cypress": "node_modules\\.bin\\cypress open",
     "lint": "eslint src/ --ext .jsx,.js",
     "lint-dev": "eslint dev/ --ext .jsx,.js",
     "lint-dev-fix": "npm run lint-dev -- --fix",
@@ -78,6 +79,7 @@
     "circular-dependency-plugin": "^5.0.2",
     "cross-env": "^5.2.1",
     "css-loader": "^3.2.0",
+    "cypress": "^7.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^5.16.0",
